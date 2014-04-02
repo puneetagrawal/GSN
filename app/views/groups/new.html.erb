@@ -1,0 +1,77 @@
+<% provide(:title, 'Sign up') %>
+<h1>Sign up</h1>
+<%= current_user.inspect %>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(:group, :url => groups_path) do |f| %>
+  	<!-- <table>
+  	<h2>Start Node</h2>
+  	<th> Name </th>
+  	<th> Value </th>
+      <%#= f.hidden_field :provider, value: "normal" %>
+      <%#= render 'shared/error_messages', object: f.object %>
+      
+      <tr>
+      	<td><%#= text_field_tag "start_node[0][name]" %></td>
+      	<td><%#= text_field_tag "start_node[0][value]" %></td>
+      </tr> 
+      <tr>
+      	<td><%#= text_field_tag "start_node[1][name]" %></td>
+      	<td><%#= text_field_tag "start_node[1][value]" %></td>
+      </tr> 
+      <tr>
+      	<td><%#= text_field_tag "start_node[2][name]" %></td>
+      	<td><%#= text_field_tag "start_node[2][value]" %></td>
+      </tr> 
+      
+   </table> -->
+
+   <table>
+  	<h2>End Node</h2>
+  	<th> Name </th>
+  	<th> Value </th>
+      <%#= f.hidden_field :provider, value: "normal" %>
+      <%#= render 'shared/error_messages', object: f.object %>
+      
+      <tr>
+      	<td><%= text_field_tag "end_node[0][name]" %></td>
+      	<td><%= text_field_tag "end_node[0][value]" %></td>
+      </tr> 
+      <tr>
+      	<td><%= text_field_tag "end_node[1][name]" %></td>
+      	<td><%= text_field_tag "end_node[1][value]" %></td>
+      </tr> 
+      <tr>
+      	<td><%= text_field_tag "end_node[2][name]" %></td>
+      	<td><%= text_field_tag "end_node[2][value]" %></td>
+      </tr> 
+      
+   </table>
+
+   <table>
+  	<h2>Relationship</h2>
+  	<th> Name </th>
+  	<th> Value </th>
+      <%#= f.hidden_field :provider, value: "normal" %>
+      <%#= render 'shared/error_messages', object: f.object %>
+      <tr>
+      	<%= text_field_tag "relationship[type]" %> 
+      </tr> 
+      <tr>
+      	<td><%= text_field_tag "relationship[0][name]" %></td>
+      	<td><%= text_field_tag "relationship[0][value]" %></td>
+      </tr> 
+      <tr>
+      	<td><%= text_field_tag "relationship[1][name]" %></td>
+      	<td><%= text_field_tag "relationship[1][value]" %></td>
+      </tr> 
+      <tr>
+      	<td><%= text_field_tag "relationship[2][name]" %></td>
+      	<td><%= text_field_tag "relationship[2][value]" %></td>
+      </tr> 
+      
+   </table>
+      <%= submit_tag "Create my group", class: "btn  btn-primary" %>
+    <% end %>
+  </div>
+</div>

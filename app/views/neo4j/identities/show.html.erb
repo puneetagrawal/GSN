@@ -1,0 +1,18 @@
+<%= @identity.nickname %>, <%= @identity.email %>
+
+<div class="clear">
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%#= gravatar_for @identity %>
+        <%= @identity.nickname %>
+      </h1>
+    </section>
+    <section>
+      <%#= render 'shared/stats' %>
+    </section>
+  </aside>
+
+  </div>
+  <%= link_to "Group", groups_path %>
