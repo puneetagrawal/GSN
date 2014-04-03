@@ -43,5 +43,11 @@
 //= require src/middlewares/sigma.middlewares.copy.js        
 //= require src/misc/sigma.misc.animation.js                 
 //= require src/misc/sigma.misc.bindEvents.js                
-//= require src/misc/sigma.misc.drawHovers.js                
+//= require src/misc/sigma.misc.drawHovers.js 
+//= require plugins/sigma.plugins.dragNodes/sigma.plugins.dragNodes.js 
+//= require jquery.minicolors  
+
+$(document).ready(function(){
+    $('#node_color_field').minicolors()
+})             
 

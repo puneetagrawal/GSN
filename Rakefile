@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 
 require 'neo4j/tasks/neo4j_server'
-Neo4jApp::Application.load_tasks
+GSN::Application.load_tasks

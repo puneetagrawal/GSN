@@ -42,8 +42,9 @@
       	<td><%= text_field_tag "end_node[1][value]" %></td>
       </tr> 
       <tr>
-      	<td><%= text_field_tag "end_node[2][name]" %></td>
-      	<td><%= text_field_tag "end_node[2][value]" %></td>
+        <td><%= label_tag "Color" %></td>
+      	<%= hidden_field_tag "end_node[2][name]", "color", readonly: true %>
+      	<td><%= text_field_tag "end_node[2][value]", "", id: "node_color_field" %></td>
       </tr> 
       
    </table>

@@ -39,3 +39,5 @@ end
 platforms :jruby do
   gem 'neo4j-community', '~> 2.0.0'
 end
+
+gem 'jquery-minicolors-rails'

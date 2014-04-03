@@ -14,6 +14,10 @@ class GroupsController < ApplicationController
 		   e_node = r.end_node
 		   e_node_id = r.end_node.neo_id
 		   s_node_id = r.start_node.neo_id
+		   edge_properties = r.props
+		   edge_relation = r.load_resource.present? ? r.load_resource["type"] : ""
+		   color_prop = r.end_node.props[:color].present? ? r.end_node.props[:color] : '#666'
+		   Rails.logger.debug edge		   
            unless check_node.include? e_node_id
            	 check_node << e_node_id
              @groups[:nodes] << {
@@ -22,7 +26,13 @@ class GroupsController < ApplicationController
            	          x: Random.rand(1-6664664646),
            	          y: Random.rand(1-6664664646),
            	          size: Random.rand(1-6664664646),
-           	          color: '#666'
+           	          color: color_prop,
+           	          properties: {
+           	          	node: e_node.props,
+           	          	edge: edge_properties
+           	          },
+           	          relation: edge_relation
+
            	      }
             end
            @groups[:edges] << {
@@ -40,7 +50,9 @@ class GroupsController < ApplicationController
            	          x: Random.rand(1-6664664646),
            	          y: Random.rand(1-6664664646),
            	          size: Random.rand(1-6664664646),
-           	          color: '#666'
+           	          color: current_user.props[:color].present? ? current_user.props[:color] : '#666'
+           	          # properties: current_user.props
+           	          
            	      }
 
 
