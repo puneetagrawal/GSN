@@ -17,7 +17,7 @@ class GroupsController < ApplicationController
 		   edge_properties = r.props
 		   edge_relation = r.load_resource.present? ? r.load_resource["type"] : ""
 		   color_prop = r.end_node.props[:color].present? ? r.end_node.props[:color] : '#666'
-		   Rails.logger.debug edge		   
+		   # Rails.logger.debug edge		   
            unless check_node.include? e_node_id
            	 check_node << e_node_id
              @groups[:nodes] << {
