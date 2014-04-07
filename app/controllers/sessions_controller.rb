@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_filter :signed_in_user, except: [:destroy]
 
   def new
   end
@@ -32,6 +33,14 @@ class SessionsController < ApplicationController
       redirect_to identity
     else
       redirect_to root_path, notice: "Token is invalid"
+    end
+  end
+
+  private
+
+  def signed_in_user
+    if signed_in?
+       redirect_to root_path, :flash => { :error => "You have already signed in." }
     end
   end
 end

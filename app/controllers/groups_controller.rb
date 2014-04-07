@@ -2,13 +2,14 @@ class GroupsController < ApplicationController
 
 	def index
 		# @groups = Group.all
+		 identity = Neo4j::Identity.find(uuid: params[:identity])
          @groups = {}
          @groups[:nodes] = []
          @groups[:edges] = []		 
 		 check_node = []
 
 		 # random_num = Random.rand(1-6664664646)
-		 rel_users = current_user.rels(dir: :outgoing)
+		 rel_users = identity.rels()
 		 rel_users.each do |r|
          
 		   e_node = r.end_node
@@ -50,7 +51,10 @@ class GroupsController < ApplicationController
            	          x: Random.rand(1-6664664646),
            	          y: Random.rand(1-6664664646),
            	          size: Random.rand(1-6664664646),
-           	          color: current_user.props[:color].present? ? current_user.props[:color] : '#666'
+           	          color: current_user.props[:color].present? ? current_user.props[:color] : '#666',
+           	          properties: {
+           	             node: current_user.props           	          	
+           	          }
            	          # properties: current_user.props
            	          
            	      }
@@ -70,20 +74,25 @@ class GroupsController < ApplicationController
 	end
 
 	def create		
-		relation_type = params["relationship"]["type"]
+		relation_type = params["relationship"]["type"].try(:parameterize).try(:underscore)
 		# start_node = Neo4j::Node.create(get_properties(params["start_node"]))
 		end_node = Neo4j::Node.create(get_properties(params["end_node"]))
 		relation_properties = get_properties(params["relationship"])
-		test_node = current_user.create_rel(relation_type,  end_node, relation_properties)
+		test_node = current_identity.create_rel(relation_type,  end_node, relation_properties)
 		
-		redirect_to groups_path
+		redirect_to groups_path(identity: current_identity.uuid)
 	end
 
 	private 
 
 	def get_properties(prop_params)
 		hash_props = {}
-		prop_params.map{|property| hash_props[property[1]["name"]] = property[1]["value"] if property[1]["name"].present? }
+		prop_params.map do |property| 
+		  if property[1]["name"].present? 
+		  	prop_name = property[1]["name"].try(:parameterize).try(:underscore)
+			hash_props[prop_name] = property[1]["value"]  
+		  end
+		end
 		return hash_props
 	end
 end

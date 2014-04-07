@@ -37,19 +37,19 @@ class Neo4j::IdentitiesController < ApplicationController
            else    
              User.create(first_name: params[:neo4j_identity][:first_name],
                          last_name: params[:neo4j_identity][:last_name], 
-                         country: params[:country]
+                         country: params[:neo4j_identity][:country]
                      )  
                      
            end 
-      @identity = Neo4j::Identity.new(identity_params)
-      if @identity.save
-        user.identities << @identity 
-        @identity.user = user          
-        flash[:notice] = "Please verify your email"
-        redirect_to @identity
-      else
-        render 'new'
-      end
+    @identity = Neo4j::Identity.new(identity_params)
+    if @identity.save
+      user.identities << @identity 
+      @identity.user = user          
+      flash[:notice] = "Please verify your email"
+      redirect_to @identity
+    else
+      render 'new'
+    end
   end
 
   def destroy
@@ -78,7 +78,7 @@ class Neo4j::IdentitiesController < ApplicationController
 
     def identity_params
       params.require(:neo4j_identity).permit(:name, :email, :password,
-                                   :password_confirmation, :first_name, :last_name, :provider)
+                                   :password_confirmation, :first_name, :last_name, :provider, :country)
     end
 
     # Before filters

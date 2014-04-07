@@ -3,5 +3,19 @@
   <%= current_user.full_name %>
 </h1>
 <span>
-  <%= link_to "view my profile", current_identity %>
+  <table class="table table-bordered">
+  <th>Provider</th>	
+  <th>Email</th>	
+  <th>Nickname</th>	
+  <th></th>	
+  <% current_user.identities.each do |identity| %>
+   <tr>
+   	<td> <%= identity.provider.try(:humanize) %></td>
+   	<td> <%= identity.email %></td>
+   	<td> <%= identity.nickname %></td>
+   	<td> <%= link_to "view my profile", identity %></td>
+   
+  </tr>
+  <% end %>
+  <table>
 </span>

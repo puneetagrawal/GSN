@@ -9,6 +9,7 @@ class Identity
   property :email
   property :nickname
   property :provider
+  property :country
   property :password
   property :password_digest
   property :created_at, type: DateTime
@@ -21,8 +22,8 @@ class Identity
   property :confirmation_token
   property :confirmed_at, type: DateTime
   property :confirmation_sent_at, type: DateTime
+  property :uuid, default: SecureRandom.uuid
 
-  before_validation :set_nickname
 
   # validates :nickname, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -32,6 +33,7 @@ class Identity
                                if: :is_normal_provider?
   validates_confirmation_of :password,
                           if: lambda { |m| m.password.present? }
+  validates :uuid, presence: true                          
   index :email
   index :remember_token
   index :nickname
@@ -40,6 +42,7 @@ class Identity
   before_save :secure_password
 
   # before_create :create_remember_token
+  before_create :set_nickname
   before_create :create_confirmation_token, if: :is_normal_provider?
   # before_create :set_user
   after_create  :send_email_confirmation, if: :is_normal_provider?
@@ -79,10 +82,12 @@ class Identity
 
 
   def email_uniqueness
-    identity = Neo4j::Identity.find(email: email)    
-    if identity.present? and (identity.email_changed? or new_record?)
-      errors.add(:email, "already exist.")
-    end    
+    if email.present?
+      identity = Neo4j::Identity.find(email: email)    
+      if identity.present? and (identity.email_changed? or new_record?)
+        errors.add(:email, "already exist.")
+      end    
+    end
   end
 
 
@@ -107,8 +112,8 @@ class Identity
   # 	@user_id = user_id
   # end  
 
-  def set_nickname
-  	nickname = "#{first_name} #{last_name}" if self.nickname.blank?    
+  def set_nickname    
+  	self.nickname = "#{first_name} #{last_name}" if self.nickname.blank?    
   end  
 
   def create_confirmation_token

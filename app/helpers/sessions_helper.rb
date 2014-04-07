@@ -17,7 +17,7 @@ module SessionsHelper
 
   def current_user
     user = current_identity.try(:user)  
-    User.find(user.neo_id)   
+    User.find(user.neo_id) if user.present?  
   end
 
 

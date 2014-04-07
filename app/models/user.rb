@@ -10,6 +10,14 @@ class User
   # property :remember_token
   property :created_at, type: DateTime
   property :updated_at, type: DateTime
+  property :uuid, default: SecureRandom.uuid
+
+
+  validates :uuid, presence: true
+  validate :id, presence: true
+  validate :first_name, presence: true
+  validate :last_name, presence: true
+  validate :country, presence: true
 
   # property :confirmation_token
   # property :confirmed_at, type: DateTime
@@ -42,7 +50,6 @@ class User
     "#{first_name} #{last_name}"
   end
  
-
   #  def create_confirmation_token
   #   # Create the confirmation token.
   #    self.confirmation_token = Neo4j::Identity.hash(Neo4j::Identity.new_random_token)

@@ -1,10 +1,10 @@
 
-<%=link_to "Create groups", new_group_path, style: "margin-top: 300px; position: relative; z-index: 99" %>
+<%=link_to "Create groups", new_group_path, class: "btn btn-primary", style: "position: relative; z-index: 99" %>
 <div id="node_edge_attr" style="display:none">
   <h4>Node Attributes</h4>  
   <div id="show_node_attrs"></div>
-  <h4>Relation</h4>  
-  <div id="show_rel_node"></div>
+  <!-- <h4>Relation</h4>   -->
+  <!-- <div id="show_rel_node"></div> -->
   <h4>Edge Attributes</h4> 
   <div id="show_edge_attrs"></div>
 </div>  
@@ -25,41 +25,12 @@
 </div>
 <script>
 /**
- * This is a basic example on how to instanciate sigma. A random graph is
- * generated and stored in the "graph" variable, and then sigma is
+ * A random graph is generated and stored in the "graph" variable, and then sigma is
  * instanciated directly with the graph.
  *
  * The simple instanciation of sigma is enough to make it render the graph
  * on the screen, since the graph is given directly to the constructor.
  */
-// var i,
-//     s,
-//     N = 100,
-//     E = 500,
-//     g = {
-//       nodes: [],
-//       edges: []
-//     };
-
-// // Generate a random graph:
-// for (i = 0; i < N; i++)
-//   g.nodes.push({
-//     id: 'n' + i,
-//     label: 'Node ' + i,
-//     x: Math.random(),
-//     y: Math.random(),
-//     size: Math.random(),
-//     color: '#666'
-//   });
-
-// for (i = 0; i < E; i++)
-//   g.edges.push({
-//     id: 'e' + i,
-//     source: 'n' + (Math.random() * N | 0),
-//     target: 'n' + (Math.random() * N | 0),
-//     size: Math.random(),
-//     color: '#ccc'
-//   });
 
 graph_data = JSON.parse('<%= raw [@groups.to_json][0] %>')
 
@@ -74,7 +45,7 @@ s = new sigma({
 sigma.plugins.dragNodes(s, s.renderers[0]);
 
 // Bind the events:
-s.bind('clickNode', function(e) { 
+s.bind('clickNode overNode', function(e) { 
   var attr_node = ""
   var attr_edge = ""
   console.log(e.data.node)

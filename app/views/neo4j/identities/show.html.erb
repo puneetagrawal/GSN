@@ -1,7 +1,6 @@
-<%= @identity.nickname %>, <%= @identity.email %>
 
-<div class="clear">
 <div class="row">
+   <%= link_to "Groups", groups_path(identity: @identity.uuid ), class: "btn btn-primary" %>
   <aside class="span4">
     <section>
       <h1>
@@ -10,9 +9,12 @@
       </h1>
     </section>
     <section>
+     <div><h3 style="display: inline" >Provider:</h4> <span><%= @identity.provider %></span></div>
+     <div><h3 style="display: inline" >Email:</h4> <%= @identity.email %></div>
+     <div><h3 style="display: inline" >Provider:</h4> <%= @identity.nickname %></div>
       <%#= render 'shared/stats' %>
     </section>
   </aside>
 
   </div>
-  <%= link_to "Group", groups_path %>
+ 

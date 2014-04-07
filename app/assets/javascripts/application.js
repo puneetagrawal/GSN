@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap
 //= require src/sigma.core.js                                
 //= require src/conrad.js                                    
 //= require src/utils/sigma.utils.js                         

@@ -15,7 +15,8 @@ html {
 }
 
 body {
-  padding-top: 60px;
+ /* padding-top: 60px; */
+ 
 }
 
 section {
@@ -191,4 +192,8 @@ aside {
 }
 .mrtop50{
   margin-top: 50px;
+}
+.remove_overlap{
+  position:relative;
+  z-index: 99;
 }

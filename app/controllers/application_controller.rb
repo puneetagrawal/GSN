@@ -3,4 +3,13 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   include SessionsHelper
+
+  def show_error_messages(obj)
+  	error_template = ""
+  	obj.errors.full_messages.map do |msg|
+  		error_template += "<li>#{msg}</li>"
+  	end
+  	"<ul>#{error_template}</ul>".html_safe
+  end
+  
 end
