@@ -4,15 +4,17 @@
 </h1>
 <span>
   <table class="table table-bordered">
-  <th>Provider</th>	
+  <!-- <th>Provider</th>	 -->
   <th>Email</th>	
-  <th>Nickname</th>	
+  <th>Nickname</th> 
+  <th>Country</th>	
   <th></th>	
   <% current_user.identities.each do |identity| %>
    <tr>
-   	<td> <%= identity.provider.try(:humanize) %></td>
+   	<!-- <td> <%#= identity.provider.try(:humanize) %></td> -->
    	<td> <%= identity.email %></td>
-   	<td> <%= identity.nickname %></td>
+    <td> <%= identity.nickname %></td>
+   	<td> <%= identity.country %></td>
    	<td> <%= link_to "view my profile", identity %></td>
    
   </tr>

@@ -84,9 +84,9 @@ class Identity
   def email_uniqueness
     if email.present?
       identity = Neo4j::Identity.find(email: email)    
-      if identity.present? and (identity.email_changed? or new_record?)
-        errors.add(:email, "already exist.")
-      end    
+      if identity.present? and (identity.email_changed? or new_record?)        
+         errors.add(:email, "already exist.")
+      end
     end
   end
 
@@ -128,6 +128,45 @@ class Identity
 
   def is_normal_provider?
     provider == "normal"
+  end
+
+  def identity_provider(provider, uid="", oauth_token="", oauth_expires_at="")  
+
+    relation = get_relation(provider)
+    if relation.blank?
+      create_provider_identity(provider, uid, oauth_token, oauth_expires_at)
+
+      if provider=='normal'
+        create_confirmation_token
+        self.save
+        send_email_confirmation
+      end
+    else      
+      update_provider_identity(relation)
+      :error_messsage if provider=='normal'
+    end
+    
+  end
+
+  def get_relation(provider)
+    provider_relations = self.rels(type: :provider)
+
+    relation = nil
+    provider_relations.map do |pr|      
+      if(pr.get_property("name") == provider)
+        relation = pr
+      end
+    end 
+    return relation 
+  end
+
+  def create_provider_identity(provider, uid, oauth_token, oauth_expires_at)
+    provider_node = Neo4j::Node.create(provider_name: provider)
+    self.create_rel(:provider,  provider_node, {uid: uid, name: provider, created_at: Time.now.to_s, updated_at: Time.now.to_s, oauth_token: oauth_token.to_s, oauth_expires_at: oauth_expires_at.to_s})
+  end
+
+  def update_provider_identity(relation)
+    relation.update_props(updated_at: Time.now.to_s)
   end
 
 

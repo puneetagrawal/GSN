@@ -6,6 +6,7 @@ describe User do
 	it { should respond_to(:first_name) }
 	it { should respond_to(:last_name) }
 	it { should respond_to(:country) }
+
     user = FactoryGirl.create(:user)
     
     describe "UUID" do
@@ -37,6 +38,7 @@ describe User do
       user.identities.count > 1
       it { should be_valid }
     end
+
 
 end
 	

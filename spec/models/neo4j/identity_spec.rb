@@ -12,7 +12,8 @@ describe Neo4j::Identity do
      identity = FactoryGirl.create(:identity) 
      user.identities << identity
      identity.user = user
-   
+     identity.identity_provider("normal")
+
   	describe "UUID" do
     	it { identity.uid.should_not be_nil }
     end
@@ -52,5 +53,7 @@ describe Neo4j::Identity do
     before { identity.password = identity.password_confirmation = "a" * 5 }
     it { should be_invalid }
   end
+
+
 end
 

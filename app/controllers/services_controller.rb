@@ -1,12 +1,19 @@
 class ServicesController < ApplicationController
 
-  def create  
-    provider = env["omniauth.auth"].provider
-    uid = env["omniauth.auth"].uid
-    identity = Neo4j::Identity.find(provider: provider, uid: uid)    
+  def create 
+    auth = env["omniauth.auth"] 
+    provider = auth.provider
+    email = (auth.info.email.present?) ? auth.info.email : "#{auth.info.nickname}@#{auth.provider}.com"
+    oauth_token = auth.credentials.token
+    oauth_expires_at = Time.at(auth.credentials.expires_at) if auth.credentials.expires_at
+   
+    identity = Neo4j::Identity.find(email: email)    
     if identity.blank?       
-      identity = from_omniauth(env["omniauth.auth"], current_user)      
+      identity = from_omniauth(auth, current_user, email)      
     end
+
+    identity.identity_provider(provider, auth.uid, oauth_token, oauth_expires_at)
+
     unless identity.errors.any?
       unless signed_in?  
   	  	sign_in(identity, provider)
@@ -15,12 +22,11 @@ class ServicesController < ApplicationController
       if identity.user == current_user
         redirect_to identity
       else
-        redirect_to root_path, :flash => { :error => "Already associate with an user" }
+        redirect_to root_path
       end
     else
       redirect_to root_path, :flash => { :error => show_error_messages(identity) }
-    end
-          
+    end          
   end
 
   def destroy
@@ -30,7 +36,7 @@ class ServicesController < ApplicationController
   
   private
 
-    def from_omniauth(auth, c_user)
+    def from_omniauth(auth, c_user, email)
       country = auth.info.location.split(',')[1].strip if auth.info.location.present?
       user = if c_user.present?
                 c_user
@@ -44,12 +50,10 @@ class ServicesController < ApplicationController
      
       identity = Neo4j::Identity.new
       
-      identity.provider = auth.provider
-      identity.uid = auth.uid
-      identity.email = (auth.info.email.present?) ? auth.info.email : "#{auth.info.nickname}@#{auth.provider}.com"
-      identity.nickname = auth.info.nickname
-      identity.oauth_token = auth.credentials.token
-      identity.oauth_expires_at = Time.at(auth.credentials.expires_at) if auth.credentials.expires_at
+      # identity.provider = auth.provider
+      # identity.uid = auth.uid
+      identity.email = email
+      identity.nickname = auth.info.nickname     
       identity.country = country
 
       if identity.save

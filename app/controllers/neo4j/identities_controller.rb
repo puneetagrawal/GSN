@@ -9,6 +9,81 @@ class Neo4j::IdentitiesController < ApplicationController
 
   def show
     @identity = Neo4j::Identity.find(params[:id])
+    @providers = {}
+    @providers[:nodes] = []
+    @providers[:edges] = []
+    check_node = []
+    # random_num = Random.rand(1-6664664646)
+     rel_identities = @identity.rels(type: :provider)
+     rel_identities.each do |r|
+         
+       e_node = r.end_node
+       e_node_id = r.end_node.neo_id
+       s_node_id = r.start_node.neo_id
+       edge_properties = r.props
+       edge_relation = r.load_resource.present? ? r.load_resource["type"] : ""
+       color_prop = r.end_node.props[:color].present? ? r.end_node.props[:color] : '#666'
+       # Rails.logger.debug edge       
+           unless check_node.include? e_node_id
+             check_node << e_node_id
+             @providers[:nodes] << {
+                      id: e_node_id.to_s,  
+                      label: "Node #{e_node_id}", 
+                      x: Random.rand(1-6664664646),
+                      y: Random.rand(1-6664664646),
+                      size: Random.rand(1-6664664646),
+                      color: color_prop,
+                      properties: {
+                        node: e_node.props,
+                        edge: edge_properties
+                      },
+                      relation: edge_relation
+
+                  }
+            end
+           @providers[:edges] << {
+             id: "e #{r.neo_id}",
+             source: "#{s_node_id}",
+             target: "#{e_node_id}",
+             size: Random.rand(1-6664664646),
+             color: '#ccc'
+                     }
+     end
+
+     @providers[:nodes] << {
+                      id: @identity.id.to_s,  
+                      label: "Node #{@identity.id}", 
+                      x: Random.rand(1-6664664646),
+                      y: Random.rand(1-6664664646),
+                      size: Random.rand(1-6664664646),
+                      color: '#FF0000',
+                      properties: {
+                         node: @identity.props                         
+                      }
+                      
+                  }
+
+     @providers[:edges] << {
+             id: "#{@identity.rels(type: 'User#identities')[0].neo_id}",
+             source: "#{current_user.id}",
+             target: "#{@identity.id}",
+             size: Random.rand(1-6664664646),
+             color: '#ccc'
+                     }             
+     @providers[:nodes] <<  {
+                      id: current_user.id.to_s,  
+                      label: "Node #{current_user.id}", 
+                      x: Random.rand(1-6664664646),
+                      y: Random.rand(1-6664664646),
+                      size: Random.rand(1-6664664646),
+                      color: '#00FF00',
+                      properties: {
+                         node: current_user.props                         
+                      }
+                      
+                  }
+
+
   end
 
   def new
@@ -40,15 +115,25 @@ class Neo4j::IdentitiesController < ApplicationController
                          country: params[:neo4j_identity][:country]
                      )  
                      
-           end 
-    @identity = Neo4j::Identity.new(identity_params)
-    if @identity.save
-      user.identities << @identity 
-      @identity.user = user          
-      flash[:notice] = "Please verify your email"
-      redirect_to @identity
+           end
+    @exist_identity =  Neo4j::Identity.find(email: params[:neo4j_identity][:email].downcase) 
+    if @exist_identity.blank?        
+      @identity = Neo4j::Identity.new(identity_params)
+      if @identity.save
+        user.identities << @identity 
+        @identity.user = user
+        @identity.identity_provider("normal")          
+        flash[:notice] = "Please verify your email"
+        redirect_to @identity
+      else
+        render 'new'
+      end
     else
-      render 'new'
+      relation =  @exist_identity.identity_provider("normal")
+      if relation == :error_messsage
+        flash[:error] = "Identity already created"      
+        redirect_to root_path
+      end
     end
   end
 
