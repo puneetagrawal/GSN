@@ -34,6 +34,7 @@ describe User do
  	  	identity = FactoryGirl.create(:identity) 	  	
  	  	user.identities << identity
  	  	identity.user = user
+ 	  	identity.identity_provider("normal")
  	  end
       user.identities.count > 1
       it { should be_valid }
