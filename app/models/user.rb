@@ -1,7 +1,7 @@
 require 'digest'
 class User
   include Neo4j::ActiveNode
-
+  include CustomNeo4j
   
   property :id
   property :first_name
@@ -24,6 +24,8 @@ class User
   # property :confirmation_sent_at, type: DateTime
   
   has_n(:identities).to(Neo4j::Identity)
+
+  before_destroy :delete_identities
 
   # before_create :create_confirmation_token, if: :is_normal_provider?
   # before_create :set_user
@@ -50,6 +52,9 @@ class User
     "#{first_name} #{last_name}"
   end
  
+  def delete_identities
+    self.identities.map{|identity| identity.destroy if identity.present?}
+  end
   #  def create_confirmation_token
   #   # Create the confirmation token.
   #    self.confirmation_token = Neo4j::Identity.hash(Neo4j::Identity.new_random_token)
@@ -72,5 +77,15 @@ class User
   	identities.find(provider: provider).next
   end
 
+  class << self
+    def first
+     all.map{|u| u}[0]
+    end
+
+    def last
+       count = all.count
+       all.map{|u| u}[count - 1]
+    end
+  end
 
 end

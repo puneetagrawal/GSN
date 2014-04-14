@@ -29,6 +29,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     arel (4.0.2)
+    assert_difference (0.5.0)
     atomic (1.1.16)
     atomic (1.1.16-java)
     bcrypt (3.1.7)
@@ -61,6 +62,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    database_cleaner (0.7.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
@@ -76,6 +78,7 @@ GEM
     ffi (1.9.3)
     ffi (1.9.3-java)
     formatador (0.2.4)
+    growl (1.0.3)
     guard (2.6.0)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -273,13 +276,16 @@ PLATFORMS
   java
 
 DEPENDENCIES
+  assert_difference
   bcrypt-ruby
   bootstrap-sass
   capybara
   childprocess
   coffee-rails (~> 4.0.0)
+  database_cleaner (= 0.7.0)
   factory_girl_rails
   faker
+  growl (= 1.0.3)
   guard-rspec
   guard-spork
   jbuilder (~> 1.2)

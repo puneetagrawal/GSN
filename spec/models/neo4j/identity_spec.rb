@@ -46,7 +46,7 @@ describe Neo4j::Identity do
 
   describe "password mismatch " do
     before { identity.password_confirmation = "mismatch" }
-    it { should_not be_valid }
+    it { should_not be_valid }  
   end
 
   describe "password too short" do
@@ -54,6 +54,28 @@ describe Neo4j::Identity do
     it { should be_invalid }
   end
 
+  describe "identity associations" do
+    it "should have many providers" do
+      identity.providers.should be_a_kind_of(Array)
+      identity.providers.should_not be_empty
+    end
+  end
+
+  # describe 'identity user association' do
+  #   before(:each) do
+  #     @event = Event.unsafe_create(@valid_attributes)
+  #     @activity = Activity.find_by_item_id(@event)
+  #   end
+    
+  #   it "should have an activity" do
+  #     @activity.should_not be_nil
+  #   end
+    
+  #   it "should add an activity to the creator" do
+  #     @event.person.recent_activity.should contain(@activity)
+  #   end
+    
+  # end
 
 end
 

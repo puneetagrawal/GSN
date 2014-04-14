@@ -3,6 +3,7 @@ module Neo4j
 class Identity 
 
   include Neo4j::ActiveNode
+  include CustomNeo4j
   
   property :id
   property :uid
@@ -48,7 +49,7 @@ class Identity
   after_create  :send_email_confirmation, if: :is_normal_provider?
 
   has_one(:user).from(:identities)
-  has_one(:role).from(:role)
+ 
   
   attr_accessor :first_name, :last_name
 
@@ -68,15 +69,16 @@ class Identity
 
     def hash(token)
       Digest::SHA1.hexdigest(token.to_s)
-    end
+    end 
 
     def first
-     all.map{|u| u}[0]
+      all.map{|u| u}[0]
     end
 
     def last
-       all.map{|u| u}[Neo4j::Identity.count - 1]
-    end
+      count = all.count
+      all.map{|u| u}[count - 1]
+    end  
     
   end
 
@@ -169,6 +171,9 @@ class Identity
     relation.update_props(updated_at: Time.now.to_s)
   end
 
+  def providers
+    rels(type: :provider)
+  end
 
 
   # def set_user

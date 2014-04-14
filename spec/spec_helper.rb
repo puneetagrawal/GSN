@@ -34,7 +34,15 @@ RSpec.configure do |config|
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
   config.include FactoryGirl::Syntax::Methods
+  
+  config.include AssertDifference
 
+  matchers_path = File.dirname(__FILE__) + "/matchers"
+  matchers_files = Dir.entries(matchers_path).select {|x| /\.rb\z/ =~ x}
+  matchers_files.each do |path|
+    require File.join(matchers_path, path)
+  end
+  config.include(CustomModelMatchers)
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing
   # the seed, which is printed after each run.

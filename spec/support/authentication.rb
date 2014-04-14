@@ -2,7 +2,7 @@ include SessionsHelper
 
 def user_sign_in(identity = create(:identity))
   identity.confirmed?
-  sign_in identity
+  sign_in identity, 'normal'
 end
 
 def user_sign_out
