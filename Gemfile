@@ -36,7 +36,6 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'database_cleaner', '0.7.0'
   gem 'growl', '1.0.3'
-  gem 'assert_difference'
 end
 
 group :test do  
