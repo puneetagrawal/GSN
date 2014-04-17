@@ -14,7 +14,11 @@ require 'capybara/rspec'
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
-  
+  matchers_path = File.dirname(__FILE__) + "/matchers"
+  matchers_files = Dir.entries(matchers_path).select {|x| /\.rb\z/ =~ x}
+  matchers_files.each do |path|
+    require File.join(matchers_path, path)
+  end
   config.include(CustomModelMatchers)
 
   config.include Capybara::DSL
@@ -30,10 +34,6 @@ end
 end
 
 Spork.each_run do
-  matchers_path = File.dirname(__FILE__) + "/matchers"
-  matchers_files = Dir.entries(matchers_path).select {|x| /\.rb\z/ =~ x}
-  matchers_files.each do |path|
-    require File.join(matchers_path, path)
-  end
+  
   FactoryGirl.reload
 end

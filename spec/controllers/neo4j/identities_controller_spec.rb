@@ -52,9 +52,6 @@ describe Neo4j::IdentitiesController do
         user_sign_in(@identity)
       end
       it "should update the identity" do
-        Rails.logger.debug ":::::::::::::::::::::::::::::::::::::"
-        Rails.logger.debug @identity.inspect
-        Rails.logger.debug @identity.id
         # put :update, id: @user.id
         # assigns(:user).should == @user
   
