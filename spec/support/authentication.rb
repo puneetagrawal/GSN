@@ -2,7 +2,8 @@ include SessionsHelper
 
 def user_sign_in(identity = create(:identity))
   identity.confirmed?
-  sign_in identity, 'normal'
+  sign_in identity, 'normal'   
+
 end
 
 def user_sign_out
@@ -24,3 +25,8 @@ end
 def request_sign_out
   visit signout_path
 end
+
+
+
+
+  

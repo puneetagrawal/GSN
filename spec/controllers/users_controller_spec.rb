@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
-	  # let(:user) { FactoryGirl.create(:user) }  
+  # let(:user) { FactoryGirl.create(:user) }  
   # routes { UsersController.routes }
 
   before do

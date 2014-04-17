@@ -16,7 +16,7 @@ module SessionsHelper
   end
 
   def current_user
-    user = current_identity.try(:user)  
+    user = current_identity.try(:user)     
     User.find(user.neo_id) if user.present?  
   end
 
@@ -29,8 +29,8 @@ module SessionsHelper
     @current_identity = identity
   end
 
-  def current_identity
-    remember_token = Neo4j::Identity.hash(cookies[:remember_token])   
+  def current_identity  
+    remember_token = Neo4j::Identity.hash(cookies[:remember_token])      
     @current_identity ||= Neo4j::Identity.find(remember_token: remember_token)
   end
 

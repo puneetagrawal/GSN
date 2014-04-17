@@ -122,8 +122,9 @@ class Neo4j::IdentitiesController < ApplicationController
       if @identity.save
         user.identities << @identity 
         @identity.user = user
-        @identity.identity_provider("normal")          
-        flash[:notice] = "Please verify your email"
+        @identity.identity_provider("normal")
+
+        flash[:notice] = signed_in? ? "Identity successfully created" : "Please verify your email"        
         redirect_to @identity
       else
         render 'new'
@@ -162,15 +163,16 @@ class Neo4j::IdentitiesController < ApplicationController
   private
 
     def identity_params
-      params.require(:neo4j_identity).permit(:name, :email, :password,
+      params.require(:neo4j_identity).permit(:email, :password,
                                    :password_confirmation, :first_name, :last_name, :provider, :country)
     end
 
     # Before filters
 
     def correct_user
-      @identity = Neo4j::Identity.find(params[:id])
-      redirect_to(root_url) unless current_user?(@identity)
+      user_id = Neo4j::Identity.find(params[:id]).user.neo_id
+      user = User.find(user_id)
+      redirect_to(root_url) unless current_user?(user)
     end
 
     def admin_user

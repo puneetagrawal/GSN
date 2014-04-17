@@ -3,7 +3,8 @@ class ServicesController < ApplicationController
   def create 
     auth = env["omniauth.auth"] 
     provider = auth.provider
-    email = (auth.info.email.present?) ? auth.info.email : "#{auth.info.nickname}@#{auth.provider}.com"
+  
+    email = (auth.info.try(:email).present?) ? auth.info.email : "#{auth.info.nickname}@#{auth.provider}.com"
     oauth_token = auth.credentials.token
     oauth_expires_at = Time.at(auth.credentials.expires_at) if auth.credentials.expires_at
    
@@ -16,15 +17,16 @@ class ServicesController < ApplicationController
 
     unless identity.errors.any?
       unless signed_in?  
-  	  	sign_in(identity, provider)
+        sign_in_user(identity, provider)
       end
-      
+      flash[:notice] = "Signed in successfully with #{provider}"      
       if identity.user == current_user
         redirect_to identity
       else
         redirect_to root_path
       end
     else
+      
       redirect_to root_path, :flash => { :error => show_error_messages(identity) }
     end          
   end
@@ -63,5 +65,16 @@ class ServicesController < ApplicationController
       
       return identity  
     end
+
+     def sign_in_user(identity, provider)
+    remember_token = Neo4j::Identity.new_random_token
+    cookies.permanent[:remember_token] = remember_token
+    identity.update(remember_token: Neo4j::Identity.hash(remember_token))
+    # identity = identity.get_identity(provider)
+
+    self.current_identity = identity
+    self.current_user = identity.user
+    flash[:notice] = "Signed in successfully"
+  end
 
 end

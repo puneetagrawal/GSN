@@ -4,7 +4,7 @@ describe Neo4j::IdentitiesController do
 
 	before(:each) do
 	  create_user_identity
-    end
+  end
 
 	describe 'GET #index' do
 		let(:get_index) { get :index }
@@ -26,11 +26,12 @@ describe Neo4j::IdentitiesController do
 
     describe 'GET #edit' do
     	before do
+          user_sign_in(@identity)
         	@identity = Neo4j::Identity.last
-        	user_sign_in(@identity)
-      	end
+      end
      	it "should edit the identity" do
-        	get :edit, id: @identity.id
+          # visit edit_neo4j_identity_path(@identity)
+        	get :edit, id: @identity.id      
         	assigns(:identity).should == @identity
      	end
     end
@@ -52,13 +53,11 @@ describe Neo4j::IdentitiesController do
         user_sign_in(@identity)
       end
       it "should update the identity" do
-        Rails.logger.debug ":::::::::::::::::::::::::::::::::::::"
-        Rails.logger.debug @identity.inspect
-        Rails.logger.debug @identity.id
+      
         # put :update, id: @user.id
         # assigns(:user).should == @user
   
-        patch :update, id: @identity.id, identity: {country: "UK"}
+        patch :update, id: @identity.id, neo4j_identity: {country: "UK"}
         # assert_redirected_to neo4j_identity_path(assigns(:identity))
         # assert_redirected_to "/neo4j/identities/#{@identity.id}"
       end
@@ -78,7 +77,6 @@ describe Neo4j::IdentitiesController do
           @identity.destroy
           @identity.should_not exist_in_database
       end
-
     end
 
 end

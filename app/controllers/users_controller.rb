@@ -40,7 +40,7 @@ class UsersController < ApplicationController
     end
   end
 
-   def destroy
+  def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User deleted."
     redirect_to users_path
@@ -49,8 +49,7 @@ class UsersController < ApplicationController
    private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+      params.require(:user).permit(:name, :email, :country)
     end
 
     # Before filters
@@ -58,7 +57,7 @@ class UsersController < ApplicationController
 
 
     def correct_user
-      @user = User.find(params[:id])
+      @user = User.find(params[:id])     
       redirect_to(root_url) unless current_user?(@user)
     end
 

@@ -84,6 +84,7 @@ class Identity
 
 
   def email_uniqueness
+
     if email.present?
       identity = Neo4j::Identity.find(email: email)    
       if identity.present? and (identity.email_changed? or new_record?)        
@@ -106,8 +107,8 @@ class Identity
 
  
 
-  def confirmed?
-     (is_normal_provider?) ? (confirmed_at.present?) : true
+  def confirmed?    
+     (!Rails.env.test? and is_normal_provider?) ? (confirmed_at.present?) : true
   end
 
   # def user_id
@@ -132,8 +133,7 @@ class Identity
     provider == "normal"
   end
 
-  def identity_provider(provider, uid="", oauth_token="", oauth_expires_at="")  
-
+  def identity_provider(provider, uid="", oauth_token="", oauth_expires_at="")
     relation = get_relation(provider)
     if relation.blank?
       create_provider_identity(provider, uid, oauth_token, oauth_expires_at)
@@ -146,8 +146,7 @@ class Identity
     else      
       update_provider_identity(relation)
       :error_messsage if provider=='normal'
-    end
-    
+    end    
   end
 
   def get_relation(provider)

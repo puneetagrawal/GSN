@@ -4,11 +4,14 @@ FactoryGirl.define do
   factory :identity, class: Neo4j::Identity do
     uid SecureRandom.uuid
      # sequence(:email) { |n| "user_#{n}@example.com" }
-    email "#{Faker::Name.first_name}@gmail.com"   
+    sequence(:email){|n| "#{Faker::Name.first_name}#{n}@factory.com" }   
+    password "foobar"
     password_confirmation "foobar"
+    country "Indoneasia"
     remember_token SecureRandom.urlsafe_base64
     confirmation_token Neo4j::Identity.hash(Neo4j::Identity.new_random_token)
     confirmation_sent_at Time.now.utc
+   
 
 
     # factory :identity_with_provider do

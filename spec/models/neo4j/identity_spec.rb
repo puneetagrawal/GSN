@@ -36,13 +36,6 @@ describe Neo4j::Identity do
     it { should_not be_valid }
   end
 
-	 
-  describe "password " do
-    before do
-      identity = Neo4j::Identity.new(nickname: "example_user", email: "use223r@example.com", password: " ", password_confirmation: " ", uid: SecureRandom.uuid)
-    end
-    it { should_not be_blank }
-  end
 
   describe "password mismatch " do
     before { identity.password_confirmation = "mismatch" }
@@ -55,10 +48,18 @@ describe Neo4j::Identity do
   end
 
   describe "identity associations" do
-    it "should have many providers" do
+    it "should have many providers" do      
       identity.providers.should be_a_kind_of(Array)
       identity.providers.should_not be_empty
     end
+  end
+
+
+  describe "password " do
+    before do
+      Neo4j::Identity.new(nickname: "example_user", email: "use223r@example.com", password: " ", password_confirmation: " ", uid: SecureRandom.uuid)
+    end
+    it { should_not be_blank }
   end
 
   # describe 'identity user association' do

@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     
     if identity && Neo4j::Identity.encrypt_password(identity.email, params[:session][:password]) == identity.password
       # Sign the user in and redirect to the user's show page.
-      sign_in(identity, "normal")
+      sign_in_user(identity, "normal")
       redirect_to identity
     else
       # Create an error message and re-render the signin form.
@@ -42,5 +42,16 @@ class SessionsController < ApplicationController
     if signed_in?
        redirect_to root_path, :flash => { :error => "You have already signed in." }
     end
+  end
+
+  def sign_in_user(identity, provider)
+    remember_token = Neo4j::Identity.new_random_token
+    cookies.permanent[:remember_token] = remember_token
+    identity.update(remember_token: Neo4j::Identity.hash(remember_token))
+    # identity = identity.get_identity(provider)
+
+    self.current_identity = identity
+    self.current_user = identity.user
+    flash[:notice] = "Signed in successfully"
   end
 end
