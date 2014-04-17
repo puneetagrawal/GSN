@@ -29,7 +29,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     arel (4.0.2)
-    assert_difference (0.5.0)
     atomic (1.1.16)
     atomic (1.1.16-java)
     bcrypt (3.1.7)
@@ -276,7 +275,6 @@ PLATFORMS
   java
 
 DEPENDENCIES
-  assert_difference
   bcrypt-ruby
   bootstrap-sass
   capybara

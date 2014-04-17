@@ -53,7 +53,6 @@ describe Neo4j::IdentitiesController do
         user_sign_in(@identity)
       end
       it "should update the identity" do
-      
         # put :update, id: @user.id
         # assigns(:user).should == @user
   
