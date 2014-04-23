@@ -14,10 +14,10 @@ class User
 
 
   validates :uuid, presence: true
-  validate :id, presence: true
-  validate :first_name, presence: true
-  validate :last_name, presence: true
-  validate :country, presence: true
+  # validate :id, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
 
   # property :confirmation_token
   # property :confirmed_at, type: DateTime

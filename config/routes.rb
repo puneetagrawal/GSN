@@ -16,11 +16,14 @@ GSN::Application.routes.draw do
 
   match 'auth/:provider/callback', to: 'services#create', via: [:get, :post]
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
+  resources :node_types 
+  resources :node_attributes
   resources :users
   namespace :neo4j do
     resources :identities
   end
   resources :groups
+  resources :group_types
   resources :sessions, only: [:new, :create, :destroy]
   # resources :microposts, only: [:create, :destroy]
 

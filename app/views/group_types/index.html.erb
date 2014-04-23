@@ -1,0 +1,76 @@
+<!-- <%# GroupType.all.each_with_index do |grp, index|%>
+  <h2> Group <%#= index%></h2>
+  <%# grp.node_types.each do |nt|%>
+    <p><%#= nt.field_name %></p>
+  <%# end %>
+<%# end %> -->
+
+<%#if GroupType.count == 0 %>
+  <%=link_to "Create group", new_group_type_path, class: "btn btn-primary", style: "position: relative; z-index: 99" %>
+<%# end %>
+
+<div id="node_edge_attr" style="display:none">
+  <h4>Node Attributes</h4>  
+  <div id="show_node_attrs"></div>
+  <!-- <h4>Relation</h4>   -->
+  <!-- <div id="show_rel_node"></div> -->
+  <!-- <h4>Edge Attributes</h4> 
+  <div id="show_edge_attrs"></div> -->
+</div>  
+	
+
+    <!-- END SIGMA IMPORTS -->
+<div id="container">
+  <style>
+    #graph-container {
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      position: absolute;
+    }
+  </style>
+  <div id="graph-container"></div>
+</div>
+<script>
+/**
+ * A random graph is generated and stored in the "graph" variable, and then sigma is
+ * instanciated directly with the graph.
+ *
+ * The simple instanciation of sigma is enough to make it render the graph
+ * on the screen, since the graph is given directly to the constructor.
+ */
+
+graph_data = JSON.parse('<%= raw [@groups.to_json][0] %>')
+sigma.renderers.def = sigma.renderers.canvas
+// Instanciate sigma:
+s = new sigma({
+  graph: graph_data,
+  container: 'graph-container'
+});
+
+// Initialize the dragNodes plugin:
+sigma.plugins.dragNodes(s, s.renderers[0]);
+
+// Bind the events:
+s.bind('clickNode overNode', function(e) { 
+  var attr_node = ""
+  // var attr_edge = ""
+  console.log(e.data.node)
+  console.log(e.data)
+  console.log(e.data.node.relation)
+  $.each(e.data.node.properties.node, function(k, v) {
+    attr_node += "<li><span style='color:red; margin-right: 20px;'>"+k+":</span><span>"+v+"</span></li>"
+  });  
+
+  //  $.each(e.data.node.properties.edge, function(k, v) {
+  //   attr_edge += "<li><span style='color:red; margin-right: 20px;'>"+k+":</span><span>"+v+"</span></li>"
+  // });
+  $("#show_node_attrs").html(attr_node);
+  // $("#show_edge_attrs").html(attr_edge);
+  $("#show_rel_node").html("<p>"+ e.data.node.relation +"</p>");
+  $("#node_edge_attr").show();
+});
+
+</script>
+

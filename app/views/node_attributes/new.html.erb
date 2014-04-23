@@ -1,0 +1,14 @@
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@attribute_type) do |f| %>
+  	  <%= render 'shared/error_messages', object: f.object %>
+
+      
+      <%= f.text_field "name" %>
+      <%= f.select "attr_type", NodeAttribute::ATTRIBUTE_TYPES, prompt: "Select Attribute Type" %>
+
+      <%= submit_tag "Create attribute", class: "btn  btn-primary" %>
+    <% end %>
+  </div>
+</div>

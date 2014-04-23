@@ -78,15 +78,16 @@ class Identity
     def last
       count = all.count
       all.map{|u| u}[count - 1]
-    end  
-    
+    end
+
+
   end
 
 
   def email_uniqueness
 
     if email.present?
-      identity = Neo4j::Identity.find(email: email)    
+      identity = Neo4j::Identity.find(email: email.try(:downcase))    
       if identity.present? and (identity.email_changed? or new_record?)        
          errors.add(:email, "already exist.")
       end
@@ -173,7 +174,11 @@ class Identity
   def providers
     rels(type: :provider)
   end
-
+  
+  def groups
+    rels(dir: :outgoing, type: :groups)
+  end  
+    
 
   # def set_user
   #   puts "OOOOOOOOOOOOOOOOOOOOOOOOO"

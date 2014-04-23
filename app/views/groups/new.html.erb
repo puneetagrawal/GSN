@@ -1,56 +1,19 @@
-<% provide(:title, 'Sign up') %>
+<% provide(:title, 'Group') %>
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for(:group, :url => groups_path) do |f| %>
+    <%= form_for(:group, url: groups_path) do |f| %>
   	
-
-   <table>
-  	<h2>End Node</h2>
-  	<th> Name </th>
-  	<th> Value </th>
-      <%#= f.hidden_field :provider, value: "normal" %>
-      <%#= render 'shared/error_messages', object: f.object %>
-      
-      <tr>
-      	<td><%= text_field_tag "end_node[0][name]" %></td>
-      	<td><%= text_field_tag "end_node[0][value]" %></td>
-      </tr> 
-      <tr>
-      	<td><%= text_field_tag "end_node[1][name]" %></td>
-      	<td><%= text_field_tag "end_node[1][value]" %></td>
-      </tr> 
-      <tr>
-        <td><%= label_tag "Color" %></td>
-      	<%= hidden_field_tag "end_node[2][name]", "color", readonly: true %>
-      	<td><%= text_field_tag "end_node[2][value]", "", id: "node_color_field" %></td>
-      </tr> 
-      
-   </table>
-
-   <table>
-  	<h2>Relationship</h2>
-  	<th> Name </th>
-  	<th> Value </th>
-      <%#= f.hidden_field :provider, value: "normal" %>
-      <%#= render 'shared/error_messages', object: f.object %>
-      <tr>
-      	<%= text_field_tag "relationship[type]" %> 
-      </tr> 
-      <tr>
-      	<td><%= text_field_tag "relationship[0][name]" %></td>
-      	<td><%= text_field_tag "relationship[0][value]" %></td>
-      </tr> 
-      <tr>
-      	<td><%= text_field_tag "relationship[1][name]" %></td>
-      	<td><%= text_field_tag "relationship[1][value]" %></td>
-      </tr> 
-      <tr>
-      	<td><%= text_field_tag "relationship[2][name]" %></td>
-      	<td><%= text_field_tag "relationship[2][value]" %></td>
-      </tr> 
-      
-   </table>
+      <% @node_types.each do |node_type| %>
+        <% field_name = node_type.field_name %>
+        <div style = "margin-bottom: 20px;">
+          <p><%= label_tag field_name %></p>
+          <p><%= text_field_tag "node_types[#{field_name}]" %></p>
+        </div>
+      <% end %>
+      <%#= hidden_field_tag "node_types[created_at]", "#{Time.now}" %>
+      <%#= hidden_field_tag "node_types[updated_at]", "#{Time.now}" %>
+       <%#= select_tag "node_types", options_for_select(@node_types.map{|nt| [nt.field_name.try(:humanize), nt.id]}), multiple: true %>
       <%= submit_tag "Create my group", class: "btn  btn-primary" %>
     <% end %>
   </div>

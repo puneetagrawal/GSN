@@ -1,0 +1,10 @@
+<%= link_to "Create new node-type", new_node_type_path, class: 'btn btn-primary'%>
+
+<% @node_types.each do |node_type|%>
+  <ul>
+  	<h2><%= node_type.field_name.try(:humanize) %> </h2>
+  <% node_type.properties.each do |prop| %>
+    <li> <%= prop.name.try(:humanize)%> </li>
+    <% end %>
+ </ul>
+<% end %>

@@ -1,7 +1,7 @@
 class Neo4j::IdentitiesController < ApplicationController
 	before_action :signed_in_user, except: [:new, :create]
   before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user,     only: :destroy
+  # before_action :admin_user,     only: :destroy
 
   def index
    @identities = Neo4j::Identity.all
@@ -141,7 +141,7 @@ class Neo4j::IdentitiesController < ApplicationController
   def destroy
     Neo4j::Identity.find(params[:id]).destroy
     flash[:success] = "Identity deleted."
-    redirect_to identities_url
+    redirect_to neo4j_identities_url
   end
 
   def nodes

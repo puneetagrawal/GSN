@@ -36,8 +36,8 @@ describe User do
  	  	identity.user = user
  	  	identity.identity_provider("normal")
  	  end
-      user.identities.count > 1
-      it { should be_valid }
+       it {  user.identities.count > 1 }
+       it { user.should be_valid }
     end
 
 

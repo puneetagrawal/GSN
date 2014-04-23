@@ -1,6 +1,7 @@
 require 'spec_helper'
 describe "neo4j/identity_page_spec.rb" do
 	subject { page }
+    
     describe "Edit page" do
     	before do
     	    create_user_identity

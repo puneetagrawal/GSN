@@ -1,0 +1,10 @@
+<%= link_to "Create new attribute", new_node_attribute_path, class: 'btn btn-primary'%>
+
+<% @attributes.each do |attr| %>
+  <ul><h2><%= attr[0] %> </h2>     
+  	<% attr[1].each do |val| %>
+      <li><h4><%= val.try(:humanize) %> </h4></li>
+    <% end %>
+  </ul>
+  
+<% end %>

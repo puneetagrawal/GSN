@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe UsersController do
-  # let(:user) { FactoryGirl.create(:user) }  
-  # routes { UsersController.routes }
 
   before do
       create_user_identity
@@ -54,34 +52,33 @@ describe UsersController do
        user_sign_in(@identity)
      end
      it "should update the user" do
-       # put :update, id: @user.id
-       # assigns(:user).should == @user
- 
-       patch :update, id: @user.id, user: {name: "test233"}
-       assert_redirected_to user_path(assigns(:user))
+       patch :update, id: @user.id, user: {country: "Africa"}
+       response.should redirect_to "/users/#{@user.id}"
+     end
+
+     it "should not update the user" do
+       patch :update, id: @user.id, user: {first_name: ''}
+       response.should render_template("edit")
      end
   end
   
   describe "should destroy user" do  
- 
+    before do
+       @identity = Neo4j::Identity.last
+       user_sign_in(@identity)
+    end
 
     it "should destroy the identities if the user is destroyed" do
-        idenitities = @user.identities.map{|identity| identity}
-        @user.destroy
-        idenitities.each do |identity|
-          identity.should_not exist_in_database
-        end
+      idenitities = @user.identities.map{|identity| identity}
+      delete :destroy, id: @user.id
+      idenitities.each do |identity|
+        identity.should_not exist_in_database
+      end
     end
 
     it "should destroy the user" do
-        @user.destroy
-        @user.should_not exist_in_database
-       
+      delete :destroy, id: @user.id
+      response.should redirect_to users_path
     end
-
   end
-
-
-
-
 end

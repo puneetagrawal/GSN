@@ -8,8 +8,22 @@
           <% if signed_in? %>
             <% oauth_text = "Add" %>
             <!-- <li><%#= link_to "Users", users_path %></li> -->
-            <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
-             <li><%= link_to "Add another account", signup_path %></li>              
+            <li><%= link_to "Sign out", signout_path, method: "delete" %></li>             
+            <li><%= link_to "Add another account", signup_path %></li>              
+            <li><%= link_to "Groups", groups_path(identity: current_identity.uuid) %></li>
+             <li id="fat-menu-group" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Add Group<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Node Attributes", node_attributes_path %></li>              
+                <li><%= link_to "Node Types", node_types_path %></li>              
+                <li><%= link_to "Group Types", group_types_path %></li>              
+                   
+                <li class="divider"></li>                
+              </ul>
+            </li>
+
           <% else %>
             <% oauth_text = "Sign in with" %>
             <li><%= link_to "Sign in", signin_path %></li>           
