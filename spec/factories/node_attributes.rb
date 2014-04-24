@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :node_attribute do
-  	name "#{Faker::Name.name}"
+  	sequence(:name){|n| "#{Faker::Name.first_name}#{n}" }  
   	attr_type "DataType" 
   end
 end

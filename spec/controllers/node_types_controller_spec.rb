@@ -31,20 +31,24 @@ describe NodeTypesController do
 		  end
     end
 
-  #   describe 'POST #create' do
-  #   	before do
-	 #       @identity = Neo4j::Identity.last
-	 #       user_sign_in(@identity)
-	 #    end
-		# # it "should create & save the node type" do
-	 # #       post :create, id: @identity.id, node_type: { field_name: "attr1" }, node_attr_type: {name: "su", attr_type: 'Visibility' }
-	 # #       response.should redirect_to "/node_types?identity=#{@identity.uuid}"
-	 # #    end
+    describe 'POST #create' do
+    	before do
+	       @identity = Neo4j::Identity.last
+	       user_sign_in(@identity)
+	       @node_attribute = FactoryGirl.create(:node_attribute)
 
-	 #    it "should not create & save the node type" do
-	 #       post :create, id: @identity.id, node_type: { }
-	 #       response.should be_successful
-	 #       response.should render_template "new"
-	 #    end
-  #   end
+	    end
+
+		it "should create & save the node type" do
+	       post :create, id: @identity.id, node_type: { field_name: "attr1" }, 
+	                                                    node_attr_type: {"#{@node_attribute.attr_type}" => "#{@node_attribute.id}"}
+	       response.should redirect_to "/node_types?identity=#{@identity.uuid}"
+	    end
+
+	    # it "should not create & save the node type" do
+	    #    post :create, id: @identity.id,  node_attr_type: {"#{@node_attribute.attr_type}" => "#{@node_attribute.id}"}
+	    #     response.should be_successful
+	    #     response.should render_template "new"
+	    # end
+    end
 end

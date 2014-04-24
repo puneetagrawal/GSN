@@ -4,7 +4,7 @@
   	
 
        <%= select_tag "node_types", options_for_select(@node_types.map{|nt| [nt.field_name.try(:humanize), nt.id]}), multiple: true %>
-      <%= submit_tag "Create group", class: "btn  btn-primary" %>
+      <%= submit_tag "Create group type", class: "btn  btn-primary" %>
     <% end %>
   </div>
 </div>
