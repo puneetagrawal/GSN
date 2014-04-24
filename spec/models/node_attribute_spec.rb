@@ -5,10 +5,11 @@ describe NodeAttribute do
     it { should respond_to(:name) }
     it { should respond_to(:attr_type) }
 
+	node_attributes = FactoryGirl.create(:node_attribute)
     # node_attributes = FactoryGirl.create(:node_attribute)
     
     describe "Name" do
-    	it { NodeAttribute.name.should_not be_nil }
+    	it { node_attributes.name.should_not be_nil }
 	end
 
 	describe "Name should be Unique" do

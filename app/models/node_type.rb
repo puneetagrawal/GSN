@@ -9,9 +9,7 @@ class NodeType
 
   has_one(:creator).from(:users)
   has_n(:properties).to(NodeAttribute)
-  before_save { self.field_name = field_name.downcase }
-  
-  # validates :creator, presence: true
-  # validates :properties, presence: true
+  before_save { self.field_name = field_name.downcase }  
+ 
   
 end

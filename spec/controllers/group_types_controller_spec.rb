@@ -37,8 +37,15 @@ describe GroupTypesController do
 	    end
 	     
 	    it "should create the node attributes and redirect" do
-	       post :create, node_types: ["#{@node_type.id}"] 
+	    	node_name = NodeType.find(field_name: "name" )
+	    	node_desc = NodeType.find(field_name: "description" )
+	       post :create, node_types: [node_name.id, node_desc.id] 
 	       response.should redirect_to group_types_path
+	    end
+
+	    it "should not create the node attributes and render" do
+	       post :create, node_types: ["#{@node_type.id}"] 
+	       response.should render_template "new"
 	    end
     end
 end

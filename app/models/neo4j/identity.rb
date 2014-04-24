@@ -69,17 +69,7 @@ class Identity
 
     def hash(token)
       Digest::SHA1.hexdigest(token.to_s)
-    end 
-
-    def first
-      all.map{|u| u}[0]
-    end
-
-    def last
-      count = all.count
-      all.map{|u| u}[count - 1]
-    end
-
+    end    
 
   end
 

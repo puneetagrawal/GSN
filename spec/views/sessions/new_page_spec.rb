@@ -9,8 +9,11 @@ describe "sessions/new.html.erb" do
 		    fill_in "Password", :with => "foobar"
 		    click_button "Sign in"
 
-		    page.should have_content('Signed in successfully')
+		    # page.should have_content('Signed in successfully')
 		end
+
+		it { page.should have_link('Sign up now!', href: signup_path) }
+		it { page.should have_selector('p', text: "user?") }
   	end
 
   	# describe "Oauth" do

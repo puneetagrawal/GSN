@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :node_type do
-  	field_name "desc"
+  	field_name "description"
   end
 end

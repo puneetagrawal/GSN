@@ -76,16 +76,6 @@ class User
   def get_identity(provider)
   	identities.find(provider: provider).next
   end
-
-  class << self
-    def first
-     all.map{|u| u}[0]
-    end
-
-    def last
-       count = all.count
-       all.map{|u| u}[count - 1]
-    end
-  end
+  
 
 end

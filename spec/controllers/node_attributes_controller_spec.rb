@@ -1,6 +1,6 @@
 require 'spec_helper'
 describe NodeAttributesController do
-
+	node_attributes = FactoryGirl.create(:node_attribute)
 	before do
       create_user_identity
     end
@@ -37,13 +37,12 @@ describe NodeAttributesController do
 	       user_sign_in(@identity)
 	    end
 		it "node attributes not saved then render" do
-	       post :create, id: @identity.id, node_attribute: {name: "test", attr_type: 'Visibility' }
-	       response.should be_successful
+	       post :create, id: @identity.id, node_attribute: {name: "#{NodeAttribute.last.name}", attr_type: 'DataType' }
 	       response.should render_template "new"
 	    end
 
 	    it "should create the node attributes and redirect" do
-	       post :create, id: @identity.id, node_attribute: {name: "#{Faker::Name.name}", attr_type: 'Visibility' }
+	       post :create, id: @identity.id, node_attribute: {name: "#{Faker::Name.name}", attr_type: 'DataType' }
 	       response.should redirect_to "/node_attributes?identity=#{@identity.uuid}"
 	    end
 
