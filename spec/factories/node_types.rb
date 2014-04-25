@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :node_type do
-  	field_name "description"
+  	sequence(:field_name){|n| "#{Faker::Name.first_name}#{n}" }   	
   end
 end
