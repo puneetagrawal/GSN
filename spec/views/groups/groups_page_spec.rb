@@ -24,7 +24,6 @@ describe "groups/groups_page_spec.rb" do
       end     
 
          it { page.should have_selector('div') }
-         it { page.should have_selector('p') }
     end
 
    describe "Show page" do
