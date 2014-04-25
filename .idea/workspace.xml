@@ -3,19 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5f296042-5060-4163-864b-a5daae68d97a" name="Default" comment="">
       <change type="DELETED" beforePath="D:\rails_tutorial\GSN\config\initializers\custom_neo4j.rb" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/group_types_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/group_types_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/groups_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/groups_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/neo4j/identity.rb" afterPath="$PROJECT_DIR$/app/models/neo4j/identity.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/node_type.rb" afterPath="$PROJECT_DIR$/app/models/node_type.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/user.rb" afterPath="$PROJECT_DIR$/app/models/user.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/group_types_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/group_types_controller_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/groups_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/groups_controller_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/node_attributes_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/node_attributes_controller_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/factories/node_types.rb" afterPath="$PROJECT_DIR$/spec/factories/node_types.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/group_type_spec.rb" afterPath="$PROJECT_DIR$/spec/models/group_type_spec.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/node_attribute_spec.rb" afterPath="$PROJECT_DIR$/spec/models/node_attribute_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/views/groups/groups_page_spec.rb" afterPath="$PROJECT_DIR$/spec/views/groups/groups_page_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/views/sessions/new_page_spec.rb" afterPath="$PROJECT_DIR$/spec/views/sessions/new_page_spec.rb" />
     </list>
     <ignored path="GSN.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -329,8 +317,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3284553" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
