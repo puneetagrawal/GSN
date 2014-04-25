@@ -9,7 +9,7 @@ describe "group_types" do
             visit group_types_path			
     	end   	    
 
-    	it { page.should have_link("Create group", href: new_group_type_path) }
+    	it { page.should have_link("New group type", href: new_group_type_path) }
         it { page.should have_selector('div') }
         # it { page.should have_selector('h4', text: "Node") }
   	end
