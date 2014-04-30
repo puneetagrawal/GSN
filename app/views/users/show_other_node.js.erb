@@ -1,0 +1,42 @@
+$("#graph-container").html("")
+<%#= render "shared/graph_script", parsed_data: @data_collections %>
+
+graph_data = JSON.parse('<%= raw [@data_collections.to_json][0] %>')
+
+sigma.renderers.def = sigma.renderers.canvas
+// Instanciate sigma:
+s = new sigma({
+  graph: graph_data,
+  container: 'graph-container'
+});
+
+// Initialize the dragNodes plugin:
+sigma.plugins.dragNodes(s, s.renderers[0]);
+
+// Bind the events:
+s.bind('overNode', function(e) { 
+  var attr_node = ""
+  var attr_edge = ""
+  
+  $.each(e.data.node.properties.node, function(k, v) {
+    attr_node += "<li><span style='color:red; margin-right: 20px;'>"+k+":</span><span>"+v+"</span></li>"
+  });  
+   if(e.data.node.properties.edge != undefined) {
+     $.each(e.data.node.properties.edge, function(k, v) {
+      attr_edge += "<li><span style='color:red; margin-right: 20px;'>"+k+":</span><span>"+v+"</span></li>"
+    });
+   }
+  $("#show_node_attrs").html(attr_node);
+  $("#show_edge_attrs").html(attr_edge);
+  $("#show_rel_node").html("<p>"+ e.data.node.relation +"</p>");
+  $("#node_edge_attr").show();
+});
+
+
+s.bind('clickNode', function(e) { 
+  $.ajax({
+    type: "GET",
+    url: "/users/"+e.data.node.id+"/show_other_node"    
+  })  
+
+});

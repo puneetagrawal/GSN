@@ -18,7 +18,11 @@ GSN::Application.routes.draw do
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
   resources :node_types 
   resources :node_attributes
-  resources :users
+  resources :users do
+    member do
+     get 'show_other_node'
+    end
+  end
   namespace :neo4j do
     resources :identities
   end

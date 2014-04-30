@@ -19,4 +19,15 @@ describe "users" do
             page.should have_content('Profile updated')
         end
   	end
+
+    describe "Show Page" do
+        before(:each) do
+           create_user_identity                
+           sign_in(@identity, 'normal')
+           visit user_path(@user)      
+        end   
+
+        it { should render_template(:partial => '_graph_script') }
+        it { should render_template(:partial => '_graph_template') }
+    end
 end

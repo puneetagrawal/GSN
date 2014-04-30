@@ -1,4 +1,6 @@
 class Neo4j::IdentitiesController < ApplicationController
+  include CustomNodeRelationship
+
 	before_action :signed_in_user, except: [:new, :create]
   before_action :correct_user,   only: [:edit, :update]
   # before_action :admin_user,     only: :destroy
@@ -15,74 +17,26 @@ class Neo4j::IdentitiesController < ApplicationController
     check_node = []
     # random_num = Random.rand(1-6664664646)
      rel_identities = @identity.rels(type: :provider)
-     rel_identities.each do |r|
+     rel_identities.each do |r_identity|
          
-       e_node = r.end_node
-       e_node_id = r.end_node.neo_id
-       s_node_id = r.start_node.neo_id
-       edge_properties = r.props
-       edge_relation = r.load_resource.present? ? r.load_resource["type"] : ""
-       color_prop = r.end_node.props[:color].present? ? r.end_node.props[:color] : '#666'
-       # Rails.logger.debug edge       
-           unless check_node.include? e_node_id
-             check_node << e_node_id
-             @providers[:nodes] << {
-                      id: e_node_id.to_s,  
-                      label: "Node #{e_node_id}", 
-                      x: Random.rand(1-6664664646),
-                      y: Random.rand(1-6664664646),
-                      size: Random.rand(1-6664664646),
-                      color: color_prop,
-                      properties: {
-                        node: e_node.props,
-                        edge: edge_properties
-                      },
-                      relation: edge_relation
+       e_node = r_identity.end_node
+       e_node_id = r_identity.end_node.neo_id
+       s_node = r_identity.start_node
+       s_node_id = r_identity.start_node.neo_id
+       edge_properties = r_identity.props
+       edge_relation = r_identity.load_resource.present? ? r_identity.load_resource["type"] : ""
+       color_prop = r_identity.end_node.props[:color].present? ? r_identity.end_node.props[:color] : '#666'
+       unless check_node.include? e_node_id
+         check_node << e_node_id
+         @providers[:nodes] << create_node(node: e_node, relation: edge_relation, label: "Provider", color: color_prop)
 
-                  }
-            end
-           @providers[:edges] << {
-             id: "e #{r.neo_id}",
-             source: "#{s_node_id}",
-             target: "#{e_node_id}",
-             size: Random.rand(1-6664664646),
-             color: '#ccc'
-                     }
+       end
+       @providers[:edges] << create_edge(source: s_node, target: e_node, relation: r_identity, color: '#ccc')
      end
 
-     @providers[:nodes] << {
-                      id: @identity.id.to_s,  
-                      label: "Node #{@identity.id}", 
-                      x: Random.rand(1-6664664646),
-                      y: Random.rand(1-6664664646),
-                      size: Random.rand(1-6664664646),
-                      color: '#FF0000',
-                      properties: {
-                         node: @identity.props                         
-                      }
-                      
-                  }
-
-     @providers[:edges] << {
-             id: "#{@identity.rels(type: 'User#identities')[0].neo_id}",
-             source: "#{current_user.id}",
-             target: "#{@identity.id}",
-             size: Random.rand(1-6664664646),
-             color: '#ccc'
-                     }             
-     @providers[:nodes] <<  {
-                      id: current_user.id.to_s,  
-                      label: "Node #{current_user.id}", 
-                      x: Random.rand(1-6664664646),
-                      y: Random.rand(1-6664664646),
-                      size: Random.rand(1-6664664646),
-                      color: '#00FF00',
-                      properties: {
-                         node: current_user.props                         
-                      }
-                      
-                  }
-
+     @providers[:nodes] << create_node(node: @identity, label: "Identity", color: '#FF0000')
+     @providers[:edges] << create_edge(source: current_user, target: @identity, relation: @identity.rels(type: 'User#identities')[0], color: '#ccc')
+     @providers[:nodes] << create_node(node: current_user, label: "User", color: '#00FF00') 
 
   end
 

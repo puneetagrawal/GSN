@@ -28,7 +28,7 @@ class GroupsController < ApplicationController
 		# binding.pry
 		# relation_properties = get_properties(params["relationship"])
 		identity_group = current_identity.create_rel(:groups, group)
-        group_owner = group.create_rel(:owner, current_identity)
+        group_owner = group.create_rel(:is_owned_by, current_identity)
 		# @group = Group.new(name: params[:node_types][:name])
 		# if @group.save
 		#   @group.creator = current_user
@@ -59,7 +59,7 @@ class GroupsController < ApplicationController
 	   # color_prop = r.end_node.props[:color].present? ? r.end_node.props[:color] : '#666'
 
      @groups[:nodes] << create_node(node: e_node, relation: "groups", label: "Group", color: "#666")
-     @groups[:nodes] << create_node(node: s_node, relation: "groups", label: "Group", color: "#19F8B5")
+     @groups[:nodes] << create_node(node: s_node, relation: "groups", label: "Identity", color: "#19F8B5")
      @groups[:nodes] << create_node(node: current_user, label: "User", color: "#F81960")
      @groups[:edges] << create_edge(source: s_node, target: e_node, relation: e_relation, color: '#ccc')
      @groups[:edges] << create_edge(source: current_user, target: s_node, relation: e_relation_user, color: '#ccc')

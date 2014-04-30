@@ -153,7 +153,7 @@ class Identity
   end
 
   def create_provider_identity(provider, uid, oauth_token, oauth_expires_at)
-    provider_node = Neo4j::Node.create(provider_name: provider)
+    provider_node = Neo4j::Node.create({provider_name: provider}, :Provider)
     self.create_rel(:provider,  provider_node, {uid: uid, name: provider, created_at: Time.now.to_s, updated_at: Time.now.to_s, oauth_token: oauth_token.to_s, oauth_expires_at: oauth_expires_at.to_s})
   end
 

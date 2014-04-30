@@ -54,7 +54,7 @@ describe GroupsController do
 
           @group = Neo4j::Node.create( {"#{@node_type.field_name}" => "hello"}, :Group )
           identity_group = @identity.create_rel(:groups, @group)
-          group_owner = @group.create_rel(:owner, @identity)
+          group_owner = @group.create_rel(:is_owned_by, @identity)
           # visit group_path(group.neo_id)     
       end   
       it "should show the group" do

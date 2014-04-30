@@ -10,6 +10,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rspec'
+# require 'capybara/webkit/matchers'
+# Capybara.javascript_driver = :webkit
  
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
  
@@ -29,6 +31,11 @@ RSpec.configure do |config|
   config.color_enabled = true
   config.tty = true
   config.formatter = :documentation # :progress, :html, :textmate
+
+
+  # config.include(Capybara::Webkit::RspecMatchers, :type => :feature)
+ 
+
 end
  
 end
