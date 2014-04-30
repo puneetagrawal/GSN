@@ -90,6 +90,8 @@ describe "neo4j/identity_page_spec.rb" do
         it { page.should have_link('Groups', href: groups_path(identity: @identity.uuid)) }
         it { page.should have_selector('h1', text: @identity.email) }
         it { page.should have_css('#graph-container') }
+        it { should render_template(:partial => '_graph_script') }
+        it { should render_template(:partial => '_graph_template') }
     end
     
 end

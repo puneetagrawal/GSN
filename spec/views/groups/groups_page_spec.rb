@@ -43,6 +43,8 @@ describe "groups/groups_page_spec.rb" do
 
          it { page.should have_selector('div') }
          it { page.should have_css('#graph-container') }
+         it { should render_template(:partial => '_graph_script') }
+         it { should render_template(:partial => '_graph_template') }
     end
 
 end

@@ -12,6 +12,8 @@ describe "group_types" do
     	it { page.should have_link("New group type", href: new_group_type_path) }
         it { page.should have_selector('div') }
         # it { page.should have_selector('h4', text: "Node") }
+        it { should render_template(:partial => '_graph_script') }
+        it { should render_template(:partial => '_graph_template') }
   	end
 
     
