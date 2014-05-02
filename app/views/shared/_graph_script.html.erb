@@ -9,7 +9,11 @@
 
 // graph_data = JSON.parse('<%#= raw [@users.to_json][0] %>')
 graph_data = JSON.parse('<%= raw [parsed_data.to_json][0] %>')
-
+var node_ids=[]
+<% @check_node.each do |node| %> 
+  node_ids.push(<%= node %>)
+<% end %>
+console.log(node_ids)
 sigma.renderers.def = sigma.renderers.canvas
 // Instanciate sigma:
 s = new sigma({
@@ -44,11 +48,34 @@ s.bind('overNode', function(e) {
 
 
 s.bind('clickNode', function(e) { 
+
   // console.log(e.data.node.id)
   $.ajax({
     type: "GET",
-    url: "/users/"+e.data.node.id+"/show_other_node"    
-  })  
+    url: "/users/"+ e.data.node.id +"/show_other_node?node_ids="+node_ids
+      
+  }).done(function(data) {
+    // graph_data = JSON.parse("<%#= raw [data.to_json][0] %>")
+   
+    data[0].nodes.forEach(function(n){
+      s.graph.addNode(n)
+    });
+
+    data[0].edges.forEach(function(e){
+      s.graph.addEdge(e)
+    });
+
+    data[1].forEach(function(d){
+      if ($.inArray(d, node_ids) == -1)
+      {
+        node_ids.push(d)
+      }
+      
+    });
+  s.refresh();
+
+});
+  s.refresh();
 
 });
 </script>

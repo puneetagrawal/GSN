@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @users = {}
     @users[:nodes] = []
     @users[:edges] = []
-    check_node = []
+    @check_node = []
     relations.each do |relation|
          
        e_node = relation.end_node
@@ -25,8 +25,8 @@ class UsersController < ApplicationController
        edge_properties = relation.props
        edge_relation = relation.load_resource.present? ? relation.load_resource["type"] : ""
        color_prop = relation.end_node.props[:color].present? ? relation.end_node.props[:color] : '#666'
-       unless check_node.include? e_node_id
-         check_node << e_node_id
+       unless @check_node.include? e_node_id
+         @check_node << e_node_id
          @users[:nodes] << create_node(node: e_node, relation: edge_relation, label: "Identity", color: color_prop)
        end
        @users[:edges] << create_edge(source: s_node, target: e_node, relation: relation, color: '#ccc')
@@ -39,13 +39,17 @@ class UsersController < ApplicationController
 
   def show_other_node
     node = Neo4j::Node.load(params[:id])
+    check_end_node = params[:node_ids].split(',').map { |s| s.to_i }
     @data_collections = {}
     relations = node.rels(dir: :outgoing)
     @data_collections[:nodes] = []
     @data_collections[:edges] = []
-    check_end_node = []  
+    # check_end_node = []  
     check_node = []
     get_relation_data(node, @data_collections, relations, check_end_node, check_node )
+    respond_to do |format|
+      format.json {render json: [@data_collections, check_end_node]}
+    end
   end
 
   def get_relation_data(node, data_collections, relations, check_end_node, check_node )
@@ -71,7 +75,7 @@ class UsersController < ApplicationController
     end
     # unless check_node.include? node and check_end_node.include? node
     #   check_node << node.neo_id
-      data_collections[:nodes] << create_node(node: node, label: node.labels[0].to_s, color: '#00FF00')
+      # data_collections[:nodes] << create_node(node: node, label: node.labels[0].to_s, color: '#00FF00')
     # end
   end
 

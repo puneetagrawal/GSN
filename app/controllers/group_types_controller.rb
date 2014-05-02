@@ -6,6 +6,7 @@ class GroupTypesController < ApplicationController
       @groups = {}
       @groups[:nodes] = []
       @groups[:edges] = []
+      @check_node = []
       if @group_type.present?
 
         check_node_type = []
@@ -47,7 +48,8 @@ class GroupTypesController < ApplicationController
         end
       end
 
-
+   @check_node = check_node_type + check_node_attr
+   @check_node << @group_type.neo_id
 	end
 
 	def new

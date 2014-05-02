@@ -5,7 +5,7 @@ module CustomNodeRelationship
 	 def create_node(options = {})	 
         node     = options[:node]
         relation = options[:relation]
-        label    = options[:label]
+        label    = options[:label]=="Neo4j::identity" ? "Identity" : options[:label]
         color    = options[:color]
 
 	 	{
@@ -34,7 +34,8 @@ module CustomNodeRelationship
 				    source: source.neo_id.to_s,
 				    target: target.neo_id.to_s,
 				    size:   Random.rand(1-6664664646),
-				    color:  color
+				    color:  color,
+            type: "arrow"
         }
 	 end
 

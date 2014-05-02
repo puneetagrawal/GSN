@@ -24,7 +24,7 @@ class Identity
   property :confirmed_at, type: DateTime
   property :confirmation_sent_at, type: DateTime
   property :uuid, default: SecureRandom.uuid
-
+  property :color, default: "#00FF00"
 
   # validates :nickname, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

@@ -6,6 +6,7 @@ class NodeType
   property :created_at, type: DateTime
   property :updated_at, type: DateTime
   property :field_name
+  property :color, default: "#00FFFF"
 
   has_one(:creator).from(:users)
   has_n(:properties).to(NodeAttribute)

@@ -14,7 +14,7 @@ class Neo4j::IdentitiesController < ApplicationController
     @providers = {}
     @providers[:nodes] = []
     @providers[:edges] = []
-    check_node = []
+    @check_node = []
     # random_num = Random.rand(1-6664664646)
      rel_identities = @identity.rels(type: :provider)
      rel_identities.each do |r_identity|
@@ -26,8 +26,8 @@ class Neo4j::IdentitiesController < ApplicationController
        edge_properties = r_identity.props
        edge_relation = r_identity.load_resource.present? ? r_identity.load_resource["type"] : ""
        color_prop = r_identity.end_node.props[:color].present? ? r_identity.end_node.props[:color] : '#666'
-       unless check_node.include? e_node_id
-         check_node << e_node_id
+       unless @check_node.include? e_node_id
+         @check_node << e_node_id
          @providers[:nodes] << create_node(node: e_node, relation: edge_relation, label: "Provider", color: color_prop)
 
        end

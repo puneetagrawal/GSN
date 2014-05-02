@@ -8,6 +8,7 @@ class NodeAttribute
   property :updated_at, type: DateTime
   property :name
   property :attr_type
+  property :color, default: "#FFFF00"
 
   validates :name, presence: true
   validate :name_uniqueness

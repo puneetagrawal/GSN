@@ -7,6 +7,8 @@ class User
   property :first_name
   property :last_name
   property :country
+  property :color, default: "#FF0000"
+
   # property :remember_token
   property :created_at, type: DateTime
   property :updated_at, type: DateTime

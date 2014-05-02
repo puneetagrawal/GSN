@@ -21,6 +21,7 @@ class GroupsController < ApplicationController
 	def create		
 		# relation_type = params["relationship"]["type"].try(:parameterize).try(:underscore)
 		# start_node = Neo4j::Node.create(get_properties(params["start_node"]))
+		params[:node_types][:color] = "#FF00FF"
 		group = Neo4j::Node.create(params[:node_types], :Group)
 
         # group.creator = current_user
