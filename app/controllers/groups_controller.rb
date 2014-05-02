@@ -50,7 +50,7 @@ class GroupsController < ApplicationController
      @groups = {}
      @groups[:nodes] = []
      @groups[:edges] = []
-
+     
 	   e_node = @group
 	   s_node = current_identity
 
@@ -64,7 +64,7 @@ class GroupsController < ApplicationController
      @groups[:nodes] << create_node(node: current_user, label: "User", color: "#F81960")
      @groups[:edges] << create_edge(source: s_node, target: e_node, relation: e_relation, color: '#ccc')
      @groups[:edges] << create_edge(source: current_user, target: s_node, relation: e_relation_user, color: '#ccc')
-
+     @check_node = [e_node.neo_id, s_node.neo_id, current_user.neo_id]
 	end
 
 	
