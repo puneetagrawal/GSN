@@ -75,7 +75,7 @@ class Neo4j::IdentitiesController < ApplicationController
       @identity = Neo4j::Identity.new(identity_params)
       if @identity.save
         user.identities << @identity 
-        @identity.user = user
+        # @identity.user = user
         @identity.identity_provider("normal")
 
         flash[:notice] = signed_in? ? "Identity successfully created" : "Please verify your email"        

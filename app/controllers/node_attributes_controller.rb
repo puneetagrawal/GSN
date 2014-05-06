@@ -12,7 +12,7 @@ class NodeAttributesController < ApplicationController
     end
     
 	def create		
-		@attribute_type = NodeAttribute.new(attribute_type_params)				
+		@attribute_type = NodeAttribute.new(attribute_type_params)	
 		if @attribute_type.save
 		  @attribute_type.creator = current_user
 		  redirect_to node_attributes_path(identity: current_identity.uuid)
@@ -25,7 +25,7 @@ class NodeAttributesController < ApplicationController
        @attribute_type = NodeAttribute.new
 	end
 
-	private
+	# private
 
     def attribute_type_params
       params.require(:node_attribute).permit(:name, :attr_type)

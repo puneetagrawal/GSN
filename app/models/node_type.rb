@@ -5,6 +5,8 @@ class NodeType
   property :id
   property :created_at, type: DateTime
   property :updated_at, type: DateTime
+  property :uuid 
+  
   property :field_name
   property :color, default: "#00FFFF"
 

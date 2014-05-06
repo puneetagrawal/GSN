@@ -1,5 +1,6 @@
 module CustomNeo4j
   extend ActiveSupport::Concern
+  
 	# def new_labels(*labels)	
 	# 	id = self.neo_id
 		# MATCH (n { name : "dfdfsd" })
@@ -23,6 +24,8 @@ module CustomNeo4j
 # return n 
 
   # end
+
+  
 
   ATTRIBUTE_TYPES = ['Visibility', 'DataType', 'Requirement']
   

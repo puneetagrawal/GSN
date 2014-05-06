@@ -1,6 +1,5 @@
 FactoryGirl.define do
-  factory :user do
-   uuid SecureRandom.uuid
+  factory :user do   
    first_name "john"
    last_name "josh"
    country "Australia"

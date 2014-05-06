@@ -7,10 +7,10 @@ class GroupTypesController < ApplicationController
       @groups[:nodes] = []
       @groups[:edges] = []
       @check_node = []
-      if @group_type.present?
-
-        check_node_type = []
+      check_node_type = []
         check_node_attr = []
+      if @group_type.present?
+        
         rel_group_types = @group_type.rels(dir: :outgoing)
         rel_group_types.each do |rel_group_type|
           e_node = rel_group_type.end_node
@@ -46,10 +46,11 @@ class GroupTypesController < ApplicationController
         if relation_user_gt.present?
           @groups[:edges] << create_edge(source: current_user, target: @group_type, relation: relation_user_gt, color: '#ccc')
         end
+        @check_node = check_node_type + check_node_attr
+        @check_node << @group_type.neo_id
       end
-
-   @check_node = check_node_type + check_node_attr
-   @check_node << @group_type.neo_id
+   
+   
 	end
 
 	def new

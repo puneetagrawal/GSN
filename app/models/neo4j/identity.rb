@@ -6,6 +6,9 @@ class Identity
   include CustomNeo4j
   
   property :id
+  property :created_at, type: DateTime
+  property :updated_at, type: DateTime
+  property :uuid 
   property :uid
   property :email
   property :nickname
@@ -13,8 +16,6 @@ class Identity
   property :country
   property :password
   property :password_digest
-  property :created_at, type: DateTime
-  property :updated_at, type: DateTime
   property :remember_token
   property :oauth_token
   property :oauth_expires_at, type: DateTime
@@ -23,7 +24,6 @@ class Identity
   property :confirmation_token
   property :confirmed_at, type: DateTime
   property :confirmation_sent_at, type: DateTime
-  property :uuid, default: SecureRandom.uuid
   property :color, default: "#00FF00"
 
   # validates :nickname, presence: true, length: { maximum: 50 }
@@ -34,7 +34,6 @@ class Identity
                                if: :is_normal_provider?
   validates_confirmation_of :password,
                           if: lambda { |m| m.password.present? }
-  validates :uuid, presence: true                          
   index :email
   index :remember_token
   index :nickname
@@ -132,7 +131,7 @@ class Identity
       if provider=='normal'
         create_confirmation_token
         self.save
-        send_email_confirmation
+        # send_email_confirmation
       end
     else      
       update_provider_identity(relation)
