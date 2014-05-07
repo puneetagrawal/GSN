@@ -47,7 +47,7 @@ class Identity
   # before_create :set_user
   after_create  :send_email_confirmation, if: :is_normal_provider?
 
-  has_one(:user).from(:identities)
+  # has_one(:user).from(:identities)
  
   
   attr_accessor :first_name, :last_name
@@ -152,8 +152,11 @@ class Identity
   end
 
   def create_provider_identity(provider, uid, oauth_token, oauth_expires_at)
-    provider_node = Neo4j::Node.create({provider_name: provider}, :Provider)
-    self.create_rel(:provider,  provider_node, {uid: uid, name: provider, created_at: Time.now.to_s, updated_at: Time.now.to_s, oauth_token: oauth_token.to_s, oauth_expires_at: oauth_expires_at.to_s})
+    provider_node = Provider.find(provider_name: provider)
+    if provider_node.blank?
+      provider_node = Provider.create(provider_name: provider) 
+    end
+    self.create_rel(:has_provider,  provider_node, {uid: uid, name: provider, created_at: Time.now.to_s, updated_at: Time.now.to_s, oauth_token: oauth_token.to_s, oauth_expires_at: oauth_expires_at.to_s})
   end
 
   def update_provider_identity(relation)
@@ -166,7 +169,11 @@ class Identity
   
   def groups
     rels(dir: :outgoing, type: :groups)
-  end  
+  end 
+
+  def user
+    rels(type: "User#identities")[0].start_node
+  end 
     
 
   # def set_user

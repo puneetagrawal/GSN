@@ -33,7 +33,7 @@ describe User do
  	  before do
  	  	identity = FactoryGirl.create(:identity) 	  	
  	  	user.identities << identity
- 	  	identity.user = user
+ 	  	# identity.user = user
  	  	identity.identity_provider("normal")
  	  end
        it {  user.identities.count > 1 }

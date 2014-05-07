@@ -11,7 +11,7 @@ describe Neo4j::Identity do
      user = FactoryGirl.create(:user) 
      identity = FactoryGirl.create(:identity) 
      user.identities << identity
-     identity.user = user
+     # identity.user = user
      identity.identity_provider("normal")
 
   	describe "UUID" do

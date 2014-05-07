@@ -60,7 +60,7 @@ class ServicesController < ApplicationController
 
       if identity.save
         user.identities << identity 
-        identity.user = user         
+        # identity.user = user         
       end
       
       return identity  

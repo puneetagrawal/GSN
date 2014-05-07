@@ -21,6 +21,11 @@ namespace :db_data do
 	  	   node_type.properties << attr
 	  	 end
 	  end
+
+	  ['normal', 'facebook', 'twitter', 'linkedin', 'gplus'].each do |provider|	  	
+	  	 Provider.create(provider_name: provider)
+	  end
+	 
     puts "Data load succesfully"
   end
 

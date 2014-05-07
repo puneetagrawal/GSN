@@ -29,15 +29,15 @@ class Neo4j::IdentitiesController < ApplicationController
        unless @check_node.include? e_node_id
          @check_node << e_node_id
          @providers[:nodes] << create_node(node: e_node, relation: edge_relation, label: "Provider", color: color_prop)
-
+          
        end
        @providers[:edges] << create_edge(source: s_node, target: e_node, relation: r_identity, color: '#ccc')
      end
 
-     @providers[:nodes] << create_node(node: @identity, label: "Identity", color: '#FF0000')
+     @providers[:nodes] << create_node(node: @identity, label: "Identity", color: @identity.props[:color])
      @providers[:edges] << create_edge(source: current_user, target: @identity, relation: @identity.rels(type: 'User#identities')[0], color: '#ccc')
-     @providers[:nodes] << create_node(node: current_user, label: "User", color: '#00FF00') 
-
+     @providers[:nodes] << create_node(node: current_user, label: "User", color: current_user.props[:color])
+   
   end
 
   def new

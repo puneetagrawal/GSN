@@ -29,6 +29,7 @@ module CustomNodeRelationship
          target   = options[:target]
          relation = options[:relation]
          color    = options[:color]
+       
 	 	{
 				    id: "e #{relation.neo_id}",
 				    source: source.neo_id.to_s,

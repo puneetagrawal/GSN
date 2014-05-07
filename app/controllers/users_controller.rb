@@ -16,8 +16,7 @@ class UsersController < ApplicationController
     @users[:nodes] = []
     @users[:edges] = []
     @check_node = []
-    relations.each do |relation|
-         
+    relations.each do |relation|         
        e_node = relation.end_node
        e_node_id = relation.end_node.neo_id
        s_node = relation.start_node
@@ -33,7 +32,7 @@ class UsersController < ApplicationController
     end
 
     # @providers[:edges] << create_edge(source: current_user, target: @identity, relation: @identity.rels(type: 'User#identities')[0], color: '#ccc')
-    @users[:nodes] << create_node(node: @user, label: "User", color: '#00FF00') 
+    @users[:nodes] << create_node(node: @user, label: "User", color: @user.props[:color]) 
   end
 
 
@@ -65,6 +64,9 @@ class UsersController < ApplicationController
        unless check_end_node.include? e_node_id
          check_end_node << e_node_id
          data_collections[:nodes] << create_node(node: e_node, relation: edge_relation, label: e_node.labels[0].to_s, color: color_prop)
+        
+
+
          # end_node_rels = e_node.rels(dir: :outgoing)
          # if end_node_rels.present?
          #    get_relation_data(e_node, data_collections, end_node_rels, check_end_node, check_node )
