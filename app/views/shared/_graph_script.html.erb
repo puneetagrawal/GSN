@@ -27,29 +27,137 @@ s = new sigma({
 sigma.plugins.dragNodes(s, s.renderers[0]);
 
 // Bind the events:
-s.bind('overNode', function(e) { 
+s.bind('doubleClickNode', function(e) { 
+// s.bind('overNode', function(e) { 
   var attr_node = ""
   var attr_edge = ""
   // console.log(e.data.node)
   // console.log(e.data)
   // console.log(e.data.node.relation)
-  $.each(e.data.node.properties.node, function(k, v) {
-    attr_node += "<li><span style='color:red; margin-right: 20px;'>"+k+":</span><span>"+v+"</span></li>"
-  });  
+  
+
+
+
+
+  // $.each(e.data.node.properties.node, function(k, v) {
+  //   attr_node += "<li><span style='color:red; margin-right: 20px;'>"+k+":</span><span>"+v+"</span></li>"
+  // });  
   // console.log(e.data.node.properties.edge)
    if(e.data.node.properties.edge != undefined) {
      $.each(e.data.node.properties.edge, function(k, v) {
       attr_edge += "<li><span style='color:red; margin-right: 20px;'>"+k+":</span><span>"+v+"</span></li>"
     });
    }
-  $("#show_node_attrs").html(attr_node);
-  $("#show_edge_attrs").html(attr_edge);
-  $("#show_rel_node").html("<p>"+ e.data.node.relation +"</p>");
-  $("#node_edge_attr").show();
+
+
+  // $("#show_node_attrs").html(attr_node);
+  // $("#show_edge_attrs").html(attr_edge);
+  // $("#show_rel_node").html("<p>"+ e.data.node.relation +"</p>");
+  // $("#node_edge_attr").show();
+
+  label = e.data.node.label.split(' ')[0]
+   switch(label){
+    case 'User': 
+       attr_node = get_user_data(e, attr_node)
+      break; 
+    case 'UserIdentity':
+       attr_node = get_user_identity_data(e, attr_node) 
+       break; 
+    case 'Provider': 
+      attr_node = get_provider_data(e, attr_node)
+      break; 
+    case 'Group': 
+      attr_node = get_group_data(e, attr_node)
+      break; 
+    case 'GroupType': 
+      attr_node = get_group_type_data(e, attr_node)
+       break; 
+    case 'NodeType': 
+      attr_node = get_node_type_data(e, attr_node)
+      break; 
+    case 'NodeAttribute': 
+      attr_node = get_node_attribute_data(e, attr_node)
+      break; 
+  }
+
+  $("#myModalLabel").html(e.data.node.label);
+  $("#modal_body_content").html(attr_node);
+  $("#nodeModal").modal("show");
+  
 });
 
 
-s.bind('clickNode', function(e) { 
+var get_user_data = function(e, attr_node){
+  $.each(e.data.node.properties.node, function(k, v) {    
+    if(k =='first_name' || k=='last_name' || k=='country') {
+      attr_node += node_html(k, v)
+    }
+  }); 
+  return attr_node; 
+}
+
+var get_user_identity_data = function(e, attr_node){
+  $.each(e.data.node.properties.node, function(k, v) {
+    if(k=='email' || k=='nickname' || k=='country') {
+      attr_node += node_html(k, v)
+    }
+  }); 
+  return attr_node;  
+}
+
+var get_provider_data = function(e, attr_node){
+  $.each(e.data.node.properties.node, function(k, v) {
+    if(k=='provider_name') {
+      attr_node += node_html(k, v)
+    }
+  }); 
+  return attr_node;  
+}
+
+var get_group_data = function(e, attr_node){
+  $.each(e.data.node.properties.node, function(k, v) {
+    if(k!='created_at' && k!='updated_at' && k!='color' && k!='uuid' && k!='id' ) {
+      attr_node += node_html(k, v)
+    }
+  }); 
+  return attr_node;  
+}
+
+var get_group_type_data = function(e, attr_node){
+  $.each(e.data.node.properties.node, function(k, v) {
+    // if(k=='provider_name') {
+      attr_node += node_html(k, v)
+    // }
+  }); 
+  return attr_node;  
+}
+
+var get_node_type_data = function(e, attr_node){
+  $.each(e.data.node.properties.node, function(k, v) {
+    if(k=='field_name') {
+      attr_node += node_html(k, v)
+    }
+  }); 
+  return attr_node;  
+}
+
+var get_node_attribute_data = function(e, attr_node){
+  $.each(e.data.node.properties.node, function(k, v) {
+    if(k=='name' ||  k==attr_type) {
+      attr_node += node_html(k, v)
+    }
+  }); 
+  return attr_node;  
+}
+
+
+
+var node_html = function(property, value){
+ return "<li><span style='color:red; margin-right: 20px;'>"+property+":</span><span>"+value+"</span></li>"
+}
+
+
+s.bind('clickNode', function(e) {    
 
   // console.log(e.data.node.id)
   $.ajax({

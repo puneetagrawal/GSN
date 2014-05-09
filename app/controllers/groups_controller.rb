@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
 	end
 
 	def show
-		@group = Neo4j::Node.load(params[:id])
+		@group = Neo4j::Node.load(params[:id])	
 	    @groups = {}
 	    @groups[:nodes] = []
 	    @groups[:edges] = []

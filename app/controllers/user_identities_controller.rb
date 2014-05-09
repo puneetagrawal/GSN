@@ -118,7 +118,7 @@ class UserIdentitiesController < ApplicationController
 
     def identity_params
       params.require(:user_identity).permit(:email, :password,
-                                   :password_confirmation, :first_name, :last_name, :provider, :country)
+                                   :password_confirmation, :first_name, :last_name, :country)
     end
 
     # Before filters
