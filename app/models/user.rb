@@ -26,7 +26,7 @@ class User
   # property :confirmed_at, type: DateTime
   # property :confirmation_sent_at, type: DateTime
   
-  has_n(:identities).to(Neo4j::Identity)
+  has_n(:identities).to(UserIdentity)
 
   before_destroy :delete_identities
 
@@ -60,7 +60,7 @@ class User
   end
   #  def create_confirmation_token
   #   # Create the confirmation token.
-  #    self.confirmation_token = Neo4j::Identity.hash(Neo4j::Identity.new_random_token)
+  #    self.confirmation_token = UserIdentity.hash(UserIdentity.new_random_token)
   #    self.confirmation_sent_at = Time.now.utc
   #  end
 

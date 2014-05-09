@@ -21,7 +21,7 @@ class GroupTypesController < ApplicationController
 
           unless check_node_type.include? e_node_id
             check_node_type << e_node_id
-            @groups[:nodes] << create_node(node: e_node, relation: edge_relation, label: "NodeType", color: "#1928F8")
+            @groups[:nodes] << create_node(node: e_node, relation: edge_relation, label: e_node.labels[0], color: "#1928F8")
             rel_node_types = rel_group_type.end_node.rels(dir: :outgoing)
             rel_node_types.each do |rel_nt|
 
@@ -33,15 +33,15 @@ class GroupTypesController < ApplicationController
 
               unless check_node_attr.include? e_node_nt_id
                  check_node_attr << e_node_nt_id
-                @groups[:nodes] << create_node(node: e_node_nt, relation: nt_edge_relation, label: "NodeAttr", color: "#19E6F8")
+                @groups[:nodes] << create_node(node: e_node_nt, relation: nt_edge_relation, label: e_node_nt.labels[0], color: "#19E6F8")
               end
               @groups[:edges] << create_edge(source: s_node_nt, target: e_node_nt, relation: rel_nt, color: '#ccc')
             end
           end
           @groups[:edges] << create_edge(source: s_node, target: e_node, relation: rel_group_type, color: '#ccc')
         end
-        @groups[:nodes] << create_node(node: current_user, label: "User", color: '#F81960')
-        @groups[:nodes] << create_node(node: @group_type, label: "GroupType", color: '#E2F819')
+        @groups[:nodes] << create_node(node: current_user, label: current_user.labels[0], color: '#F81960')
+        @groups[:nodes] << create_node(node: @group_type, label: @group_type.labels[0], color: '#E2F819')
         relation_user_gt =  @group_type.rels(type: "users", dir: :incoming, between: Neo4j::Node.load(current_user.id))[0]
         if relation_user_gt.present?
           @groups[:edges] << create_edge(source: current_user, target: @group_type, relation: relation_user_gt, color: '#ccc')

@@ -1,12 +1,12 @@
 require 'spec_helper'
-describe "neo4j/identity_page_spec.rb" do
+describe "user_identities/identity_page_spec.rb" do
 	subject { page }
     
     describe "Edit page" do
     	before do
     	    create_user_identity
     	    sign_in(@identity, 'normal')			
-    	    visit edit_neo4j_identity_path(@identity)				
+    	    visit edit_user_identity_path(@identity)				
     	end   	    
 
     	it { page.should have_link( 'change', href: "http://gravatar.com/emails") }
@@ -14,7 +14,7 @@ describe "neo4j/identity_page_spec.rb" do
         it "user's profile changes" do      			
 		    fill_in "First name", :with => "Test"
 		    fill_in "Last name", :with => "User"		    
-            fill_in "Email", :with => Neo4j::Identity.last.email
+            fill_in "Email", :with => UserIdentity.last.email
             fill_in "Country", :with => "India"     
             fill_in "Password", :with => "foobar"    
             fill_in "Confirm Password", :with => "foobar"    
@@ -29,7 +29,7 @@ describe "neo4j/identity_page_spec.rb" do
         before do
             create_user_identity
             sign_in(@identity, 'normal')            
-            visit new_neo4j_identity_path             
+            visit new_user_identity_path             
         end         
 
         #it { page.should have_link( 'change', href: "http://gravatar.com/emails") }
@@ -70,7 +70,7 @@ describe "neo4j/identity_page_spec.rb" do
         it "user's email already exist" do                  
             fill_in "First name", :with => "Test"
             fill_in "Last name", :with => "User" 
-            fill_in "Email", :with => Neo4j::Identity.last.email          
+            fill_in "Email", :with => UserIdentity.last.email          
             fill_in "Country", :with => "India"  
             fill_in "Password", :with => "foobar"    
             fill_in "Confirmation", :with => "foobar"            
@@ -85,7 +85,7 @@ describe "neo4j/identity_page_spec.rb" do
         before do
             create_user_identity
             sign_in(@identity, 'normal')            
-            visit neo4j_identity_path(@identity.id)             
+            visit user_identity_path(@identity.id)             
         end
         it { page.should have_link('Groups', href: groups_path(identity: @identity.uuid)) }
         it { page.should have_selector('h1', text: @identity.email) }

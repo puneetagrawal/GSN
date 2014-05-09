@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Neo4j::Identity do   
+describe UserIdentity do   
 
   	it { should respond_to(:uid) }
   	it { should respond_to(:email) }
@@ -57,7 +57,7 @@ describe Neo4j::Identity do
 
   describe "password " do
     before do
-      Neo4j::Identity.new(nickname: "example_user", email: "use223r@example.com", password: " ", password_confirmation: " ", uid: SecureRandom.uuid)
+      UserIdentity.new(nickname: "example_user", email: "use223r@example.com", password: " ", password_confirmation: " ", uid: SecureRandom.uuid)
     end
     it { should_not be_blank }
   end

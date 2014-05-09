@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Neo4j::IdentitiesController do
+describe UserIdentitiesController do
   subject { page }
 
   before(:each) do
@@ -9,7 +9,7 @@ describe Neo4j::IdentitiesController do
 
   describe 'GET #index' do
     let(:get_index) { get :index }
-        @identities = Neo4j::Identity.all
+        @identities = UserIdentity.all
     describe 'response' do
         before { get_index }
           it { assigns(:identities).should eql @identities }
@@ -18,7 +18,7 @@ describe Neo4j::IdentitiesController do
 
     describe 'GET #new' do
     let(:get_new) { get :new }
-        @user = Neo4j::Identity.new
+        @user = UserIdentity.new
     describe 'response' do
         before { get_new }
             it { should render_template :new }
@@ -28,10 +28,10 @@ describe Neo4j::IdentitiesController do
     describe 'GET #edit' do
       before do
           user_sign_in(@identity)
-          @identity = Neo4j::Identity.last
+          @identity = UserIdentity.last
       end
       it "should edit the identity" do
-          # visit edit_neo4j_identity_path(@identity)
+          # visit edit_user_identity_path(@identity)
           get :edit, id: @identity.id      
           assigns(:identity).should == @identity
       end
@@ -39,7 +39,7 @@ describe Neo4j::IdentitiesController do
 
     describe 'GET #show' do
       before do
-          @identity = Neo4j::Identity.last
+          @identity = UserIdentity.last
           user_sign_in(@identity)
       end
       it "should show the identity" do   
@@ -50,16 +50,16 @@ describe Neo4j::IdentitiesController do
 
     describe 'PUT update' do
       before do
-        @identity = Neo4j::Identity.last
+        @identity = UserIdentity.last
         user_sign_in(@identity)
       end
       it "should update the identity and redirect" do
-        patch :update, id: @identity.id, neo4j_identity: {country: "UK"}
-        response.should redirect_to "/neo4j/identities/#{@identity.id}"
+        patch :update, id: @identity.id, user_identity: {country: "UK"}
+        response.should redirect_to "/user_identities/#{@identity.id}"
       end
 
       it "should_not update the identity and render" do
-        patch :update, id: @identity.id, neo4j_identity: {email: ""}
+        patch :update, id: @identity.id, user_identity: {email: ""}
         response.should be_successful
         response.should render_template("edit")
       end
@@ -68,13 +68,13 @@ describe Neo4j::IdentitiesController do
     describe "DELETE destroy identity" do
 
       before do
-        @identity = Neo4j::Identity.last
+        @identity = UserIdentity.last
         user_sign_in(@identity)
       end
 
       it "should destroy the identity" do
           delete :destroy, id: @identity.id
-          response.should redirect_to neo4j_identities_url
+          response.should redirect_to user_identities_url
       end
     end
 

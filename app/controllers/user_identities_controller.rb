@@ -1,4 +1,4 @@
-class Neo4j::IdentitiesController < ApplicationController
+class UserIdentitiesController < ApplicationController
   include CustomNodeRelationship
 
 	before_action :signed_in_user, except: [:new, :create]
@@ -6,11 +6,11 @@ class Neo4j::IdentitiesController < ApplicationController
   # before_action :admin_user,     only: :destroy
 
   def index
-   @identities = Neo4j::Identity.all
+   @identities = UserIdentity.all
   end
 
   def show
-    @identity = Neo4j::Identity.find(params[:id])
+    @identity = UserIdentity.find(params[:id])
     @providers = {}
     @providers[:nodes] = []
     @providers[:edges] = []
@@ -28,28 +28,28 @@ class Neo4j::IdentitiesController < ApplicationController
        color_prop = r_identity.end_node.props[:color].present? ? r_identity.end_node.props[:color] : '#666'
        unless @check_node.include? e_node_id
          @check_node << e_node_id
-         @providers[:nodes] << create_node(node: e_node, relation: edge_relation, label: "Provider", color: color_prop)
+         @providers[:nodes] << create_node(node: e_node, relation: edge_relation, label: e_node.labels[0], color: color_prop)
           
        end
        @providers[:edges] << create_edge(source: s_node, target: e_node, relation: r_identity, color: '#ccc')
      end
-
-     @providers[:nodes] << create_node(node: @identity, label: "Identity", color: @identity.props[:color])
+   
+     @providers[:nodes] << create_node(node: @identity, label: @identity.labels[0], color: @identity.props[:color])
      @providers[:edges] << create_edge(source: current_user, target: @identity, relation: @identity.rels(type: 'User#identities')[0], color: '#ccc')
-     @providers[:nodes] << create_node(node: current_user, label: "User", color: current_user.props[:color])
+     @providers[:nodes] << create_node(node: current_user, label: current_user.labels[0], color: current_user.props[:color])
    
   end
 
   def new
-    @identity = Neo4j::Identity.new
+    @identity = UserIdentity.new
   end
 
   def edit
-    @identity = Neo4j::Identity.find(params[:id])
+    @identity = UserIdentity.find(params[:id])
   end
 
   def update
-    @identity = Neo4j::Identity.find(params[:id])
+    @identity = UserIdentity.find(params[:id])
     if @identity.update_attributes(identity_params)
       flash[:success] = "Profile updated"
       redirect_to @identity
@@ -59,20 +59,20 @@ class Neo4j::IdentitiesController < ApplicationController
   end
 
   def create
-    # @identity = Neo4j::Identity.new(identity_params)
+    # @identity = UserIdentity.new(identity_params)
     # if @identity.save
     user = if signed_in?
              current_user
            else    
-             User.create(first_name: params[:neo4j_identity][:first_name],
-                         last_name: params[:neo4j_identity][:last_name], 
-                         country: params[:neo4j_identity][:country]
+             User.create(first_name: params[:user_identity][:first_name],
+                         last_name: params[:user_identity][:last_name], 
+                         country: params[:user_identity][:country]
                      )  
                      
            end
-    @exist_identity =  Neo4j::Identity.find(email: params[:neo4j_identity][:email].downcase) 
+    @exist_identity =  UserIdentity.find(email: params[:user_identity][:email].downcase) 
     if @exist_identity.blank?        
-      @identity = Neo4j::Identity.new(identity_params)
+      @identity = UserIdentity.new(identity_params)
       if @identity.save
         user.identities << @identity 
         # @identity.user = user
@@ -93,9 +93,9 @@ class Neo4j::IdentitiesController < ApplicationController
   end
 
   def destroy
-    Neo4j::Identity.find(params[:id]).destroy
+    UserIdentity.find(params[:id]).destroy
     flash[:success] = "Identity deleted."
-    redirect_to neo4j_identities_url
+    redirect_to user_identities_url
   end
 
   def nodes
@@ -117,14 +117,14 @@ class Neo4j::IdentitiesController < ApplicationController
   private
 
     def identity_params
-      params.require(:neo4j_identity).permit(:email, :password,
+      params.require(:user_identity).permit(:email, :password,
                                    :password_confirmation, :first_name, :last_name, :provider, :country)
     end
 
     # Before filters
 
     def correct_user
-      user_id = Neo4j::Identity.find(params[:id]).user.neo_id
+      user_id = UserIdentity.find(params[:id]).user.neo_id
       user = User.find(user_id)
       redirect_to(root_url) unless current_user?(user)
     end

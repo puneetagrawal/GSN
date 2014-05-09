@@ -5,9 +5,9 @@ class SessionsController < ApplicationController
   end
 
   def create    
-    identity = Neo4j::Identity.find(email: params[:session][:email].downcase)
+    identity = UserIdentity.find(email: params[:session][:email].downcase)
     
-    if identity && Neo4j::Identity.encrypt_password(identity.email, params[:session][:password]) == identity.password
+    if identity && UserIdentity.encrypt_password(identity.email, params[:session][:password]) == identity.password
       # Sign the user in and redirect to the user's show page.
       sign_in_user(identity, "normal")
       redirect_to identity
@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
   end
 
   def confirm_user
-    identity = Neo4j::Identity.find(confirmation_token: params[:token])    
+    identity = UserIdentity.find(confirmation_token: params[:token])    
     if identity.present?
       identity.confirmed_at = Time.now
       identity.confirmation_token = ""
@@ -45,9 +45,9 @@ class SessionsController < ApplicationController
   end
 
   def sign_in_user(identity, provider)
-    remember_token = Neo4j::Identity.new_random_token
+    remember_token = UserIdentity.new_random_token
     cookies.permanent[:remember_token] = remember_token
-    identity.update(remember_token: Neo4j::Identity.hash(remember_token))
+    identity.update(remember_token: UserIdentity.hash(remember_token))
     # identity = identity.get_identity(provider)
 
     self.current_identity = identity

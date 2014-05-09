@@ -23,16 +23,14 @@ GSN::Application.routes.draw do
      get 'show_other_node'
     end
   end
-  namespace :neo4j do
-    resources :identities
-  end
+  resources :user_identities
   resources :groups
   resources :group_types
   resources :sessions, only: [:new, :create, :destroy]
   # resources :microposts, only: [:create, :destroy]
 
   match '/home',    to: 'static_pages#home',    via: 'get'
-  match '/signup',  to: 'neo4j/identities#new',       via: 'get'
+  match '/signup',  to: 'user_identities#new',       via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'  
   match '/signout', to: 'sessions#destroy',     via: Rails.env.test? ? 'get' : 'delete'
   match 'confirm_user/:token', to: 'sessions#confirm_user', via: 'get', as: :confirmation

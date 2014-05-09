@@ -8,7 +8,7 @@ class ServicesController < ApplicationController
     oauth_token = auth.credentials.token
     oauth_expires_at = Time.at(auth.credentials.expires_at) if auth.credentials.expires_at
    
-    identity = Neo4j::Identity.find(email: email)    
+    identity = UserIdentity.find(email: email)    
     if identity.blank?       
       identity = from_omniauth(auth, current_user, email)      
     end
@@ -50,7 +50,7 @@ class ServicesController < ApplicationController
               end
 
      
-      identity = Neo4j::Identity.new
+      identity = UserIdentity.new
       
       # identity.provider = auth.provider
       # identity.uid = auth.uid
@@ -67,9 +67,9 @@ class ServicesController < ApplicationController
     end
 
      def sign_in_user(identity, provider)
-    remember_token = Neo4j::Identity.new_random_token
+    remember_token = UserIdentity.new_random_token
     cookies.permanent[:remember_token] = remember_token
-    identity.update(remember_token: Neo4j::Identity.hash(remember_token))
+    identity.update(remember_token: UserIdentity.hash(remember_token))
     # identity = identity.get_identity(provider)
 
     self.current_identity = identity

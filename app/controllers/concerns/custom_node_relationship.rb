@@ -5,7 +5,7 @@ module CustomNodeRelationship
 	 def create_node(options = {})	 
         node     = options[:node]
         relation = options[:relation]
-        label    = options[:label]=="Neo4j::identity" ? "Identity" : options[:label]
+        label    = options[:label]
         color    = options[:color]
 
 	 	{

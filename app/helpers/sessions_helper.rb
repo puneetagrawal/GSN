@@ -1,9 +1,9 @@
 module SessionsHelper
 
   def sign_in(identity, provider)
-    remember_token = Neo4j::Identity.new_random_token
+    remember_token = UserIdentity.new_random_token
     cookies.permanent[:remember_token] = remember_token
-    identity.update(remember_token: Neo4j::Identity.hash(remember_token))
+    identity.update(remember_token: UserIdentity.hash(remember_token))
     # identity = identity.get_identity(provider)
 
     self.current_identity = identity
@@ -30,8 +30,8 @@ module SessionsHelper
   end
 
   def current_identity  
-    remember_token = Neo4j::Identity.hash(cookies[:remember_token])      
-    @current_identity ||= Neo4j::Identity.find(remember_token: remember_token)
+    remember_token = UserIdentity.hash(cookies[:remember_token])      
+    @current_identity ||= UserIdentity.find(remember_token: remember_token)
   end
 
   def current_identity?(identity)
@@ -44,7 +44,7 @@ module SessionsHelper
   end
 
   def sign_out
-    current_identity.update(remember_token: Neo4j::Identity.hash(Neo4j::Identity.new_random_token))
+    current_identity.update(remember_token: UserIdentity.hash(UserIdentity.new_random_token))
     cookies.delete(:remember_token)
     self.current_identity = nil
     self.current_user = nil

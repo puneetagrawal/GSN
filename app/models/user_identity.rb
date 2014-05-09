@@ -1,6 +1,6 @@
 require 'digest'
-module Neo4j
-class Identity 
+
+class UserIdentity 
 
   include Neo4j::ActiveNode
   include CustomNeo4j
@@ -76,7 +76,7 @@ class Identity
   def email_uniqueness
 
     if email.present?
-      identity = Neo4j::Identity.find(email: email.try(:downcase))    
+      identity = UserIdentity.find(email: email.try(:downcase))    
       if identity.present? and (identity.email_changed? or new_record?)        
          errors.add(:email, "already exist.")
       end
@@ -86,7 +86,7 @@ class Identity
 
   def secure_password
     if password_changed? or new_record?
-      self.password = Neo4j::Identity.encrypt_password(email, password) 
+      self.password = UserIdentity.encrypt_password(email, password) 
     end
   end
 
@@ -111,7 +111,7 @@ class Identity
 
   def create_confirmation_token
     # Create the confirmation token.
-     self.confirmation_token = Neo4j::Identity.hash(Neo4j::Identity.new_random_token)
+     self.confirmation_token = UserIdentity.hash(UserIdentity.new_random_token)
      self.confirmation_sent_at = Time.now.utc
   end
 
@@ -188,5 +188,4 @@ class Identity
   # end
 
 
-end
 end

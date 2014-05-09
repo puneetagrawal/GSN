@@ -5,7 +5,7 @@ describe "sessions/new.html.erb" do
     	before { visit signin_path }      
 
         it "signs users in" do
-		    fill_in "Email", :with => Neo4j::Identity.last.email
+		    fill_in "Email", :with => UserIdentity.last.email
 		    fill_in "Password", :with => "foobar"
 		    click_button "Sign in"
 
