@@ -11,8 +11,8 @@
           <p><%= text_field_tag "node_types[#{field_name}]" %></p>
         </div>
       <% end %>
-      <%= hidden_field_tag "node_types[created_date]", "#{Time.now}" %>
-      <%= hidden_field_tag "node_types[last_modification_date]", "#{Time.now}" %>
+      <%#= hidden_field_tag "node_types[created_date]", "#{Time.now}" %>
+      <%#= hidden_field_tag "node_types[last_modification_date]", "#{Time.now}" %>
        <%#= select_tag "node_types", options_for_select(@node_types.map{|nt| [nt.field_name.try(:humanize), nt.id]}), multiple: true %>
       <%= submit_tag "Create my group", class: "btn  btn-primary" %>
     <% end %>

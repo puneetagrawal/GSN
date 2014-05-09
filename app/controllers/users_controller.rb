@@ -26,13 +26,13 @@ class UsersController < ApplicationController
        color_prop = relation.end_node.props[:color].present? ? relation.end_node.props[:color] : '#666'
        unless @check_node.include? e_node_id
          @check_node << e_node_id
-         @users[:nodes] << create_node(node: e_node, relation: edge_relation, label: "Identity", color: color_prop)
+         @users[:nodes] << create_node(node: e_node, relation: edge_relation, label: e_node.labels[0], color: color_prop)
        end
        @users[:edges] << create_edge(source: s_node, target: e_node, relation: relation, color: '#ccc')
     end
 
     # @providers[:edges] << create_edge(source: current_user, target: @identity, relation: @identity.rels(type: 'User#identities')[0], color: '#ccc')
-    @users[:nodes] << create_node(node: @user, label: "User", color: @user.props[:color]) 
+    @users[:nodes] << create_node(node: @user, label: @user.labels[0], color: @user.props[:color]) 
   end
 
 

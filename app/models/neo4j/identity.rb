@@ -156,7 +156,7 @@ class Identity
     if provider_node.blank?
       provider_node = Provider.create(provider_name: provider) 
     end
-    self.create_rel(:has_provider,  provider_node, {uid: uid, name: provider, created_at: Time.now.to_s, updated_at: Time.now.to_s, oauth_token: oauth_token.to_s, oauth_expires_at: oauth_expires_at.to_s})
+    self.create_rel(:has_provider,  provider_node, {uid: uid, name: provider, created_at: Time.now.to_i, updated_at: Time.now.to_i, oauth_token: oauth_token.to_s, oauth_expires_at: oauth_expires_at.to_s})
   end
 
   def update_provider_identity(relation)

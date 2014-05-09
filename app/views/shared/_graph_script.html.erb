@@ -8,7 +8,9 @@
  */
 
 // graph_data = JSON.parse('<%#= raw [@users.to_json][0] %>')
-graph_data = JSON.parse('<%= raw [parsed_data.to_json][0] %>')
+
+graph_data = JSON.parse(('<%= raw [parsed_data.to_json][0].gsub("\\", "") %>'))
+console.log(graph_data)
 var node_ids=[]
 <% @check_node.each do |node| %> 
   node_ids.push(<%= node %>)
