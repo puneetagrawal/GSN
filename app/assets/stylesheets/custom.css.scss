@@ -201,3 +201,35 @@ aside {
 .alert-error{
    color: red;   
 }
+.tooltip-inner{
+  max-width: 100% !important;  
+  li{
+    list-style:none;
+  }   
+}
+
+.modal-content{
+  float: left;
+width: 80%;
+}
+
+#modal_body_content{
+  float: left;
+  width: 60%;
+  li{
+     list-style:none;
+   }
+}
+
+.modal-footer{
+float: right;
+width: 100%;
+display: block;
+}
+
+.modal_action_btn{
+  width: 20%;
+  div{
+    margin-bottom: 10px;
+  }
+}

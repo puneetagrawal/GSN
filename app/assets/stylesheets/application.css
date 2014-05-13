@@ -12,3 +12,12 @@
  *= require jquery.minicolors
  *= require_tree .
  */
+
+.tooltip {
+    z-index: 200000000 !important;
+    position: fixed;
+}
+
+.tooltip-inner li{
+	text-align: left;
+}

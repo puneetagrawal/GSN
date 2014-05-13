@@ -9,13 +9,32 @@
 
 // graph_data = JSON.parse('<%#= raw [@users.to_json][0] %>')
 
+// Add a method to the graph model that returns an
+  // object with every neighbors of a node inside:
+  
+  // sigma.classes.graph.addMethod('neighbors', function(nodeId) {
+  //   var k,
+  //       neighbors = {},
+  //       index = this.allNeighborsIndex[nodeId] || {};
+
+  //   for (k in index)
+  //     neighbors[k] = this.nodesIndex[k];
+
+  //   return neighbors;
+  // });
+
+
+$(document).ready(function() {
+            $("a[rel='tooltip']").tooltip({'placement': 'right', 'z-index': '3000'});
+        });
+
 graph_data = JSON.parse(('<%= raw [parsed_data.to_json][0].gsub("\\", "") %>'))
 console.log(graph_data)
 var node_ids=[]
 <% @check_node.each do |node| %> 
   node_ids.push(<%= node %>)
 <% end %>
-console.log(node_ids)
+// console.log(node_ids)
 sigma.renderers.def = sigma.renderers.canvas
 // Instanciate sigma:
 s = new sigma({
@@ -31,18 +50,38 @@ s.bind('doubleClickNode', function(e) {
 // s.bind('overNode', function(e) { 
   var attr_node = ""
   var attr_edge = ""
-  // console.log(e.data.node)
+  var edge_property = e.data.node.properties.edge
+  var inc = 0;
   // console.log(e.data)
-  // console.log(e.data.node.relation)
-  
-
+  // console.log(e.source)
+  // console.log(e.target)
+   // var nodeId = e.data.node.id,
+   //     toKeep = s.graph.neighbors(nodeId);
+   //     toKeep[nodeId] = e.data.node;
+   //  console.log(s.graph.edges())
+    // s.graph.edges().forEach(function(e) {
+    //       if (toKeep[e.source] && toKeep[e.target]){
+    //         console.log(e)   
+    //         console.log(":::::::::::::::::::::::::::::")   
+    //       }       
+    //     });
 
 
 
   // $.each(e.data.node.properties.node, function(k, v) {
   //   attr_node += "<li><span style='color:red; margin-right: 20px;'>"+k+":</span><span>"+v+"</span></li>"
   // });  
-  // console.log(e.data.node.properties.edge)
+  // console.log(e.data.node.properties)
+  // console.log(e.data.node.properties.edge.relation_name  )
+  if(edge_property.relation_id != undefined) {
+    edge_prop = ''
+    $.each(edge_property.relation_id, function(key, relation_id) {     
+       edge_prop += relation_html(key, relation_id, edge_property.relation_name[inc])
+       inc++
+     });
+    $("#edge_prop_tooltip").attr('data-original-title', edge_prop)
+ }
+
    if(e.data.node.properties.edge != undefined) {
      $.each(e.data.node.properties.edge, function(k, v) {
       attr_edge += "<li><span style='color:red; margin-right: 20px;'>"+k+":</span><span>"+v+"</span></li>"
@@ -88,73 +127,108 @@ s.bind('doubleClickNode', function(e) {
 
 
 var get_user_data = function(e, attr_node){
+  node_prop = ''
   $.each(e.data.node.properties.node, function(k, v) {    
     if(k =='first_name' || k=='last_name' || k=='country') {
       attr_node += node_html(k, v)
     }
+    node_prop += node_html(k, v)
   }); 
+  $("#node_prop_tooltip").attr('data-original-title', node_prop)
   return attr_node; 
 }
 
 var get_user_identity_data = function(e, attr_node){
+  node_prop = ''
   $.each(e.data.node.properties.node, function(k, v) {
     if(k=='email' || k=='nickname' || k=='country') {
       attr_node += node_html(k, v)
     }
-  }); 
+    node_prop += node_html(k, v)
+  });
+  $("#node_prop_tooltip").attr('data-original-title', node_prop) 
   return attr_node;  
 }
 
 var get_provider_data = function(e, attr_node){
+  node_prop = ''
   $.each(e.data.node.properties.node, function(k, v) {
     if(k=='provider_name') {
       attr_node += node_html(k, v)
     }
+    node_prop += node_html(k, v)
   }); 
+  $("#node_prop_tooltip").attr('data-original-title', node_prop)
   return attr_node;  
 }
 
 var get_group_data = function(e, attr_node){
+  node_prop = ''
   $.each(e.data.node.properties.node, function(k, v) {
     if(k!='created_at' && k!='updated_at' && k!='color' && k!='uuid' && k!='id' ) {
       attr_node += node_html(k, v)
     }
+    node_prop += node_html(k, v)
   }); 
+  $("#node_prop_tooltip").attr('data-original-title', node_prop)
   return attr_node;  
 }
 
 var get_group_type_data = function(e, attr_node){
+  node_prop = ''
   $.each(e.data.node.properties.node, function(k, v) {
     // if(k=='provider_name') {
       attr_node += node_html(k, v)
     // }
   }); 
+  $("#node_prop_tooltip").attr('data-original-title', attr_node)
   return attr_node;  
 }
 
 var get_node_type_data = function(e, attr_node){
+  node_prop = ''
   $.each(e.data.node.properties.node, function(k, v) {
     if(k=='field_name') {
       attr_node += node_html(k, v)
     }
+    node_prop += node_html(k, v)
   }); 
+  $("#node_prop_tooltip").attr('data-original-title', node_prop)
   return attr_node;  
 }
 
 var get_node_attribute_data = function(e, attr_node){
+  node_prop = ''
   $.each(e.data.node.properties.node, function(k, v) {
     if(k=='name' ||  k==attr_type) {
       attr_node += node_html(k, v)
     }
+    node_prop += node_html(k, v)
   }); 
+  $("#node_prop_tooltip").attr('data-original-title', node_prop)
   return attr_node;  
 }
 
 
-
 var node_html = function(property, value){
- return "<li><span style='color:red; margin-right: 20px;'>"+property+":</span><span>"+value+"</span></li>"
+ return "<li><span style='color:red; margin-right: 20px;'>"+capitalize_str(property)
++":</span><span>"+value+"</span></li>"
 }
+
+var relation_html = function(key, relation_id, relation_name){
+ return "<li><span style='color:red; margin-right: 20px;'>"+capitalize_str(relation_id)
++":</span><span>"+relation_name+"</span></li>"
+
+}
+
+
+var capitalize_str = function(str){
+  str = str.toLowerCase().replace("_", " ").replace(/\b[a-z]/g, 
+  function(letter) {
+    return letter.toUpperCase();
+  });
+  return str;
+} 
 
 
 s.bind('clickNode', function(e) {    
@@ -188,4 +262,6 @@ s.bind('clickNode', function(e) {
   s.refresh();
 
 });
+
+
 </script>

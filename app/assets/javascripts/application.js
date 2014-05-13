@@ -50,5 +50,7 @@
 
 $(document).ready(function(){
     $('#node_color_field').minicolors()
-})             
+});
+
+         
 

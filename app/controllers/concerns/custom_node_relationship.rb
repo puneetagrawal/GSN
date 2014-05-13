@@ -7,7 +7,12 @@ module CustomNodeRelationship
         relation = options[:relation]
         label    = options[:label]
         color    = options[:color]
-
+        relation_name = []
+        relation_id = []
+        node.rels.each do |rel|
+          relation_name << rel.load_resource['type']
+          relation_id <<  "Relation #{rel.neo_id}"
+        end
 	 	{
        	           id:         node.neo_id.to_s,  
        	           label:      "#{label} #{node.neo_id}", 
@@ -17,7 +22,10 @@ module CustomNodeRelationship
        	           color:      color,
        	           properties: {
        	           	node:         node.props,
-       	           	edge:         {}
+       	           	edge:         {
+                        relation_name: relation_name,
+                        relation_id: relation_id
+                    }
        	                       },
        	           relation:   relation
         }
@@ -28,10 +36,10 @@ module CustomNodeRelationship
          source   = options[:source]
          target   = options[:target]
          relation = options[:relation]
-         color    = options[:color]
+         color    = options[:color]         
        
 	 	{
-				    id: "e #{relation.neo_id}",
+				    id: " #{relation.neo_id}",
 				    source: source.neo_id.to_s,
 				    target: target.neo_id.to_s,
 				    size:   Random.rand(1-6664664646),

@@ -5,9 +5,22 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
-      <div class="modal-body" id="modal_body_content">
-        ...
+      <div class="modal-body" >       
+       <div id="modal_body_content" class="span10"></div>
+       <!--  <a class="btn pop"  rel="popover" href="javascript:void(0)" data-original-title="A Title" data-container="body"
+        data-content="And here's some amazing content.It's very engaging. right? And another thing about this is a that it's really long.  When I say  long I mean really, really long.  Super, duper long.  There is even more text that makes it longer.  Why do I need so much text in my modal?  It's so long that the top gets cut off by the modal header.  How do I fix this?">
+            Click to toggle popover
+         </a> -->
+        <div class="pull-right modal_action_btn" >
+        <div class="pull-right">
+           <a class="btn btn-primary" href="javascript:void(0)" rel="tooltip" title="" data-original-title="A Title" data-container="body" data-html="true" id="node_prop_tooltip" >Attributes</a>
+        </div>
+
+        <div class="pull-right">
+           <a class="btn btn-primary" href="javascript:void(0)" rel="tooltip" title="" data-original-title="A Title" data-container="body" data-html="true" id="edge_prop_tooltip" >Relations</a>
+        </div>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
