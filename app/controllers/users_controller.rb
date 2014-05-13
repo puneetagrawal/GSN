@@ -10,11 +10,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    relations = @user.rels
-    @users = {}
-    @users[:nodes] = []
-    @users[:edges] = []
+    node_id = params[:id].present? ? params[:id] : params[:search_node]
+    @node = Neo4j::Node.load(node_id)
+    relations = @node.rels(dir: :outgoing)
+    @data_collections = {}
+    @data_collections[:nodes] = []
+    @data_collections[:edges] = []
     @check_node = []
     relations.each do |relation|         
        e_node = relation.end_node
@@ -26,13 +27,13 @@ class UsersController < ApplicationController
        color_prop = relation.end_node.props[:color].present? ? relation.end_node.props[:color] : '#666'
        unless @check_node.include? e_node_id
          @check_node << e_node_id
-         @users[:nodes] << create_node(node: e_node, relation: edge_relation, label: e_node.labels[0], color: color_prop)
+         @data_collections[:nodes] << create_node(node: e_node, relation: edge_relation, label: e_node.labels[0], color: color_prop)
        end
-       @users[:edges] << create_edge(source: s_node, target: e_node, relation: relation, color: '#ccc')
+       @data_collections[:edges] << create_edge(source: s_node, target: e_node, relation: relation, color: '#ccc')
     end
 
     # @providers[:edges] << create_edge(source: current_user, target: @identity, relation: @identity.rels(type: 'User#identities')[0], color: '#ccc')
-    @users[:nodes] << create_node(node: @user, label: @user.labels[0], color: @user.props[:color]) 
+    @data_collections[:nodes] << create_node(node: @node, label: @node.labels[0], color: @node.props[:color]) 
   end
 
 
@@ -50,6 +51,7 @@ class UsersController < ApplicationController
       format.json {render json: [@data_collections, check_end_node]}
     end
   end
+  
 
   def get_relation_data(node, data_collections, relations, check_end_node, check_node )
     relations.each do |relation|
@@ -152,6 +154,8 @@ class UsersController < ApplicationController
     flash[:success] = "User deleted."
     redirect_to users_path
   end
+
+
 
    private
 

@@ -1,11 +1,16 @@
-<%= @user.full_name %>
+<div>
+<%= form_tag users_path, class: "remove_overlap form_search_field", remote: true do %>  
+  <%= search_field_tag :search_node, "", placeholder: "Search"%>
+  <%= submit_tag "Submit"%>
+<% end %>
+</div>
 <div class="clear">
 <div class="row">
   <aside class="span4">
     <section>
       <h1>
         <%#= gravatar_for @user %>
-        <%= @user.full_name %>
+        <%#= @node.full_name %>
       </h1>
     </section>
     <section>
@@ -18,5 +23,5 @@
   
 
 <%= render "shared/graph_template"%>
-<%= render "shared/graph_script", parsed_data: @users %>
+<%= render "shared/graph_script", parsed_data: @data_collections %>
  

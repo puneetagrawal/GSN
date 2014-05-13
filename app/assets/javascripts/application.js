@@ -47,10 +47,14 @@
 //= require src/misc/sigma.misc.drawHovers.js 
 //= require plugins/sigma.plugins.dragNodes/sigma.plugins.dragNodes.js 
 //= require jquery.minicolors  
+//= require graph  
 
 $(document).ready(function(){
-    $('#node_color_field').minicolors()
+    $('#node_color_field').minicolors();
+    $("a[rel='tooltip']").tooltip({'placement': 'right', 'z-index': '3000'});
 });
+
+
 
          
 

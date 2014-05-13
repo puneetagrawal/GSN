@@ -22,6 +22,9 @@ GSN::Application.routes.draw do
     member do
      get 'show_other_node'
     end
+    collection do
+      post 'show'
+    end
   end
   resources :user_identities
   resources :groups
