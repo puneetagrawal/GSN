@@ -1,0 +1,172 @@
+May 16, 2014 1:55:38 PM org.neo4j.server.logging.Logger log
+INFO: Setting startup timeout to: 120000ms based on -1
+May 16, 2014 1:55:41 PM org.neo4j.server.logging.Logger log
+INFO: Successfully started database
+May 16, 2014 1:55:42 PM org.neo4j.server.logging.Logger log
+INFO: Starting HTTP on port :7474 with 80 threads available
+May 16, 2014 1:55:42 PM org.neo4j.server.logging.Logger log
+INFO: Enabling HTTPS on port :7473
+May 16, 2014 1:55:42 PM org.neo4j.server.logging.Logger log
+INFO: Mounted discovery module at [/]
+May 16, 2014 1:55:42 PM org.neo4j.server.logging.Logger log
+INFO: Mounted REST API at [/db/data/]
+May 16, 2014 1:55:42 PM org.neo4j.server.logging.Logger log
+INFO: Mounted management API at [/db/manage/]
+May 16, 2014 1:55:42 PM org.neo4j.server.logging.Logger log
+INFO: Mounted third-party JAX-RS package [org.neo4j.extension.uuid] at [/db/uuid]
+May 16, 2014 1:55:42 PM org.neo4j.server.logging.Logger log
+INFO: Mounted webadmin at [/webadmin]
+May 16, 2014 1:55:42 PM org.neo4j.server.logging.Logger log
+INFO: Mounted Neo4j Browser at [/browser]
+May 16, 2014 1:55:42 PM org.neo4j.server.logging.Logger log
+INFO: Mounting static content at [/webadmin] from [webadmin-html]
+May 16, 2014 1:55:43 PM org.neo4j.server.logging.Logger log
+INFO: Mounting static content at [/browser] from [browser]
+May 16, 2014 1:55:43 PM com.sun.jersey.api.core.PackagesResourceConfig init
+INFO: Scanning for root resource and provider classes in the packages:
+  org.neo4j.extension.uuid
+May 16, 2014 1:55:43 PM com.sun.jersey.api.core.ScanningResourceConfig logClasses
+INFO: Root resource classes found:
+  class org.neo4j.extension.uuid.UUIDRestInterface
+May 16, 2014 1:55:43 PM com.sun.jersey.api.core.ScanningResourceConfig init
+INFO: No provider classes found.
+May 16, 2014 1:55:43 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+May 16, 2014 1:55:44 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+May 16, 2014 1:55:44 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+May 16, 2014 1:55:44 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+May 16, 2014 1:55:45 PM org.neo4j.server.logging.Logger log
+INFO: Remote interface ready and available at [http://0.0.0.0:7474/]
+May 16, 2014 1:56:15 PM org.neo4j.server.logging.Logger log
+INFO: Available console sessions: SHELL: class org.neo4j.server.webadmin.console.ShellSessionCreator
+CYPHER: class org.neo4j.server.webadmin.console.CypherSessionCreator
+
+May 16, 2014 1:58:41 PM org.neo4j.server.logging.Logger log
+INFO: Setting startup timeout to: 120000ms based on -1
+May 16, 2014 1:58:41 PM org.neo4j.server.logging.Logger log
+SEVERE: Recovery startup task failed.
+May 16, 2014 1:58:41 PM org.neo4j.server.logging.Logger log
+SEVERE: Unable to recover database
+May 16, 2014 1:58:41 PM org.neo4j.server.logging.Logger log
+SEVERE: 
+org.neo4j.server.ServerStartupException: Starting Neo4j Server failed: Startup failed due to preflight task [class org.neo4j.server.preflight.PerformRecoveryIfNecessary]: Unable to recover database
+	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:209)
+	at org.neo4j.server.Bootstrapper.start(Bootstrapper.java:87)
+	at org.neo4j.server.Bootstrapper.main(Bootstrapper.java:50)
+Caused by: org.neo4j.server.preflight.PreflightFailedException: Startup failed due to preflight task [class org.neo4j.server.preflight.PerformRecoveryIfNecessary]: Unable to recover database
+	at org.neo4j.server.AbstractNeoServer.runPreflightTasks(AbstractNeoServer.java:321)
+	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:144)
+	... 2 more
+
+May 16, 2014 1:58:41 PM org.neo4j.server.logging.Logger log
+SEVERE: Failed to start Neo Server on port [7474]
+May 16, 2014 4:02:00 PM org.neo4j.server.logging.Logger log
+INFO: Setting startup timeout to: 120000ms based on -1
+May 16, 2014 4:02:03 PM org.neo4j.server.logging.Logger log
+INFO: Successfully started database
+May 16, 2014 4:02:03 PM org.neo4j.server.logging.Logger log
+INFO: Starting HTTP on port :7474 with 80 threads available
+May 16, 2014 4:02:03 PM org.neo4j.server.logging.Logger log
+INFO: Enabling HTTPS on port :7473
+May 16, 2014 4:02:04 PM org.neo4j.server.logging.Logger log
+INFO: Mounted discovery module at [/]
+May 16, 2014 4:02:04 PM org.neo4j.server.logging.Logger log
+INFO: Mounted REST API at [/db/data/]
+May 16, 2014 4:02:04 PM org.neo4j.server.logging.Logger log
+INFO: Mounted management API at [/db/manage/]
+May 16, 2014 4:02:04 PM org.neo4j.server.logging.Logger log
+INFO: Mounted third-party JAX-RS package [org.neo4j.extension.uuid] at [/db/uuid]
+May 16, 2014 4:02:04 PM org.neo4j.server.logging.Logger log
+INFO: Mounted webadmin at [/webadmin]
+May 16, 2014 4:02:04 PM org.neo4j.server.logging.Logger log
+INFO: Mounted Neo4j Browser at [/browser]
+May 16, 2014 4:02:04 PM org.neo4j.server.logging.Logger log
+INFO: Mounting static content at [/webadmin] from [webadmin-html]
+May 16, 2014 4:02:04 PM org.neo4j.server.logging.Logger log
+INFO: Mounting static content at [/browser] from [browser]
+May 16, 2014 4:02:04 PM com.sun.jersey.api.core.PackagesResourceConfig init
+INFO: Scanning for root resource and provider classes in the packages:
+  org.neo4j.extension.uuid
+May 16, 2014 4:02:04 PM com.sun.jersey.api.core.ScanningResourceConfig logClasses
+INFO: Root resource classes found:
+  class org.neo4j.extension.uuid.UUIDRestInterface
+May 16, 2014 4:02:04 PM com.sun.jersey.api.core.ScanningResourceConfig init
+INFO: No provider classes found.
+May 16, 2014 4:02:04 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+May 16, 2014 4:02:05 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+May 16, 2014 4:02:05 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+May 16, 2014 4:02:06 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+May 16, 2014 4:02:06 PM org.neo4j.server.logging.Logger log
+INFO: Remote interface ready and available at [http://0.0.0.0:7474/]
+May 16, 2014 4:02:37 PM org.neo4j.server.logging.Logger log
+INFO: Available console sessions: SHELL: class org.neo4j.server.webadmin.console.ShellSessionCreator
+CYPHER: class org.neo4j.server.webadmin.console.CypherSessionCreator
+
+May 16, 2014 5:25:18 PM org.neo4j.server.logging.Logger log
+INFO: Setting startup timeout to: 120000ms based on -1
+May 16, 2014 5:25:18 PM org.neo4j.server.logging.Logger log
+SEVERE: Recovery startup task failed.
+May 16, 2014 5:25:18 PM org.neo4j.server.logging.Logger log
+SEVERE: Unable to recover database
+May 16, 2014 5:25:18 PM org.neo4j.server.logging.Logger log
+SEVERE: 
+org.neo4j.server.ServerStartupException: Starting Neo4j Server failed: Startup failed due to preflight task [class org.neo4j.server.preflight.PerformRecoveryIfNecessary]: Unable to recover database
+	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:209)
+	at org.neo4j.server.Bootstrapper.start(Bootstrapper.java:87)
+	at org.neo4j.server.Bootstrapper.main(Bootstrapper.java:50)
+Caused by: org.neo4j.server.preflight.PreflightFailedException: Startup failed due to preflight task [class org.neo4j.server.preflight.PerformRecoveryIfNecessary]: Unable to recover database
+	at org.neo4j.server.AbstractNeoServer.runPreflightTasks(AbstractNeoServer.java:321)
+	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:144)
+	... 2 more
+
+May 16, 2014 5:25:18 PM org.neo4j.server.logging.Logger log
+SEVERE: Failed to start Neo Server on port [7474]
+May 16, 2014 5:32:15 PM org.neo4j.server.logging.Logger log
+INFO: Setting startup timeout to: 120000ms based on -1
+May 16, 2014 5:32:18 PM org.neo4j.server.logging.Logger log
+INFO: Successfully started database
+May 16, 2014 5:32:18 PM org.neo4j.server.logging.Logger log
+INFO: Starting HTTP on port :7474 with 80 threads available
+May 16, 2014 5:32:18 PM org.neo4j.server.logging.Logger log
+INFO: Enabling HTTPS on port :7473
+May 16, 2014 5:32:19 PM org.neo4j.server.logging.Logger log
+INFO: Mounted discovery module at [/]
+May 16, 2014 5:32:19 PM org.neo4j.server.logging.Logger log
+INFO: Mounted REST API at [/db/data/]
+May 16, 2014 5:32:19 PM org.neo4j.server.logging.Logger log
+INFO: Mounted management API at [/db/manage/]
+May 16, 2014 5:32:19 PM org.neo4j.server.logging.Logger log
+INFO: Mounted third-party JAX-RS package [org.neo4j.extension.uuid] at [/db/uuid]
+May 16, 2014 5:32:19 PM org.neo4j.server.logging.Logger log
+INFO: Mounted webadmin at [/webadmin]
+May 16, 2014 5:32:19 PM org.neo4j.server.logging.Logger log
+INFO: Mounted Neo4j Browser at [/browser]
+May 16, 2014 5:32:19 PM org.neo4j.server.logging.Logger log
+INFO: Mounting static content at [/webadmin] from [webadmin-html]
+May 16, 2014 5:32:19 PM org.neo4j.server.logging.Logger log
+INFO: Mounting static content at [/browser] from [browser]
+May 16, 2014 5:32:19 PM com.sun.jersey.api.core.PackagesResourceConfig init
+INFO: Scanning for root resource and provider classes in the packages:
+  org.neo4j.extension.uuid
+May 16, 2014 5:32:19 PM com.sun.jersey.api.core.ScanningResourceConfig logClasses
+INFO: Root resource classes found:
+  class org.neo4j.extension.uuid.UUIDRestInterface
+May 16, 2014 5:32:19 PM com.sun.jersey.api.core.ScanningResourceConfig init
+INFO: No provider classes found.
+May 16, 2014 5:32:19 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+May 16, 2014 5:32:20 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+May 16, 2014 5:32:20 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+May 16, 2014 5:32:20 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+May 16, 2014 5:32:21 PM org.neo4j.server.logging.Logger log
+INFO: Remote interface ready and available at [http://0.0.0.0:7474/]
