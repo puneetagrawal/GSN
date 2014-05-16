@@ -26,6 +26,14 @@
         fontSize = (settings('labelSize') === 'fixed') ?
           settings('defaultLabelSize') :
           settings('labelSizeRatio') * size;
+     
+     // Node properties
+     var node_prop = ''
+      $.each(node.properties.node, function(property, value) {   
+        node_prop += '<li><span style="color:red; margin-right: 20px; list-style: none">'+(property)+
+        ':</span><span>'+value+'</span></li>'
+      });
+
 
     // Label background:
     context.font = (fontStyle ? fontStyle + ' ' : '') +
@@ -47,18 +55,18 @@
       x = Math.round(node[prefix + 'x'] - fontSize / 2 - 2);
       y = Math.round(node[prefix + 'y'] - fontSize / 2 - 2);
       w = Math.round(
-        context.measureText(node.label).width + fontSize / 2 + size + 7
+        context.measureText(node.label).width + 20 + fontSize / 2 + size + 7
       );
-      h = Math.round(fontSize + 4);
+      h = Math.round(100 + fontSize + 4);
       e = Math.round(fontSize / 2 + 2);
 
-      context.moveTo(x, y + e);
-      context.arcTo(x, y, x + e, y, e);
-      context.lineTo(x + w, y);
-      context.lineTo(x + w, y + h);
-      context.lineTo(x + e, y + h);
-      context.arcTo(x, y + h, x, y + h - e, e);
-      context.lineTo(x, y + e);
+      // context.moveTo(x, y + e);
+      // context.arcTo(x, y, x + e, y, e);
+      // context.lineTo(x + w, y);
+      // context.lineTo(x + w, y + h);
+      // context.lineTo(x + e, y + h);
+      // context.arcTo(x, y + h, x, y + h - e, e);
+      // context.lineTo(x, y + e);
 
       context.closePath();
       context.fill();
@@ -89,18 +97,87 @@
     // Node:
     var nodeRenderer = sigma.canvas.nodes[node.type] || sigma.canvas.nodes.def;
     nodeRenderer(node, context, settings);
-
+      
     // Display the label:
     if (typeof node.label === 'string') {
       context.fillStyle = (settings('labelHoverColor') === 'node') ?
         (node.color || settings('defaultNodeColor')) :
         settings('defaultLabelHoverColor');
+      
 
-      context.fillText(
-        node.label,
+      // context.fillText(
+      //   node.label,
+      //   Math.round(node[prefix + 'x'] + size + 3),
+      //   Math.round(node[prefix + 'y'] + fontSize / 3)
+      // );
+    
+      // var data   = '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">' +
+      //          // '<image x="200" y="200" width="300" height="80" xlink:href="http://jenkov.com/images/layout/top-bar-logo.png" />' +
+      //          '<foreignObject width="100%" height="100%">' +
+      //           '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:12px; background-color: white;">' +
+      //           // '<image xlink:href="http://localhost:3000/assets/img/img1.png" height="20px" width="20px"/>'+
+      //             '<img src="http://localhost:3000/assets/img/img1.png" height="50" width="50" alt="img1"/>'+
+      //             '<span style="color:white; text-shadow:0 0 2px blue;">'+ node.label + '</span>'+
+      //             '<div id="modal_body_content" class="span10">'+ node_prop +'</div>'+
+      //             '</div>' +
+      //          '</foreignObject>' +
+      //        '</svg>';
+
+            var data   = '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400">' +
+               // '<image x="200" y="200" width="300" height="80" xlink:href="http://jenkov.com/images/layout/top-bar-logo.png" />' +
+               '<foreignObject width="100%" height="100%">' +
+                '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:12px; background-color: white; border: 1px solid #bbb">' +
+                // '<image xlink:href="http://localhost:3000/assets/img/img1.png" height="20px" width="20px"/>'+
+                  // '<img src="http://localhost:3000/assets/img/img1.png" height="50" width="50" alt="img1"/>'+
+                  '<span style="color:black; font-size: 18px>'+ node.label + '</span>'+
+                  '<div id="modal_body_content" class="span10">'+ node_prop +'</div>'+
+                  '</div>' +
+               '</foreignObject>' +
+             '</svg>';
+
+      // var data   = '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">' +
+      //          '<foreignObject width="100%" height="100%">' +
+      //            '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:40px">' +
+      //              '<em>I</em> like <span style="color:white; text-shadow:0 0 2px blue;">cheese</span>' +
+      //            '</div>' +
+      //          '</foreignObject>' +
+      //        '</svg>';
+            
+     var DOMURL = window.URL || window.webkitURL || window;
+     var img = new Image();
+     var svg = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+     var url = DOMURL.createObjectURL(svg);
+     img.onload = function () {
+      context.drawImage(img, 
         Math.round(node[prefix + 'x'] + size + 3),
-        Math.round(node[prefix + 'y'] + fontSize / 3)
-      );
+        Math.round(node[prefix + 'y'] + fontSize / 3 -12)
+      ); 
+       
+        //  context.drawImage(img.src='/assets/img/img1.png', 
+        // Math.round(node[prefix + 'x'] + size + 3),
+        // Math.round(node[prefix + 'y'] + fontSize / 3 -12)
+        // ); 
+         //context.restore(); // exit clipping mode
+      DOMURL.revokeObjectURL(url);
     }
+    img.src = url; 
+
+        }
+
+
+    //  context.drawImage(img.src="/assets/img/img1.png", 
+    // Math.round(node[prefix + 'x'] + size + 3+10),
+    // Math.round(node[prefix + 'y'] + fontSize / 3 -12-10),10,10,10,10,10,10
+    // );
+
+
+
+  // img.src='/assets/img/img1.png';
+  // img.onload = function () {
+  // context.drawImage(img,Math.round(node[prefix + 'x'] + size + 3+10),
+  //    Math.round(node[prefix + 'y'] + fontSize / 3 -12-10)
+  //    ,50,60,10,10,150,60);
+
+  //     }
   };
 }).call(this);

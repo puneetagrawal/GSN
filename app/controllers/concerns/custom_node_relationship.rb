@@ -13,13 +13,16 @@ module CustomNodeRelationship
           relation_name << rel.load_resource['type']
           relation_id <<  "Relation #{rel.neo_id}"
         end
-	 	{
+        label_html = "#{label} #{node.neo_id}"
+	 	    {
        	           id:         node.neo_id.to_s,  
-       	           label:      "#{label} #{node.neo_id}", 
+       	           label:      label_html, 
        	           x:          Random.rand(1-6664664646),
        	           y:          Random.rand(1-6664664646),
        	           size:       Random.rand(1-6664664646),
        	           color:      color,
+                   type:       "image",
+                   url:     "/assets/img/img4.png",
        	           properties: {
        	           	node:         node.props,
        	           	edge:         {
@@ -42,7 +45,7 @@ module CustomNodeRelationship
 				    id: " #{relation.neo_id}",
 				    source: source.neo_id.to_s,
 				    target: target.neo_id.to_s,
-				    size:   Random.rand(1-6664664646),
+				    size:   1000,
 				    color:  color,
             type: "arrow"
         }

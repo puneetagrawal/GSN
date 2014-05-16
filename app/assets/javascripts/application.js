@@ -46,6 +46,8 @@
 //= require src/misc/sigma.misc.bindEvents.js                
 //= require src/misc/sigma.misc.drawHovers.js 
 //= require plugins/sigma.plugins.dragNodes/sigma.plugins.dragNodes.js 
+//= require plugins/sigma.renderers.customShapes/shape-library.js
+//= require plugins/sigma.renderers.customShapes/sigma.renderers.customShapes.js
 //= require jquery.minicolors  
 //= require graph  
 
