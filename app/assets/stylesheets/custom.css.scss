@@ -234,10 +234,22 @@ display: block;
   }
 }
 .form_search_field{
-  width: 20%; 
+  margin-top: 20px;  
   input{
    height: 30px !important;
   padding: 5px;
   }
   
+}
+
+.modal_relation_attr ul li {
+  list-style: none;
+  width:40%; 
+  float: left;
+  margin-right: 10px;
+}
+
+#relationship_type{
+  width: 75%;
+  margin-left: 40px;
 }

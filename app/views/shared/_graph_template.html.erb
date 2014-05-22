@@ -9,7 +9,14 @@
   
 
     <!-- END SIGMA IMPORTS -->
-<div id="container">
+<div id="container" >
+  <div id="selected_node_container" style="position: absolute; display:none; z-index: 10;"  >
+    <p id="selected_first_node" data-id=""></p>
+    <p id="selected_second_node" data-id=""></p>
+    <%= submit_tag "Reset node", id: "reset_node", class: "btn" %>
+    <%= submit_tag "Add Relation", id: "add_relation_node", class: "btn btn-primary", style: "margin-top: 10px; display: none;" %>
+   
+  </div>
   <style>
     #graph-container {
    /*   top: 0;

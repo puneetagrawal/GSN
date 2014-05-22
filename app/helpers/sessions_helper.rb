@@ -32,6 +32,7 @@ module SessionsHelper
   def current_identity  
     remember_token = UserIdentity.hash(cookies[:remember_token])      
     @current_identity ||= UserIdentity.find(remember_token: remember_token)
+   
   end
 
   def current_identity?(identity)

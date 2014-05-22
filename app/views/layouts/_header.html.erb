@@ -1,8 +1,12 @@
 <header class="navbar navbar-inverse">
   <div class="navbar-inner">
     <div class="container ">
-    
-      <%= link_to "GSN", root_path, id: "logo", class: "remove_overlap" %>
+     <div class="pull-left">
+      <p>
+      <%= link_to "GSN", root_path, id: "logo", class: "remove_overlap" %> 
+      </p>     
+      <%= render "shared/search_node" if controller_name=="users" and action_name=="show" %>
+     </div>
       <nav>
         <ul class="nav pull-right remove_overlap">
           <!-- <li><%#= link_to "Home", root_path %></li> -->

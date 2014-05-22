@@ -61,6 +61,22 @@ describe UsersController do
        response.should render_template("edit")
      end
   end
+
+  describe 'POST create_relation' do
+     before do
+       @identity = UserIdentity.last
+       user_sign_in(@identity)
+     end
+
+     it "should create the relation" do
+      end_node = Neo4j::Node.create( {:test => "hello"}, :Test )
+       post :create_relation, id: @identity.id, "relationship"=>{"type"=>"HAS_PROVIDER", 
+                                         "0"=>{"name"=>"test", "value"=>"test"}}, 
+                                         "start_node"=> @identity.id, "end_node"=> end_node.neo_id
+       response.should redirect_to "/users/#{@user.id}"
+     end
+    
+  end
   
   describe "should destroy user" do  
     before do

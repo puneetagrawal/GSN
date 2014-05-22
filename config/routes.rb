@@ -21,9 +21,10 @@ GSN::Application.routes.draw do
   resources :users do
     member do
      get 'show_other_node'
+     post 'create_relation'
     end
     collection do
-      post 'show'
+      post 'show'      
     end
   end
   resources :user_identities

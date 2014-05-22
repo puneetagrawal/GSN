@@ -7,6 +7,7 @@ module CustomNodeRelationship
         relation = options[:relation]
         label    = options[:label]
         color    = options[:color]
+        url    = options[:url].present? ? options[:url] : "/assets/img/img1.png"
         relation_name = []
         relation_id = []
         node.rels.each do |rel|
@@ -22,7 +23,7 @@ module CustomNodeRelationship
        	           size:       Random.rand(1-6664664646),
        	           color:      color,
                    type:       "image",
-                   url:     "/assets/img/img4.png",
+                   url:        url,
        	           properties: {
        	           	node:         node.props,
        	           	edge:         {

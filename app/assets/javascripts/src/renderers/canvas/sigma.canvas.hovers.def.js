@@ -123,13 +123,13 @@
       //          '</foreignObject>' +
       //        '</svg>';
 
-            var data   = '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400">' +
+            var data   = '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">' +
                // '<image x="200" y="200" width="300" height="80" xlink:href="http://jenkov.com/images/layout/top-bar-logo.png" />' +
-               '<foreignObject width="100%" height="100%">' +
+               '<foreignObject width="300" height="300">' +
                 '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:12px; background-color: white; border: 1px solid #bbb">' +
                 // '<image xlink:href="http://localhost:3000/assets/img/img1.png" height="20px" width="20px"/>'+
                   // '<img src="http://localhost:3000/assets/img/img1.png" height="50" width="50" alt="img1"/>'+
-                  '<span style="color:black; font-size: 18px>'+ node.label + '</span>'+
+                  '<span style="color:black; font-size: 18px">'+ node.label + '</span>'+
                   '<div id="modal_body_content" class="span10">'+ node_prop +'</div>'+
                   '</div>' +
                '</foreignObject>' +

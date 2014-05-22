@@ -25,10 +25,6 @@
 var load_graph = function(graph_data, node_ids){
 
 
-
-
-
-
 sigma.utils.pkg('sigma.canvas.nodes');
 sigma.canvas.nodes.image = (function() {
   var _cache = {},
@@ -125,32 +121,27 @@ sigma.canvas.nodes.image = (function() {
 
 
 
-
-
-
-
-
-
-
-
-
-	
+  
 sigma.renderers.def = sigma.renderers.canvas
-// Instanciate sigma:
-// s = new sigma({
-//   graph: graph_data,
-//   container: 'graph-container'
-// });
-
-
 
 
 // Then, wait for all images to be loaded before instanciating sigma:
-// urls.forEach(function(url) {
-  sigma.canvas.nodes.image.cache(
-    "/assets/img/img4.png",
-    function() {
-      // if (++loaded === urls.length)
+// 
+var loaded = 0, urls = [] ;  
+
+$.each(graph_data.nodes, function(key, value){
+    urls.push(value.url)
+  });
+
+urls = urls.filter(function(elem, pos) {
+    return urls.indexOf(elem) == pos;
+});
+
+urls.forEach(function(url) {
+  sigma.canvas.nodes.image.cache( url, function() {
+
+      if (++loaded === urls.length){
+      
         // Instanciate sigma:
         s = new sigma({
           graph: graph_data,
@@ -165,65 +156,199 @@ sigma.renderers.def = sigma.renderers.canvas
             minNodeSize: 8,
             maxNodeSize: 16,
           }
-        });
-
+        });       
 
         // Initialize the dragNodes plugin:
-sigma.plugins.dragNodes(s, s.renderers[0]);
+        sigma.plugins.dragNodes(s, s.renderers[0]);
+        
+        // Bind the events:        
+        double_click_node_event(s)
+        click_node_event(s)
 
-// Bind the events:
-s.bind('doubleClickNode', function(e) { 
-// s.bind('overNode', function(e) { 
-  var attr_node = ""
-  var attr_edge = ""
-  var edge_property = e.data.node.properties.edge
-  var inc = 0;
-  
-  if(edge_property.relation_id != undefined) {
-    edge_prop = ''
-    $.each(edge_property.relation_id, function(key, relation_id) {     
-       edge_prop += relation_html(key, relation_id, edge_property.relation_name[inc])
-       inc++
-     });
-    $("#edge_prop_tooltip").attr('data-original-title', edge_prop)
- }
-
-   if(e.data.node.properties.edge != undefined) {
-     $.each(e.data.node.properties.edge, function(k, v) {
-      attr_edge += "<li><span style='color:red; margin-right: 20px;'>"+k+":</span><span>"+v+"</span></li>"
+      }
     });
-   }
 
-  label = e.data.node.label.split(' ')[0]
-   switch(label){
-    case 'User': 
-       attr_node = get_user_data(e, attr_node)
-      break; 
-    case 'UserIdentity':
-       attr_node = get_user_identity_data(e, attr_node) 
-       break; 
-    case 'Provider': 
-      attr_node = get_provider_data(e, attr_node)
-      break; 
-    case 'Group': 
-      attr_node = get_group_data(e, attr_node)
-      break; 
-    case 'GroupType': 
-      attr_node = get_group_type_data(e, attr_node)
-       break; 
-    case 'NodeType': 
-      attr_node = get_node_type_data(e, attr_node)
-      break; 
-    case 'NodeAttribute': 
-      attr_node = get_node_attribute_data(e, attr_node)
-      break; 
-  }
-
-  $("#myModalLabel").html(e.data.node.label);
-  $("#modal_body_content").html(attr_node);
-  $("#nodeModal").modal("show");
-  
 });
+
+
+
+
+
+}
+
+
+
+var double_click_node_event = function(s){
+  s.bind('doubleClickNode', function(e) { 
+        // s.bind('overNode', function(e) { 
+         //  var attr_node = ""
+         //  var attr_edge = ""
+         //  var edge_property = e.data.node.properties.edge
+         //  var inc = 0;
+          
+         //  if(edge_property.relation_id != undefined) {
+         //    edge_prop = ''
+         //    $.each(edge_property.relation_id, function(key, relation_id) {     
+         //       edge_prop += relation_html(key, relation_id, edge_property.relation_name[inc])
+         //       inc++
+         //     });
+         //    $("#edge_prop_tooltip").attr('data-original-title', edge_prop)
+         // }
+
+         //   if(e.data.node.properties.edge != undefined) {
+         //     $.each(e.data.node.properties.edge, function(k, v) {
+         //      attr_edge += "<li><span style='color:red; margin-right: 20px;'>"+k+":</span><span>"+v+"</span></li>"
+         //    });
+         //   }
+
+         //  label = e.data.node.label.split(' ')[0]
+         //   switch(label){
+         //    case 'User': 
+         //       attr_node = get_user_data(e, attr_node)
+         //      break; 
+         //    case 'UserIdentity':
+         //       attr_node = get_user_identity_data(e, attr_node) 
+         //       break; 
+         //    case 'Provider': 
+         //      attr_node = get_provider_data(e, attr_node)
+         //      break; 
+         //    case 'Group': 
+         //      attr_node = get_group_data(e, attr_node)
+         //      break; 
+         //    case 'GroupType': 
+         //      attr_node = get_group_type_data(e, attr_node)
+         //       break; 
+         //    case 'NodeType': 
+         //      attr_node = get_node_type_data(e, attr_node)
+         //      break; 
+         //    case 'NodeAttribute': 
+         //      attr_node = get_node_attribute_data(e, attr_node)
+         //      break; 
+         //  }
+
+         //  $("#myModalLabel").html(e.data.node.label);
+         //  $("#modal_body_content").html(attr_node);
+         //  $("#nodeModal").modal("show");
+
+              $.ajax({
+            type: "GET",
+            url: "/users/"+ e.data.node.id +"/show_other_node?node_ids="+node_ids
+              
+          }).done(function(data) {            
+           
+            data[0].nodes.forEach(function(n){
+              s.graph.addNode(n)
+            });
+
+            data[0].edges.forEach(function(e){
+              s.graph.addEdge(e)
+            });
+
+            data[1].forEach(function(d){
+              if ($.inArray(d, node_ids) == -1)
+              {
+                node_ids.push(d)
+              }
+              
+            });
+          s.refresh();
+
+        });
+          s.refresh();
+          
+        });
+}
+
+
+var get_node_ele = function(){
+  first_node=$("#selected_first_node")
+  second_node=$("#selected_second_node")
+  first_node_id = first_node.attr('data-id')
+  second_node_id = second_node.attr('data-id')
+}
+
+var click_node_event = function(s){
+  s.bind('clickNode', function(e) {  
+          
+          $("#selected_node_container").show();
+          get_node_ele();
+          selected_node = e.data.node
+
+          if(first_node_id==""){
+            set_selected_node(first_node, selected_node, "Start node")
+          }
+          else{
+            set_selected_node(second_node, selected_node, "End node")
+          }
+
+          if(first_node_id == "" && second_node_id == ""){
+            $("#add_relation_node").hide();
+           } 
+          else
+          {
+            $("#add_relation_node").show();
+          }
+          
+          
+        //   $.ajax({
+        //     type: "GET",
+        //     url: "/users/"+ e.data.node.id +"/show_other_node?node_ids="+node_ids
+              
+        //   }).done(function(data) {            
+           
+        //     data[0].nodes.forEach(function(n){
+        //       s.graph.addNode(n)
+        //     });
+
+        //     data[0].edges.forEach(function(e){
+        //       s.graph.addEdge(e)
+        //     });
+
+        //     data[1].forEach(function(d){
+        //       if ($.inArray(d, node_ids) == -1)
+        //       {
+        //         node_ids.push(d)
+        //       }
+              
+        //     });
+        //   s.refresh();
+
+        // });
+        //   s.refresh();
+
+        });
+}
+
+
+$(document).on("click", "#reset_node", function() {
+  get_node_ele();
+  first_node.attr('data-id', '');
+  first_node.text('');
+  second_node.attr('data-id', '');
+  second_node.text('');
+  $("#add_relation_node").hide();
+});
+
+$(document).on("click", "#add_relation_node", function() {
+   get_node_ele();
+   if(first_node_id == second_node_id){
+     alert("Start and End node will not be same")
+   }
+   else{   
+
+     $("#start_node_modal").val(first_node_id);
+     $("#end_node_modal").val(second_node_id);
+     $("#relationModal").modal("show");
+
+   }
+  // $("#add_relation_node")
+});
+
+
+var set_selected_node = function(node_ele, selected_node, node_pos){
+  node_ele.text(node_pos + ": " + selected_node.label)
+  node_ele.attr('data-id', selected_node.id)
+}
 
 
 var get_user_data = function(e, attr_node){
@@ -329,50 +454,3 @@ var capitalize_str = function(str){
   });
   return str;
 } 
-
-
-s.bind('clickNode', function(e) {    
-
-  // console.log(e.data.node.id)
-  $.ajax({
-    type: "GET",
-    url: "/users/"+ e.data.node.id +"/show_other_node?node_ids="+node_ids
-      
-  }).done(function(data) {
-    // graph_data = JSON.parse("<%#= raw [data.to_json][0] %>")
-   
-    data[0].nodes.forEach(function(n){
-      s.graph.addNode(n)
-    });
-
-    data[0].edges.forEach(function(e){
-      s.graph.addEdge(e)
-    });
-
-    data[1].forEach(function(d){
-      if ($.inArray(d, node_ids) == -1)
-      {
-        node_ids.push(d)
-      }
-      
-    });
-  s.refresh();
-
-});
-  s.refresh();
-
-});
-    }
-  );
-// });
-
-
-
-
-
-
-
-
-
-
-}

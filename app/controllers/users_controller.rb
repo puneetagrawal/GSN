@@ -27,13 +27,13 @@ class UsersController < ApplicationController
        color_prop = relation.end_node.props[:color].present? ? relation.end_node.props[:color] : '#666'
        unless @check_node.include? e_node_id
          @check_node << e_node_id
-         @data_collections[:nodes] << create_node(node: e_node, relation: edge_relation, label: e_node.labels[0], color: color_prop)
+         @data_collections[:nodes] << create_node(node: e_node, relation: edge_relation, label: e_node.labels[0], color: color_prop, url: "/assets/img/img3.png")
        end
        @data_collections[:edges] << create_edge(source: s_node, target: e_node, relation: relation, color: '#ccc')
     end
 
     # @providers[:edges] << create_edge(source: current_user, target: @identity, relation: @identity.rels(type: 'User#identities')[0], color: '#ccc')
-    @data_collections[:nodes] << create_node(node: @node, label: @node.labels[0], color: @node.props[:color]) 
+    @data_collections[:nodes] << create_node(node: @node, label: @node.labels[0], color: @node.props[:color], url: "/assets/img/img2.png") 
   end
 
 
@@ -155,6 +155,21 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def create_relation
+    unless params[:start_node] == params[:end_node]
+      relation_type = params["relationship"]["type"].try(:parameterize).try(:underscore)
+      start_node = Neo4j::Node.load(params[:start_node])
+      end_node = Neo4j::Node.load(params[:end_node])
+
+      relation_properties = get_properties(params["relationship"], current_identity)
+      if relation_type.present?
+        test_node = start_node.create_rel(relation_type, end_node, relation_properties)
+      end
+    end
+
+   redirect_to user_path(current_user)
+  end
+
 
 
    private
@@ -175,5 +190,17 @@ class UsersController < ApplicationController
     def admin_user
       redirect_to(root_url) unless current_user.admin
     end
+
+      def get_properties(prop_params, identity)
+        hash_props = {}
+        prop_params.map do |property|
+          if property[1]["name"].present?
+            prop_name = property[1]["name"].try(:parameterize).try(:underscore)
+            hash_props[prop_name] = property[1]["value"]
+          end
+        end
+        hash_props["identity"] = identity.id  
+        return hash_props
+      end
 
 end

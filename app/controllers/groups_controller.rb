@@ -1,12 +1,9 @@
 class GroupsController < ApplicationController
     include CustomNodeRelationship
 
-	def index
-		
+	def index		
      @groups = current_identity.groups
-
-	# Neo4j::Session.current.find_all_nodes(:Groupss) 
-		
+	# Neo4j::Session.current.find_all_nodes(:Groupss) 		
 	end
 
 	def new

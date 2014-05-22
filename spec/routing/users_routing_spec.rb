@@ -31,5 +31,9 @@ describe UsersController do
       delete("/users/1").should route_to("users#destroy", :id => "1")
     end
 
+    it "routes to #create_relation" do
+      post("/users/1/create_relation").should route_to("users#create_relation", :id => "1")
+    end
+
   end
 end
