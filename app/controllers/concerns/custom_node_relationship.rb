@@ -43,7 +43,7 @@ module CustomNodeRelationship
          color    = options[:color]         
        
 	 	{
-				    id: " #{relation.neo_id}",
+				    id: "#{relation.neo_id}",
 				    source: source.neo_id.to_s,
 				    target: target.neo_id.to_s,
 				    size:   1000,

@@ -156,7 +156,10 @@ urls.forEach(function(url) {
             minNodeSize: 8,
             maxNodeSize: 16,
           }
-        });       
+        });   
+
+       
+    
 
         // Initialize the dragNodes plugin:
         sigma.plugins.dragNodes(s, s.renderers[0]);
@@ -275,10 +278,11 @@ var click_node_event = function(s){
           selected_node = e.data.node
 
           if(first_node_id==""){
-            set_selected_node(first_node, selected_node, "Start node")
+            set_selected_node(e, first_node, selected_node, "Start node")
+            // show_attributes(e);
           }
           else{
-            set_selected_node(second_node, selected_node, "End node")
+            set_selected_node(e, second_node, selected_node, "End node")
           }
 
           if(first_node_id == "" && second_node_id == ""){
@@ -344,10 +348,42 @@ $(document).on("click", "#add_relation_node", function() {
   // $("#add_relation_node")
 });
 
+var show_attributes = function(e){
+  var attr_node = "<h4>Attributes</h4>"
+  label = e.data.node.label.split(' ')[0]
+     switch(label){
+      case 'User': 
+         attr_node = get_user_data(e, attr_node)
+        break; 
+      case 'UserIdentity':
+         attr_node = get_user_identity_data(e, attr_node) 
+         break; 
+      case 'Provider': 
+        attr_node = get_provider_data(e, attr_node)
+        break; 
+      case 'Group': 
+        attr_node = get_group_data(e, attr_node)
+        break; 
+      case 'GroupType': 
+        attr_node = get_group_type_data(e, attr_node)
+         break; 
+      case 'NodeType': 
+        attr_node = get_node_type_data(e, attr_node)
+        break; 
+      case 'NodeAttribute': 
+        attr_node = get_node_attribute_data(e, attr_node)
+        break; 
+    }
+    return attr_node;
+}
 
-var set_selected_node = function(node_ele, selected_node, node_pos){
+
+var set_selected_node = function(node, node_ele, selected_node, node_pos){
   node_ele.text(node_pos + ": " + selected_node.label)
   node_ele.attr('data-id', selected_node.id)
+  html= "<ul><h4>" + node_pos + ": " + selected_node.label + "</h4><li>"+ show_attributes(node) +"</li></ul>"
+  console.log(html)
+  node_ele.html(html)
 }
 
 

@@ -54,6 +54,10 @@
 $(document).ready(function(){
     $('#node_color_field').minicolors();
     $("a[rel='tooltip']").tooltip({'placement': 'right', 'z-index': '3000'});
+
+    $("#header_profile_link").click(function(){
+    	$("#profileModal").modal("show");
+    })
 });
 
 

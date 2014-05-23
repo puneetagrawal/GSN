@@ -23,13 +23,13 @@
         sY = source[prefix + 'y'],
         tX = target[prefix + 'x'],
         tY = target[prefix + 'y'],
-        aSize = thickness * 2.5,
+        aSize = (thickness+2) * 2.5,
         d = Math.sqrt(Math.pow(tX - sX, 2) + Math.pow(tY - sY, 2)),
         aX = sX + (tX - sX) * (d - aSize - tSize) / d,
         aY = sY + (tY - sY) * (d - aSize - tSize) / d,
         vX = (tX - sX) * aSize / d,
         vY = (tY - sY) * aSize / d;
-
+     
     if (!color)
       switch (edgeColor) {
         case 'source':
@@ -51,6 +51,7 @@
       aX,
       aY
     );
+   
     context.stroke();
 
     context.fillStyle = color;

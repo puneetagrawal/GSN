@@ -9,7 +9,7 @@ class GroupType
 
   has_one(:creator).from(:users)
   has_n(:node_types).to(NodeType)
-  
+
   
 
   def has_name_desc?

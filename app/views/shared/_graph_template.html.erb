@@ -10,10 +10,29 @@
 
     <!-- END SIGMA IMPORTS -->
 <div id="container" >
-  <div id="selected_node_container" style="position: absolute; display:none; z-index: 10;"  >
+  <div class="graph_side_container pull-left">
+    <ul>
+      <p>Groups</p>
+      <ul><h4><%= link_to "My Groups", groups_path(identity: current_identity.uuid) %></h4>
+      <% current_identity.groups.each do |group| %>
+        <li>
+          <%=link_to group.end_node.get_property(:name).try(:humanize), group_path(group.end_node.neo_id) %> 
+        </li>          
+        <% end %>
+      </ul>
+
+      <!-- <li><h4>Participating groups</h4></li> -->
+      <ul><h4><%=link_to "Create new group", new_group_path %> </h4></ul>
+      
+
+    </ul>
+
+  </div>
+
+  <div id="selected_node_container" class="remove_overlap pull-right" style="display: none">
     <p id="selected_first_node" data-id=""></p>
     <p id="selected_second_node" data-id=""></p>
-    <%= submit_tag "Reset node", id: "reset_node", class: "btn" %>
+    <%= submit_tag "Reset node", id: "reset_node", class: "btn" %><br>
     <%= submit_tag "Add Relation", id: "add_relation_node", class: "btn btn-primary", style: "margin-top: 10px; display: none;" %>
    
   </div>
