@@ -29,12 +29,14 @@
 
   </div>
 
-  <div id="selected_node_container" class="remove_overlap pull-right" style="display: none">
+   <div class="remove_overlap pull-right graph_container_right" > <%= render "shared/search_node" if controller_name=="users" and action_name=="show" %>
+  <div id="selected_node_container" class="remove_overlap" style="display: none">
     <p id="selected_first_node" data-id=""></p>
     <p id="selected_second_node" data-id=""></p>
     <%= submit_tag "Reset node", id: "reset_node", class: "btn" %><br>
     <%= submit_tag "Add Relation", id: "add_relation_node", class: "btn btn-primary", style: "margin-top: 10px; display: none;" %>
    
+  </div>
   </div>
   <style>
     #graph-container {
@@ -45,6 +47,9 @@
       position: absolute;*/
 
       /*max-width: 500px;*/
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 70%;
     height: 400px;
     margin: auto;
     }

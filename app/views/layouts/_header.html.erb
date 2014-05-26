@@ -5,16 +5,16 @@
       <p>
       <%= link_to "GSN", root_path, id: "logo", class: "remove_overlap" %> 
       </p>     
-      <%= render "shared/search_node" if controller_name=="users" and action_name=="show" %>
+      
      </div>
       <nav>
-        <ul class="nav pull-right remove_overlap">
+        <div class="nav pull-right remove_overlap nav_right_header_link">
           <% if signed_in? %>
             <% oauth_text = "Add another account" %>
-            <li><%= link_to "Sign out", signout_path, method: "delete" %></li>             
+            <span><%= link_to "Sign out", signout_path, method: "delete" %></span>             
             <!-- <li><%#= link_to "Groups", groups_path(identity: current_identity.uuid) %></li> -->
-            <li><%= link_to "Graph", user_path(current_user) %></li>
-            <li><%= link_to "Profile", "javascript:void(0)", id: "header_profile_link" %></li>
+            <span><%= link_to "Graph", user_path(current_user) %></span>
+            <span><%= link_to "Profile", "javascript:void(0)", id: "header_profile_link" %></span>
             <!--  <li id="fat-menu-group" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Add Group<b class="caret"></b>
@@ -47,7 +47,7 @@
               </ul>
           </li> -->
           
-        </ul>
+        </div>
       </nav>
     </div>
   </div>

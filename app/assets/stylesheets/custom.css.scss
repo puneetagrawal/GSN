@@ -257,6 +257,8 @@ display: block;
 .graph_side_container{
   position: absolute; 
   z-index: 10; 
+  width: 15%;
+  word-wrap: break-word;
   ul{
     padding-left: 0px; 
     p{
@@ -272,10 +274,12 @@ display: block;
   }
 }
 #selected_node_container{ 
-  width: 225px; 
+
+ word-wrap: break-word; 
   ul{
     padding-left: 0px;   
    li{   
+    line-height: 1.3;
     list-style: none;
     margin-left: 40px;
     h4{
@@ -288,3 +292,19 @@ display: block;
     width: 150px;
   }
 }
+.container{
+  width: 100%;
+}
+
+.graph_container_right{
+   width: 15%;
+ padding-left: 5px;
+}
+.nav_right_header_link{
+  width: 20%;
+  margin-top: 10px;
+  span{
+    padding: 10px;
+  }
+}
+
