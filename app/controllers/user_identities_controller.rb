@@ -24,18 +24,19 @@ class UserIdentitiesController < ApplicationController
        s_node = r_identity.start_node
        s_node_id = r_identity.start_node.neo_id
        edge_properties = r_identity.props
-       edge_relation = r_identity.load_resource.present? ? r_identity.load_resource["type"] : ""
+       edge_relation_resource = r_identity.load_resource
+       edge_relation = edge_relation_resource.present? ? edge_relation_resource["type"] : ""
        color_prop = r_identity.end_node.props[:color].present? ? r_identity.end_node.props[:color] : '#666'
        unless @check_node.include? e_node_id
          @check_node << e_node_id
          @providers[:nodes] << create_node(node: e_node, relation: edge_relation, label: e_node.labels[0], color: color_prop)
           
        end
-       @providers[:edges] << create_edge(source: s_node, target: e_node, relation: r_identity, color: '#ccc')
+       @providers[:edges] << create_edge(source: s_node, target: e_node, relation: r_identity, color: '#ccc', relation_name: edge_relation)
      end
    
      @providers[:nodes] << create_node(node: @identity, label: @identity.labels[0], color: @identity.props[:color])
-     @providers[:edges] << create_edge(source: current_user, target: @identity, relation: @identity.rels(type: 'User#identities')[0], color: '#ccc')
+     @providers[:edges] << create_edge(source: current_user, target: @identity, relation: @identity.rels(type: 'User#identities')[0], color: '#ccc', relation_name: 'User#identities')
      @providers[:nodes] << create_node(node: current_user, label: current_user.labels[0], color: current_user.props[:color])
    
   end

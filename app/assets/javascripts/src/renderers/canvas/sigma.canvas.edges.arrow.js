@@ -19,6 +19,7 @@
         defaultEdgeColor = settings('defaultEdgeColor'),
         thickness = edge[prefix + 'size'] || 1,
         tSize = target[prefix + 'size'],
+        relation_name = edge.relation_name,
         sX = source[prefix + 'x'],
         sY = source[prefix + 'y'],
         tX = target[prefix + 'x'],
@@ -51,7 +52,12 @@
       aX,
       aY
     );
-   
+   // context.textBaseline = "hanging";
+
+context.font=" 14px Verdana";
+context.fillStyle = 'green';
+context.fillText(relation_name, (sX+aX)/2, (sY+aY)/2);
+
     context.stroke();
 
     context.fillStyle = color;
@@ -63,4 +69,5 @@
     context.closePath();
     context.fill();
   };
+
 })();

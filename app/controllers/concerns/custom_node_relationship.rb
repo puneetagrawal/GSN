@@ -37,24 +37,20 @@ module CustomNodeRelationship
 	 end
 
 	 def create_edge(options = {})
-         source   = options[:source]
-         target   = options[:target]
-         relation = options[:relation]
-         color    = options[:color]         
-       Rails.logger.debug(relation)
-       Rails.logger.debug(relation.props)
-       # if relation.present?         
-       # Rails.logger.debug relation.load_resource.present? ? relation.load_resource["type"] : "asdad"
-     # end
-       Rails.logger.debug("LLLLLLLLLLLLLLLLLLLL")
-	 	{
+      source           = options[:source]
+      target           = options[:target]
+      relation         = options[:relation]
+      color            = options[:color]         
+      relation_name    = options[:relation_name].try(:capitalize) 
+      {
 				    id: "#{relation.neo_id}",
 				    source: source.neo_id.to_s,
 				    target: target.neo_id.to_s,
 				    size:   1000,
 				    color:  color,
-            type: "arrow"
-        }
+            type: "arrow",
+            relation_name: relation_name
+      }
 	 end
 
 

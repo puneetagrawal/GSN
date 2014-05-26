@@ -17,19 +17,20 @@ class UsersController < ApplicationController
     @data_collections[:nodes] = []
     @data_collections[:edges] = []
     @check_node = []
-    relations.each do |relation|         
+    relations.each do |relation|   
+       relation_resource = relation.load_resource                
        e_node = relation.end_node
        e_node_id = relation.end_node.neo_id
        s_node = relation.start_node
        s_node_id = relation.start_node.neo_id
-       edge_properties = relation.props
-       edge_relation = relation.load_resource.present? ? relation.load_resource["type"] : ""
+       edge_properties = relation.props       
+       edge_relation = relation_resource.present? ? relation_resource["type"] : ""      
        color_prop = relation.end_node.props[:color].present? ? relation.end_node.props[:color] : '#666'
        unless @check_node.include? e_node_id
          @check_node << e_node_id
          @data_collections[:nodes] << create_node(node: e_node, relation: edge_relation, label: e_node.labels[0], color: color_prop, url: "/assets/img/img3.png")
        end
-       @data_collections[:edges] << create_edge(source: s_node, target: e_node, relation: relation, color: '#ccc')
+       @data_collections[:edges] << create_edge(source: s_node, target: e_node, relation: relation, color: '#ccc', relation_name: edge_relation)
     end
 
     # @providers[:edges] << create_edge(source: current_user, target: @identity, relation: @identity.rels(type: 'User#identities')[0], color: '#ccc')
@@ -55,14 +56,16 @@ class UsersController < ApplicationController
 
   def get_relation_data(node, data_collections, relations, check_end_node, check_node )
     relations.each do |relation|
-         
+
+       edge_resource = relation.load_resource
        e_node = relation.end_node
        e_node_id = relation.end_node.neo_id
        s_node = relation.start_node
        s_node_id = relation.start_node.neo_id
        edge_properties = relation.props
-       edge_relation = relation.load_resource.present? ? relation.load_resource["type"] : ""
+       edge_relation = edge_resource.present? ? edge_resource["type"] : ""
        color_prop = relation.end_node.props[:color].present? ? relation.end_node.props[:color] : '#666'
+
        unless check_end_node.include? e_node_id
          check_end_node << e_node_id
          data_collections[:nodes] << create_node(node: e_node, relation: edge_relation, label: e_node.labels[0].to_s, color: color_prop)
@@ -75,7 +78,7 @@ class UsersController < ApplicationController
          # end
        end 
 
-       data_collections[:edges] << create_edge(source: s_node, target: e_node, relation: relation, color: '#ccc')
+       data_collections[:edges] << create_edge(source: s_node, target: e_node, relation: relation, color: '#ccc', relation_name: edge_relation)
     end
     # unless check_node.include? node and check_end_node.include? node
     #   check_node << node.neo_id
