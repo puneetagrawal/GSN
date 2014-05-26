@@ -41,7 +41,12 @@ module CustomNodeRelationship
          target   = options[:target]
          relation = options[:relation]
          color    = options[:color]         
-       
+       Rails.logger.debug(relation)
+       Rails.logger.debug(relation.props)
+       # if relation.present?         
+       # Rails.logger.debug relation.load_resource.present? ? relation.load_resource["type"] : "asdad"
+     # end
+       Rails.logger.debug("LLLLLLLLLLLLLLLLLLLL")
 	 	{
 				    id: "#{relation.neo_id}",
 				    source: source.neo_id.to_s,
