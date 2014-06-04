@@ -3,22 +3,22 @@
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for(@identity) do |f| %>
+    <%= form_for(@identity, html: { class: "form-signin auth_form"}) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>      
       <%= f.label :nickname %>
-      <%= f.text_field :nickname %>     
+      <%= f.text_field :nickname, class: "form-control"  %>     
 
       <%= f.label :email %>
-      <%= f.text_field :email %>
+      <%= f.text_field :email, class: "form-control"  %>
 
       <%= f.label :country %>
-      <%= f.text_field  :country %>
+      <%= f.text_field  :country, class: "form-control"  %>
 
       <%= f.label :password %>
-      <%= f.password_field :password %>
+      <%= f.password_field :password, class: "form-control"  %>
 
       <%= f.label :password_confirmation, "Confirm Password" %>
-      <%= f.password_field :password_confirmation %>
+      <%= f.password_field :password_confirmation, class: "form-control"  %>
 
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
     <% end %>

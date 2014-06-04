@@ -3,17 +3,17 @@
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
+    <%= form_for(@user, html: { class: "form-signin auth_form"}) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
       <%= f.label :first_name %>
-      <%= f.text_field :first_name %>
+      <%= f.text_field :first_name, class: "form-control"  %>
 
       <%= f.label :last_name %>
-      <%= f.text_field :last_name %>
+      <%= f.text_field :last_name, class: "form-control"  %>
       
       <%= f.label :country %>
-      <%= f.text_field :country %>
+      <%= f.text_field :country, class: "form-control"  %>
       
 
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
