@@ -16,6 +16,9 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-linkedin'
 gem 'omniauth-gplus'
+# gem 'neo4jrb-paperclip', :require => "neo4jrb_paperclip"
+gem "rmagick4j"
+# gem "carrierwave-neo4j", :require => "carrierwave/neo4j"
 
 # gem 'neography'
 # gem 'neo4j-will_paginate', path: 'vendor/gems/neo4j-will_paginate-0.2.1-java'
@@ -48,3 +51,4 @@ platforms :jruby do
 end
 
 gem 'jquery-minicolors-rails'
+

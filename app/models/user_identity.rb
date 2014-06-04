@@ -74,7 +74,6 @@ class UserIdentity
 
 
   def email_uniqueness
-
     if email.present?
       identity = UserIdentity.find(email: email.try(:downcase))    
       if identity.present? and (identity.email_changed? or new_record?)        

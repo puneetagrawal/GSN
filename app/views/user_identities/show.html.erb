@@ -1,20 +1,20 @@
-
-<div class="row">
-   <%= link_to "Groups", groups_path(identity: @identity.uuid ), class: "btn btn-primary remove_overlap"%>
+<div class="clear"></div>
+<!-- <div class="row">
+   <%#= link_to "Groups", groups_path(identity: @identity.uuid ), class: "btn btn-primary remove_overlap"%>
   <aside class="span4">
     <section>
-      <h1> <%= @identity.nickname %> </h1>
-      <h1> <%= @identity.email %> </h1>
+      <h1> <%#= @identity.nickname %> </h1>
+      <h1> <%#= @identity.email %> </h1>
     </section>
-    <!-- <section>
+    <section>
      <div><h3 style="display: inline" >Provider:</h4> <span><%#= @identity.provider %></span></div>
      <div><h3 style="display: inline" >Email:</h4> <%#= @identity.email %></div>
      <div><h3 style="display: inline" >Nickname:</h4> <%#= @identity.nickname %></div>
       <%#= render 'shared/stats' %>
-    </section> -->
+    </section>
   </aside>
 
-  </div>
+  </div> -->
 
 <%= render "shared/graph_template"%>
 <%= render "shared/graph_script", parsed_data: @providers %>

@@ -8,7 +8,7 @@
       <div class="modal-body" >       
        <div id="profile_modal_body_content" class="span10"></div>
         <ul class="nav remove_overlap">
-          <li> <%=link_to "Modify Profile", "javascript:void(0)"%></li>
+          <li> <%=link_to "Modify Profile", edit_user_identity_path(current_identity) %></li>
         <% if signed_in? %>
           <% oauth_text = "Add another account" %>
 

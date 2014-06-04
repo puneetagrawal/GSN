@@ -21,7 +21,7 @@ class UserIdentitiesController < ApplicationController
          
        e_node = r_identity.end_node
        e_node_id = r_identity.end_node.neo_id
-       s_node = r_identity.start_node
+       s_node = r_identity.start_node 
        s_node_id = r_identity.start_node.neo_id
        edge_properties = r_identity.props
        edge_relation_resource = r_identity.load_resource
@@ -32,7 +32,7 @@ class UserIdentitiesController < ApplicationController
          @providers[:nodes] << create_node(node: e_node, relation: edge_relation, label: e_node.labels[0], color: color_prop)
           
        end
-       @providers[:edges] << create_edge(source: s_node, target: e_node, relation: r_identity, color: '#ccc', relation_name: edge_relation)
+       @providers[:edges] << create_edge(source: s_node, target: e_node, relsation: r_identity, color: '#ccc', relation_name: edge_relation)
      end
    
      @providers[:nodes] << create_node(node: @identity, label: @identity.labels[0], color: @identity.props[:color])

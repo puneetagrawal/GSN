@@ -16,6 +16,7 @@ GSN::Application.routes.draw do
 
   match 'auth/:provider/callback', to: 'services#create', via: [:get, :post]
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
+  get '/node_attribute/code_image/:id', to: 'node_attribute#code_image'
   resources :node_types 
   resources :node_attributes
   resources :users do
