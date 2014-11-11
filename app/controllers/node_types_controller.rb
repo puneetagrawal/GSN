@@ -28,7 +28,7 @@ class NodeTypesController < ApplicationController
 		  	flash.now[:error] = 'Node Type has at least one node attribute'
 		  	render 'new'
 		  else
-		    redirect_to node_types_path(identity: current_identity.uuid)
+		    redirect_to node_types_path(identity: current_identity.uuuid)
 		  end
 		else
 		  render 'new'

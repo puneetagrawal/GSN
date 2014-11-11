@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :identity, class: UserIdentity do
-    uid SecureRandom.uuid
+    uid SecureRandom.uuuid
      # sequence(:email) { |n| "user_#{n}@example.com" }
     sequence(:email){|n| "#{Faker::Name.first_name}#{n}@factory.com" }   
     password "foobar"

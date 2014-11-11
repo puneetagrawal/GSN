@@ -4,7 +4,7 @@ class Provider
   property :id
   property :created_at, type: DateTime
   property :updated_at, type: DateTime 
-  property :uuid 
+  property :uuuid 
   property :color, default: "#A52A2A"
   property :provider_name
 

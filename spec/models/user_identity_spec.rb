@@ -57,7 +57,7 @@ describe UserIdentity do
 
   describe "password " do
     before do
-      UserIdentity.new(nickname: "example_user", email: "use223r@example.com", password: " ", password_confirmation: " ", uid: SecureRandom.uuid)
+      UserIdentity.new(nickname: "example_user", email: "use223r@example.com", password: " ", password_confirmation: " ", uid: SecureRandom.uuuid)
     end
     it { should_not be_blank }
   end

@@ -12,7 +12,7 @@
           <% if signed_in? %>
             <% oauth_text = "Add another account" %>
             <span><%= link_to "Sign out", signout_path, method: "delete" %></span>             
-            <!-- <li><%#= link_to "Groups", groups_path(identity: current_identity.uuid) %></li> -->
+            <!-- <li><%#= link_to "Groups", groups_path(identity: current_identity.uuuid) %></li> -->
             <span><%= link_to "Graph", user_path(current_user) %></span>
             <span><%= link_to "Profile", "javascript:void(0)", id: "header_profile_link" %></span>
             <!--  <li id="fat-menu-group" class="dropdown">

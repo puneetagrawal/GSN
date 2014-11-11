@@ -76,14 +76,14 @@ module CustomNeo4j
     # Rails.logger.debug "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
     # Rails.logger.debug self.avatar_attribute.inspect
     # tmp_directory = "tmp/uploads/#{Time.now.to_i}"
-    # directory = "public/systems/#{self.uuid}"
+    # directory = "public/systems/#{self.uuuid}"
     # FileUtils.mkdir directory
-    # FileUtils.cp_r "tmp/uploads/#{Time.now.to_i}/.", "public/systems/#{self.uuid}"
+    # FileUtils.cp_r "tmp/uploads/#{Time.now.to_i}/.", "public/systems/#{self.uuuid}"
     input_data = self.avatar_attribute
     
     name = input_data.original_filename
     content_type = input_data.content_type.chomp
-    directory = "public/systems/#{self.uuid}"
+    directory = "public/systems/#{self.uuuid}"
     FileUtils.mkdir directory
     # create the file path
     path = File.join(directory, name)

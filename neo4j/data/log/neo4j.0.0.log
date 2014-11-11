@@ -13,7 +13,7 @@ INFO: Mounted REST API at [/db/data/]
 May 16, 2014 1:55:42 PM org.neo4j.server.logging.Logger log
 INFO: Mounted management API at [/db/manage/]
 May 16, 2014 1:55:42 PM org.neo4j.server.logging.Logger log
-INFO: Mounted third-party JAX-RS package [org.neo4j.extension.uuid] at [/db/uuid]
+INFO: Mounted third-party JAX-RS package [org.neo4j.extension.uuuid] at [/db/uuuid]
 May 16, 2014 1:55:42 PM org.neo4j.server.logging.Logger log
 INFO: Mounted webadmin at [/webadmin]
 May 16, 2014 1:55:42 PM org.neo4j.server.logging.Logger log
@@ -24,10 +24,10 @@ May 16, 2014 1:55:43 PM org.neo4j.server.logging.Logger log
 INFO: Mounting static content at [/browser] from [browser]
 May 16, 2014 1:55:43 PM com.sun.jersey.api.core.PackagesResourceConfig init
 INFO: Scanning for root resource and provider classes in the packages:
-  org.neo4j.extension.uuid
+  org.neo4j.extension.uuuid
 May 16, 2014 1:55:43 PM com.sun.jersey.api.core.ScanningResourceConfig logClasses
 INFO: Root resource classes found:
-  class org.neo4j.extension.uuid.UUIDRestInterface
+  class org.neo4j.extension.uuuid.UUIDRestInterface
 May 16, 2014 1:55:43 PM com.sun.jersey.api.core.ScanningResourceConfig init
 INFO: No provider classes found.
 May 16, 2014 1:55:43 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
@@ -78,7 +78,7 @@ INFO: Mounted REST API at [/db/data/]
 May 16, 2014 4:02:04 PM org.neo4j.server.logging.Logger log
 INFO: Mounted management API at [/db/manage/]
 May 16, 2014 4:02:04 PM org.neo4j.server.logging.Logger log
-INFO: Mounted third-party JAX-RS package [org.neo4j.extension.uuid] at [/db/uuid]
+INFO: Mounted third-party JAX-RS package [org.neo4j.extension.uuuid] at [/db/uuuid]
 May 16, 2014 4:02:04 PM org.neo4j.server.logging.Logger log
 INFO: Mounted webadmin at [/webadmin]
 May 16, 2014 4:02:04 PM org.neo4j.server.logging.Logger log
@@ -89,10 +89,10 @@ May 16, 2014 4:02:04 PM org.neo4j.server.logging.Logger log
 INFO: Mounting static content at [/browser] from [browser]
 May 16, 2014 4:02:04 PM com.sun.jersey.api.core.PackagesResourceConfig init
 INFO: Scanning for root resource and provider classes in the packages:
-  org.neo4j.extension.uuid
+  org.neo4j.extension.uuuid
 May 16, 2014 4:02:04 PM com.sun.jersey.api.core.ScanningResourceConfig logClasses
 INFO: Root resource classes found:
-  class org.neo4j.extension.uuid.UUIDRestInterface
+  class org.neo4j.extension.uuuid.UUIDRestInterface
 May 16, 2014 4:02:04 PM com.sun.jersey.api.core.ScanningResourceConfig init
 INFO: No provider classes found.
 May 16, 2014 4:02:04 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
@@ -143,7 +143,7 @@ INFO: Mounted REST API at [/db/data/]
 May 16, 2014 5:32:19 PM org.neo4j.server.logging.Logger log
 INFO: Mounted management API at [/db/manage/]
 May 16, 2014 5:32:19 PM org.neo4j.server.logging.Logger log
-INFO: Mounted third-party JAX-RS package [org.neo4j.extension.uuid] at [/db/uuid]
+INFO: Mounted third-party JAX-RS package [org.neo4j.extension.uuuid] at [/db/uuuid]
 May 16, 2014 5:32:19 PM org.neo4j.server.logging.Logger log
 INFO: Mounted webadmin at [/webadmin]
 May 16, 2014 5:32:19 PM org.neo4j.server.logging.Logger log
@@ -154,10 +154,10 @@ May 16, 2014 5:32:19 PM org.neo4j.server.logging.Logger log
 INFO: Mounting static content at [/browser] from [browser]
 May 16, 2014 5:32:19 PM com.sun.jersey.api.core.PackagesResourceConfig init
 INFO: Scanning for root resource and provider classes in the packages:
-  org.neo4j.extension.uuid
+  org.neo4j.extension.uuuid
 May 16, 2014 5:32:19 PM com.sun.jersey.api.core.ScanningResourceConfig logClasses
 INFO: Root resource classes found:
-  class org.neo4j.extension.uuid.UUIDRestInterface
+  class org.neo4j.extension.uuuid.UUIDRestInterface
 May 16, 2014 5:32:19 PM com.sun.jersey.api.core.ScanningResourceConfig init
 INFO: No provider classes found.
 May 16, 2014 5:32:19 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
@@ -185,7 +185,7 @@ INFO: Mounted REST API at [/db/data/]
 May 18, 2014 10:47:40 AM org.neo4j.server.logging.Logger log
 INFO: Mounted management API at [/db/manage/]
 May 18, 2014 10:47:40 AM org.neo4j.server.logging.Logger log
-INFO: Mounted third-party JAX-RS package [org.neo4j.extension.uuid] at [/db/uuid]
+INFO: Mounted third-party JAX-RS package [org.neo4j.extension.uuuid] at [/db/uuuid]
 May 18, 2014 10:47:40 AM org.neo4j.server.logging.Logger log
 INFO: Mounted webadmin at [/webadmin]
 May 18, 2014 10:47:40 AM org.neo4j.server.logging.Logger log
@@ -196,10 +196,10 @@ May 18, 2014 10:47:40 AM org.neo4j.server.logging.Logger log
 INFO: Mounting static content at [/browser] from [browser]
 May 18, 2014 10:47:40 AM com.sun.jersey.api.core.PackagesResourceConfig init
 INFO: Scanning for root resource and provider classes in the packages:
-  org.neo4j.extension.uuid
+  org.neo4j.extension.uuuid
 May 18, 2014 10:47:40 AM com.sun.jersey.api.core.ScanningResourceConfig logClasses
 INFO: Root resource classes found:
-  class org.neo4j.extension.uuid.UUIDRestInterface
+  class org.neo4j.extension.uuuid.UUIDRestInterface
 May 18, 2014 10:47:40 AM com.sun.jersey.api.core.ScanningResourceConfig init
 INFO: No provider classes found.
 May 18, 2014 10:47:41 AM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate

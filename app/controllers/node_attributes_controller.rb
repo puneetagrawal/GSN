@@ -16,7 +16,7 @@ class NodeAttributesController < ApplicationController
         	
 		if @attribute_type.save
 		  @attribute_type.creator = current_user
-		  redirect_to node_attributes_path(identity: current_identity.uuid)
+		  redirect_to node_attributes_path(identity: current_identity.uuuid)
 		else
 		  render 'new'
 		end

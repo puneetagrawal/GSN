@@ -8,7 +8,7 @@ class UserIdentity
   property :id
   property :created_at, type: DateTime
   property :updated_at, type: DateTime
-  property :uuid 
+  property :uuuid 
   property :uid
   property :email
   property :nickname

@@ -4,7 +4,7 @@ class GroupType
   property :id
   property :created_at, type: DateTime
   property :updated_at, type: DateTime 
-  property :uuid 
+  property :uuuid 
   property :color, default: "#0000FF"
 
   has_one(:creator).from(:users)

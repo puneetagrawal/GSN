@@ -9,7 +9,7 @@ class NodeAttribute #< DefaultProperty
   property :id
   property :created_at, type: DateTime
   property :updated_at, type: DateTime
-  property :uuid 
+  property :uuuid 
 
   property :name
   property :attr_type

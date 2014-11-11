@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
 
-	it { should respond_to(:uuid) }
+	it { should respond_to(:uuuid) }
 	it { should respond_to(:first_name) }
 	it { should respond_to(:last_name) }
 	it { should respond_to(:country) }
@@ -10,7 +10,7 @@ describe User do
     user = FactoryGirl.create(:user)
     
     describe "UUID" do
-    	it { user.uuid.should_not be_nil }
+    	it { user.uuuid.should_not be_nil }
 	end
 
 	describe "First Name" do

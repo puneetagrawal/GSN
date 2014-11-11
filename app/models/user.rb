@@ -12,11 +12,11 @@ class User
   # property :remember_token
   property :created_at, type: DateTime
   property :updated_at, type: DateTime
-  property :uuid
-  # property :uuid, default: SecureRandom.uuid
+  property :uuuid
+  # property :uuuid, default: SecureRandom.uuuid
 
 
-  # validates :uuid, presence: true
+  # validates :uuuid, presence: true
   # validate :id, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true

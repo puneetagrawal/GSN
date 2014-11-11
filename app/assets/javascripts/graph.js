@@ -426,7 +426,7 @@ var get_provider_data = function(e, attr_node){
 var get_group_data = function(e, attr_node){
   node_prop = ''
   $.each(e.data.node.properties.node, function(k, v) {
-    if(k!='created_at' && k!='updated_at' && k!='color' && k!='uuid' && k!='id' ) {
+    if(k!='created_at' && k!='updated_at' && k!='color' && k!='uuuid' && k!='id' ) {
       attr_node += node_html(k, v)
     }
     node_prop += node_html(k, v)

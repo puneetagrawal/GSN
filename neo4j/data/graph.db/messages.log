@@ -1367,7 +1367,7 @@ Storage files: (filename : modification date - size)
 2014-05-16 15:32:16.423+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/system/lib/jetty-servlet-9.0.5.v20130815.jar
 2014-05-16 15:32:16.423+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/lib/neo4j-cypher-compiler-2.0-2.0.0.jar
 2014-05-16 15:32:16.423+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/lib/neo4j-cypher-commons-2.0.0.jar
-2014-05-16 15:32:16.423+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/plugins/neo4j-uuid-1.0.0-SNAPSHOT.jar
+2014-05-16 15:32:16.423+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/plugins/neo4j-uuuid-1.0.0-SNAPSHOT.jar
 2014-05-16 15:32:16.423+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/system/lib/rhino-1.7R3.jar
 2014-05-16 15:32:16.423+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/system/lib/jersey-multipart-1.9.jar
 2014-05-16 15:32:16.423+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/lib/neo4j-cypher-compiler-1.9-2.0.0.jar
@@ -1408,7 +1408,7 @@ Storage files: (filename : modification date - size)
 2014-05-16 15:32:16.425+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/system/lib/mimepull-1.6.jar
 2014-05-16 15:32:16.425+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/system/lib/commons-lang-2.4.jar
 2014-05-16 15:32:16.425+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/system/lib/rrd4j-2.0.7.jar
-2014-05-16 15:32:16.425+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/plugins/java-uuid-generator-3.1.3.jar
+2014-05-16 15:32:16.425+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/plugins/java-uuuid-generator-3.1.3.jar
 2014-05-16 15:32:16.425+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap] /usr/lib/jvm/jdk1.7.0_45/jre/lib/jsse.jar
 2014-05-16 15:32:16.426+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/lib/neo4j-kernel-2.0.0.jar
 2014-05-16 15:32:16.426+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/system/lib/logback-classic-1.0.9.jar
@@ -1682,19 +1682,19 @@ Caused by: javax.transaction.RollbackException: Failed to commit, transaction ro
 	at org.neo4j.kernel.impl.transaction.TxManager.commit(TxManager.java:402) ~[neo4j-kernel-2.0.0.jar:2.0.0]
 	at org.neo4j.kernel.impl.core.Transactor.execute(Transactor.java:79) ~[neo4j-kernel-2.0.0.jar:2.0.0]
 	... 16 common frames omitted
-Caused by: java.lang.RuntimeException: org.neo4j.graphdb.TransactionFailureException: Index creation failed for uuid, {provider=lucene, type=exact}
+Caused by: java.lang.RuntimeException: org.neo4j.graphdb.TransactionFailureException: Index creation failed for uuuid, {provider=lucene, type=exact}
 	at org.neo4j.kernel.TransactionEventHandlers.beforeCompletion(TransactionEventHandlers.java:128) ~[neo4j-kernel-2.0.0.jar:2.0.0]
 	at org.neo4j.kernel.impl.core.TransactionEventsSyncHook.beforeCompletion(TransactionEventsSyncHook.java:68) ~[neo4j-kernel-2.0.0.jar:2.0.0]
 	at org.neo4j.kernel.impl.transaction.TransactionImpl.doBeforeCompletion(TransactionImpl.java:369) ~[neo4j-kernel-2.0.0.jar:2.0.0]
 	at org.neo4j.kernel.impl.transaction.TxManager.commit(TxManager.java:392) ~[neo4j-kernel-2.0.0.jar:2.0.0]
 	... 17 common frames omitted
-Caused by: org.neo4j.graphdb.TransactionFailureException: Index creation failed for uuid, {provider=lucene, type=exact}
+Caused by: org.neo4j.graphdb.TransactionFailureException: Index creation failed for uuuid, {provider=lucene, type=exact}
 	at org.neo4j.kernel.impl.coreapi.IndexManagerImpl.getOrCreateIndexConfig(IndexManagerImpl.java:235) ~[neo4j-kernel-2.0.0.jar:2.0.0]
 	at org.neo4j.kernel.impl.coreapi.IndexManagerImpl.getOrCreateNodeIndex(IndexManagerImpl.java:314) ~[neo4j-kernel-2.0.0.jar:2.0.0]
 	at org.neo4j.kernel.impl.coreapi.IndexManagerImpl.forNodes(IndexManagerImpl.java:302) ~[neo4j-kernel-2.0.0.jar:2.0.0]
 	at org.neo4j.kernel.impl.coreapi.IndexManagerImpl.forNodes(IndexManagerImpl.java:294) ~[neo4j-kernel-2.0.0.jar:2.0.0]
-	at org.neo4j.extension.uuid.UUIDTransactionEventHandler.initIndexes(UUIDTransactionEventHandler.java:57) ~[neo4j-uuid-1.0.0-SNAPSHOT.jar:na]
-	at org.neo4j.extension.uuid.UUIDTransactionEventHandler.beforeCommit(UUIDTransactionEventHandler.java:47) ~[neo4j-uuid-1.0.0-SNAPSHOT.jar:na]
+	at org.neo4j.extension.uuuid.UUIDTransactionEventHandler.initIndexes(UUIDTransactionEventHandler.java:57) ~[neo4j-uuuid-1.0.0-SNAPSHOT.jar:na]
+	at org.neo4j.extension.uuuid.UUIDTransactionEventHandler.beforeCommit(UUIDTransactionEventHandler.java:47) ~[neo4j-uuuid-1.0.0-SNAPSHOT.jar:na]
 	at org.neo4j.kernel.TransactionEventHandlers.beforeCompletion(TransactionEventHandlers.java:109) ~[neo4j-kernel-2.0.0.jar:2.0.0]
 	... 20 common frames omitted
 org.neo4j.graphdb.TransactionFailureException: Database is currently not available. Blocking components (1): []
@@ -1723,14 +1723,14 @@ org.neo4j.graphdb.TransactionFailureException: Database is currently not availab
 2014-05-16 15:32:19.091+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.server.manage.console_engines = shell
 2014-05-16 15:32:19.091+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.server.http.log.enabled = false
 2014-05-16 15:32:19.091+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.server.http.log.config = conf/neo4j-http-logging.xml
-2014-05-16 15:32:19.091+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.server.thirdparty_jaxrs_classes = org.neo4j.extension.uuid=/db/uuid
+2014-05-16 15:32:19.091+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.server.thirdparty_jaxrs_classes = org.neo4j.extension.uuuid=/db/uuuid
 2014-05-16 15:32:19.091+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.server.webadmin.management.uri = /db/manage/
 2014-05-16 15:32:19.091+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.server.webadmin.data.uri = /db/data/
 2014-05-16 15:32:19.091+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for org.neo4j.server.configuration.Configurator END ---
 2014-05-16 15:32:19.097+0000 INFO  [o.n.k.i.DiagnosticsManager]: Mounted discovery module (org.neo4j.server.rest.discovery) at: /
 2014-05-16 15:32:19.108+0000 INFO  [o.n.k.i.DiagnosticsManager]: Mounted REST API at: /db/data/
 2014-05-16 15:32:19.112+0000 INFO  [o.n.k.i.DiagnosticsManager]: Mounted management API at: /db/manage/
-2014-05-16 15:32:19.114+0000 INFO  [o.n.k.i.DiagnosticsManager]: Mounted third-party JAX-RS package [org.neo4j.extension.uuid] at [/db/uuid]
+2014-05-16 15:32:19.114+0000 INFO  [o.n.k.i.DiagnosticsManager]: Mounted third-party JAX-RS package [org.neo4j.extension.uuuid] at [/db/uuuid]
 2014-05-16 15:32:19.115+0000 INFO  [o.n.k.i.DiagnosticsManager]: Mounted webadmin at: /webadmin
 2014-05-16 15:32:19.117+0000 INFO  [o.n.k.i.DiagnosticsManager]: Mounted Neo4j Browser at: /browser
 2014-05-16 15:32:21.292+0000 INFO  [o.n.k.i.DiagnosticsManager]: Server started on: http://0.0.0.0:7474/
@@ -1831,7 +1831,7 @@ org.neo4j.graphdb.TransactionFailureException: Database is currently not availab
 2014-05-18 08:47:35.673+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/system/lib/jetty-servlet-9.0.5.v20130815.jar
 2014-05-18 08:47:35.673+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/lib/neo4j-cypher-compiler-2.0-2.0.0.jar
 2014-05-18 08:47:35.674+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/lib/neo4j-cypher-commons-2.0.0.jar
-2014-05-18 08:47:35.674+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/plugins/neo4j-uuid-1.0.0-SNAPSHOT.jar
+2014-05-18 08:47:35.674+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/plugins/neo4j-uuuid-1.0.0-SNAPSHOT.jar
 2014-05-18 08:47:35.674+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/system/lib/rhino-1.7R3.jar
 2014-05-18 08:47:35.674+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/system/lib/jersey-multipart-1.9.jar
 2014-05-18 08:47:35.674+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/lib/neo4j-cypher-compiler-1.9-2.0.0.jar
@@ -1872,7 +1872,7 @@ org.neo4j.graphdb.TransactionFailureException: Database is currently not availab
 2014-05-18 08:47:35.677+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/system/lib/mimepull-1.6.jar
 2014-05-18 08:47:35.677+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/system/lib/commons-lang-2.4.jar
 2014-05-18 08:47:35.677+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/system/lib/rrd4j-2.0.7.jar
-2014-05-18 08:47:35.677+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/plugins/java-uuid-generator-3.1.3.jar
+2014-05-18 08:47:35.677+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/plugins/java-uuuid-generator-3.1.3.jar
 2014-05-18 08:47:35.677+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap] /usr/lib/jvm/jdk1.7.0_45/jre/lib/jsse.jar
 2014-05-18 08:47:35.677+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/lib/neo4j-kernel-2.0.0.jar
 2014-05-18 08:47:35.677+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/pdipietro/gsn/neo4j/system/lib/logback-classic-1.0.9.jar
@@ -2176,7 +2176,7 @@ Storage files: (filename : modification date - size)
 2014-05-18 08:47:37.581+0000 INFO  [o.n.k.i.DiagnosticsManager]:     lucene.log.v0: 2014-05-16T17:29:54+0200 - 16.00 B
 2014-05-18 08:47:37.581+0000 INFO  [o.n.k.i.DiagnosticsManager]:     lucene:
 2014-05-18 08:47:37.581+0000 INFO  [o.n.k.i.DiagnosticsManager]:       relationship:
-2014-05-18 08:47:37.581+0000 INFO  [o.n.k.i.DiagnosticsManager]:         uuid:
+2014-05-18 08:47:37.581+0000 INFO  [o.n.k.i.DiagnosticsManager]:         uuuid:
 2014-05-18 08:47:37.582+0000 INFO  [o.n.k.i.DiagnosticsManager]:           _1.fdt: 2014-05-16T17:49:34+0200 - 61.00 B
 2014-05-18 08:47:37.582+0000 INFO  [o.n.k.i.DiagnosticsManager]:           _0.fdx: 2014-05-16T17:43:05+0200 - 12.00 B
 2014-05-18 08:47:37.582+0000 INFO  [o.n.k.i.DiagnosticsManager]:           segments_1: 2014-05-16T17:49:34+0200 - 468.00 B
@@ -2198,7 +2198,7 @@ Storage files: (filename : modification date - size)
 2014-05-18 08:47:37.588+0000 INFO  [o.n.k.i.DiagnosticsManager]:         - Total: 2014-05-16T17:49:34+0200 - 1018.00 B
 2014-05-18 08:47:37.588+0000 INFO  [o.n.k.i.DiagnosticsManager]:       - Total: 2014-05-16T17:43:04+0200 - 1018.00 B
 2014-05-18 08:47:37.589+0000 INFO  [o.n.k.i.DiagnosticsManager]:       node:
-2014-05-18 08:47:37.589+0000 INFO  [o.n.k.i.DiagnosticsManager]:         uuid:
+2014-05-18 08:47:37.589+0000 INFO  [o.n.k.i.DiagnosticsManager]:         uuuid:
 2014-05-18 08:47:37.589+0000 INFO  [o.n.k.i.DiagnosticsManager]:           _2.tis: 2014-05-16T17:49:34+0200 - 72.00 B
 2014-05-18 08:47:37.589+0000 INFO  [o.n.k.i.DiagnosticsManager]:           _1.fdt: 2014-05-16T17:43:05+0200 - 47.00 B
 2014-05-18 08:47:37.590+0000 INFO  [o.n.k.i.DiagnosticsManager]:           _0.fdx: 2014-05-16T17:43:04+0200 - 12.00 B
@@ -2255,14 +2255,14 @@ Storage files: (filename : modification date - size)
 2014-05-18 08:47:40.205+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.server.manage.console_engines = shell
 2014-05-18 08:47:40.205+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.server.http.log.enabled = false
 2014-05-18 08:47:40.205+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.server.http.log.config = conf/neo4j-http-logging.xml
-2014-05-18 08:47:40.205+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.server.thirdparty_jaxrs_classes = org.neo4j.extension.uuid=/db/uuid
+2014-05-18 08:47:40.205+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.server.thirdparty_jaxrs_classes = org.neo4j.extension.uuuid=/db/uuuid
 2014-05-18 08:47:40.205+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.server.webadmin.management.uri = /db/manage/
 2014-05-18 08:47:40.205+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.server.webadmin.data.uri = /db/data/
 2014-05-18 08:47:40.205+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for org.neo4j.server.configuration.Configurator END ---
 2014-05-18 08:47:40.236+0000 INFO  [o.n.k.i.DiagnosticsManager]: Mounted discovery module (org.neo4j.server.rest.discovery) at: /
 2014-05-18 08:47:40.249+0000 INFO  [o.n.k.i.DiagnosticsManager]: Mounted REST API at: /db/data/
 2014-05-18 08:47:40.253+0000 INFO  [o.n.k.i.DiagnosticsManager]: Mounted management API at: /db/manage/
-2014-05-18 08:47:40.255+0000 INFO  [o.n.k.i.DiagnosticsManager]: Mounted third-party JAX-RS package [org.neo4j.extension.uuid] at [/db/uuid]
+2014-05-18 08:47:40.255+0000 INFO  [o.n.k.i.DiagnosticsManager]: Mounted third-party JAX-RS package [org.neo4j.extension.uuuid] at [/db/uuuid]
 2014-05-18 08:47:40.256+0000 INFO  [o.n.k.i.DiagnosticsManager]: Mounted webadmin at: /webadmin
 2014-05-18 08:47:40.257+0000 INFO  [o.n.k.i.DiagnosticsManager]: Mounted Neo4j Browser at: /browser
 2014-05-18 08:47:42.982+0000 INFO  [o.n.k.i.DiagnosticsManager]: Server started on: http://0.0.0.0:7474/
