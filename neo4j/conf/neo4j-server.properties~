@@ -93,5 +93,5 @@ org.neo4j.server.http.log.config=conf/neo4j-http-logging.xml
 #*****************************************************************
 # automatic uuid generator
 #*****************************************************************
-org.neo4j.server.thirdparty_jaxrs_classes=org.neo4j.extension.uuid=/db/uuid
+org.neo4j.server.thirdparty_jaxrs_classes=org.neo4j.extension.uuuid=/db/uuid
 
